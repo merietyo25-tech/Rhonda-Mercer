@@ -12,7 +12,7 @@
 
 @section('content')
   <div class="card-head">
-    <div class="otp-icon" style="width:64px;height:64px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(220,190,135,.12);color:var(--accent);font-size:1.6rem">
+    <div class="otp-icon" style="width:64px;height:64px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(63,203,146,.12);color:var(--accent);font-size:1.6rem">
       <i class="fas fa-envelope-open-text"></i>
     </div>
     <h1 class="card-title">{{ __('onboarding.check_title') }}</h1>

@@ -48,7 +48,7 @@
 }
 .ep-input:focus {
   outline:none;border-color:var(--ca-teal-l);
-  box-shadow:0 0 0 3px rgba(27,138,122,.15);
+  box-shadow:0 0 0 3px rgba(0,132,87,.15);
 }
 .ep-ico {
   position:absolute;left:1rem;top:50%;transform:translateY(-50%);
@@ -68,8 +68,8 @@
 
 /* OTP panel */
 .ep-otp-panel {
-  background:rgba(27,138,122,.07);
-  border:1.5px solid rgba(27,138,122,.3);
+  background:rgba(0,132,87,.07);
+  border:1.5px solid rgba(0,132,87,.3);
   border-radius:var(--ca-radius-md);
   padding:1.25rem;margin-bottom:1.5rem;
 }
@@ -133,7 +133,7 @@
 </div>
 
 <div class="ep-info-row">
-  <div class="ep-info-ico" style="background:rgba(27,138,122,.15);color:var(--ca-teal-l)">
+  <div class="ep-info-ico" style="background:rgba(0,132,87,.15);color:var(--ca-teal-l)">
     <i class="fas fa-user"></i>
   </div>
   <div class="ep-info-body">

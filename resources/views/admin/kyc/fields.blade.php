@@ -10,7 +10,7 @@
 .kf-steps{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .kf-step{display:flex;gap:.75rem;align-items:flex-start;border:1.5px solid var(--c-border);border-radius:12px;padding:.9rem 1rem;cursor:pointer;position:relative}
 .kf-step input{position:absolute;opacity:0;pointer-events:none}
-.kf-step:has(input:checked){border-color:var(--c-accent);background:rgba(198,161,91,.08)}
+.kf-step:has(input:checked){border-color:var(--c-accent);background:rgba(0,132,87,.08)}
 .kf-step__n{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;background:var(--c-border);flex:none}
 .kf-step:has(input:checked) .kf-step__n{background:var(--c-accent);color:#fff}
 .kf-step strong{display:block;font-size:.9rem}
@@ -20,7 +20,7 @@
 @media (max-width:760px){.kf-row{grid-template-columns:1fr 1fr;}.kf-row > :first-child{grid-column:1 / -1}}
 .kf-name{font-weight:700;font-size:.88rem;min-width:0;overflow-wrap:anywhere}
 .kf-tag{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.1rem .5rem;border-radius:999px;margin-left:.35rem;vertical-align:middle;background:var(--c-border);color:var(--c-muted)}
-.kf-tag--custom{background:rgba(27,73,118,.12);color:#1B4976}
+.kf-tag--custom{background:rgba(27,73,118,.12);color:#3A3590}
 .kf-mini{font-size:.68rem;color:var(--c-muted);display:block;margin-bottom:.15rem;text-transform:uppercase;letter-spacing:.04em}
 .kf-row select,.kf-row input[type=number]{width:100%}
 .kf-sw{display:flex;align-items:center;gap:.4rem;font-size:.78rem;cursor:pointer;white-space:nowrap}
@@ -33,7 +33,7 @@
 .kf-i18n[open] summary{margin-bottom:.6rem}
 .kf-i18n__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.7rem}
 .kf-i18n__grid em{font-style:normal;opacity:.7}
-.kf-auto{font-size:.6rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.05rem .4rem;border-radius:999px;background:rgba(27,73,118,.12);color:#1B4976;margin-left:.2rem}
+.kf-auto{font-size:.6rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.05rem .4rem;border-radius:999px;background:rgba(27,73,118,.12);color:#3A3590;margin-left:.2rem}
 .kf-hint{font-size:.72rem;color:var(--c-muted);margin-top:.6rem;line-height:1.45}
 .kf-save{position:sticky;bottom:0;z-index:5;margin-top:1rem;padding:.85rem 0;display:flex;justify-content:flex-end;background:var(--c-bg);border-top:1px solid var(--c-border)}
 </style>

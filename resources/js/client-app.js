@@ -222,8 +222,8 @@ window.buildDoughnutChart = function (canvasId, data, colors, labels) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#0E3B2E',
-                    borderColor: 'rgba(220,190,135,.3)',
+                    backgroundColor: '#312B81',
+                    borderColor: 'rgba(63,203,146,.3)',
                     borderWidth: 1,
                     titleColor: '#FFFFFF',
                     bodyColor: '#F5EDDD',
@@ -249,11 +249,11 @@ window.buildLineChart = function (canvasId, labels, values, currency) {
             labels,
             datasets: [{
                 data: values,
-                borderColor: '#DCBE87',
-                backgroundColor: 'rgba(220,190,135,.1)',
+                borderColor: '#3FCB92',
+                backgroundColor: 'rgba(63,203,146,.1)',
                 borderWidth: 2,
                 pointRadius: 3,
-                pointBackgroundColor: '#DCBE87',
+                pointBackgroundColor: '#3FCB92',
                 fill: true,
                 tension: .4,
             }],
@@ -264,8 +264,8 @@ window.buildLineChart = function (canvasId, labels, values, currency) {
             plugins: {
                 legend: { display: false },
                 tooltip: {
-                    backgroundColor: '#0E3B2E',
-                    borderColor: 'rgba(220,190,135,.3)',
+                    backgroundColor: '#312B81',
+                    borderColor: 'rgba(63,203,146,.3)',
                     borderWidth: 1,
                     titleColor: '#FFFFFF',
                     bodyColor: '#F5EDDD',

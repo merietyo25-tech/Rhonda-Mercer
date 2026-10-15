@@ -46,17 +46,17 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{background:radial-gradient(1200px 600px at 50% -10%,#123a5e 0%,#071a2e 55%,#04111f 100%);color:#e9eef5;font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;display:flex;flex-direction:column;min-height:100vh}
+body{background:radial-gradient(1200px 600px at 50% -10%,#312B81 0%,#1A1750 55%,#100D3A 100%);color:#e9eef5;font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;display:flex;flex-direction:column;min-height:100vh}
 .brand{display:inline-flex;align-items:center;padding:1.25rem 1.5rem;text-decoration:none;align-self:flex-start}
 .wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:1.5rem}
 .card{width:100%;max-width:520px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:24px;padding:2.5rem 2rem 2.1rem;box-shadow:0 30px 80px rgba(0,0,0,.35);backdrop-filter:blur(6px)}
-.code{font-family:'Space Grotesk',sans-serif;font-size:clamp(4.5rem,18vw,7rem);font-weight:700;line-height:1;letter-spacing:-.04em;background:linear-gradient(135deg,#F5EDDD,#DCBE87 55%,#C6A15B);-webkit-background-clip:text;background-clip:text;color:transparent}
+.code{font-family:'Space Grotesk',sans-serif;font-size:clamp(4.5rem,18vw,7rem);font-weight:700;line-height:1;letter-spacing:-.04em;background:linear-gradient(135deg,#D9F2E7,#3FCB92 55%,#008457);-webkit-background-clip:text;background-clip:text;color:transparent}
 h1{font-size:1.45rem;font-weight:700;margin:.9rem 0 .6rem;color:#fff}
 p{font-size:.95rem;line-height:1.65;color:rgba(233,238,245,.72);max-width:400px;margin:0 auto}
 .actions{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.8rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:999px;font-family:inherit;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .12s,opacity .15s}
 .btn:active{transform:scale(.98)}
-.btn--primary{background:linear-gradient(135deg,#DCBE87,#C6A15B);color:#1a2b3c}
+.btn--primary{background:linear-gradient(135deg,#3FCB92,#008457);color:#1a2b3c}
 .btn--ghost{background:transparent;color:#e9eef5;border-color:rgba(255,255,255,.22)}
 .btn:hover{opacity:.9}
 .foot{padding:1rem 1.5rem 1.5rem;text-align:center;font-size:.75rem;color:rgba(233,238,245,.4)}

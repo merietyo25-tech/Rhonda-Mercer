@@ -41,10 +41,10 @@
     $box   = ['sm' => 32, 'md' => 44, 'lg' => 64][$size] ?? 44;
     $isDark = $theme === 'dark';
     // Palette derivee du logo Mellenthin Financial : pastille bleue, marque blanche.
-    $badgeBg   = $isDark ? '#FFFFFF' : '#C6A15B';
-    $badgeFg   = $isDark ? '#C6A15B' : '#FFFFFF';
-    $wordColor = $isDark ? '#FFFFFF' : '#0E3B2E';
-    $restColor = $isDark ? '#F5EDDD' : '#C6A15B';
+    $badgeBg   = $isDark ? '#FFFFFF' : '#312B81';
+    $badgeFg   = $isDark ? '#312B81' : '#FFFFFF';
+    $wordColor = $isDark ? '#FFFFFF' : '#312B81';
+    $restColor = $isDark ? '#BFE5D4' : '#008457';
     $gap   = round($box * 0.28);
     $wsize = round($box * 0.42);
     $tag   = $href ? 'a' : 'span';

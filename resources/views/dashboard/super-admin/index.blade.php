@@ -4,7 +4,7 @@
 
 @push('styles')
 <style>
-.sad-hero { background: linear-gradient(135deg, #0E3B2E 0%, #14503D 100%); border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; color: #fff; }
+.sad-hero { background: linear-gradient(135deg, #312B81 0%, #3C3694 100%); border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; color: #fff; }
 .sad-hero-tag { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--c-accent); margin-bottom: .4rem; }
 .sad-hero-title { font-size: 1.375rem; font-weight: 900; line-height: 1.2; margin-bottom: .25rem; }
 .sad-hero-sub { font-size: .8rem; color: rgba(255,255,255,.55); }
@@ -15,19 +15,19 @@
 .sad-kpi-ico { width: 44px; height: 44px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: .95rem; margin-bottom: .75rem; }
 .sad-kpi-val { font-size: 2rem; font-weight: 900; color: var(--c-navy); line-height: 1; margin-bottom: .25rem; }
 .sad-kpi-lbl { font-size: .72rem; color: var(--c-muted); font-weight: 500; }
-.sad-ico-navy  { background: rgba(14,59,46,.08); color: var(--c-navy); }
+.sad-ico-navy  { background: rgba(49,43,129,.08); color: var(--c-navy); }
 .sad-ico-green { background: rgba(5,150,105,.1); color: #059669; }
 .sad-ico-amber { background: rgba(217,119,6,.1); color: #D97706; }
-.sad-ico-accent{ background: rgba(198,161,91,.14); color: #a07d20; }
+.sad-ico-accent{ background: rgba(0,132,87,.14); color: #006A45; }
 .sad-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 14px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
 .sad-card-hdr { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; border-bottom: 1px solid var(--c-border); }
 .sad-card-title { font-size: .9rem; font-weight: 800; margin: 0; }
 .sad-row { display: flex; align-items: center; gap: .875rem; padding: .8rem 1.25rem; border-bottom: 1px solid var(--c-border); }
 .sad-row:last-child { border-bottom: 0; }
-.sad-av { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0E3B2E; color: #fff; font-weight: 800; font-size: .85rem; flex-shrink: 0; }
+.sad-av { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #312B81; color: #fff; font-weight: 800; font-size: .85rem; flex-shrink: 0; }
 .sad-name { font-size: .85rem; font-weight: 700; }
 .sad-mail { font-size: .74rem; color: var(--c-muted); }
-.sad-role { margin-left: auto; font-size: .68rem; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; background: rgba(14,59,46,.08); color: var(--c-navy); white-space: nowrap; }
+.sad-role { margin-left: auto; font-size: .68rem; font-weight: 700; padding: .2rem .65rem; border-radius: 999px; background: rgba(49,43,129,.08); color: var(--c-navy); white-space: nowrap; }
 </style>
 @endpush
 

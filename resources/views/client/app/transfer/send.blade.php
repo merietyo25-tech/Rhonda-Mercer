@@ -28,7 +28,7 @@
 .sd-input-wrap > i { position: absolute; left: .95rem; top: 50%; transform: translateY(-50%); color: var(--ca-text-3); font-size: .8rem; pointer-events: none; }
 .sd-input { width: 100%; min-height: 48px; padding: .75rem 1rem .75rem 2.5rem; border-radius: 12px; border: 1.5px solid var(--ca-border);
   background: var(--ca-bg3); color: var(--ca-text); font-size: 16px; font-family: inherit; outline: none; transition: border-color .15s, box-shadow .15s; }
-.sd-input:focus { border-color: var(--ca-accent); box-shadow: 0 0 0 3px rgba(220,190,135,.16); }
+.sd-input:focus { border-color: var(--ca-accent); box-shadow: 0 0 0 3px rgba(63,203,146,.16); }
 .sd-input.is-bad { border-color: var(--ca-negative); }
 .sd-input--iban { font-family: 'Space Grotesk', ui-monospace, monospace; letter-spacing: .05em; text-transform: uppercase; }
 textarea.sd-input { padding-left: 1rem; min-height: 78px; resize: vertical; }
@@ -61,13 +61,13 @@ textarea.sd-input { padding-left: 1rem; min-height: 78px; resize: vertical; }
 .sd-key--del { color: var(--ca-text-2); font-size: 1rem; }
 
 .sd-summary { display: flex; justify-content: space-between; gap: 1rem; padding: .75rem .95rem; margin-bottom: 1rem; border-radius: 12px;
-  background: rgba(220,190,135,.08); border: 1px dashed rgba(220,190,135,.35); font-size: .78rem; color: var(--ca-text-2); }
+  background: rgba(63,203,146,.08); border: 1px dashed rgba(63,203,146,.35); font-size: .78rem; color: var(--ca-text-2); }
 .sd-summary strong { color: var(--ca-text); }
 .sd-summary__to { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right; }
 
 .sd-submit { width: 100%; min-height: 54px; border: 0; border-radius: 999px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: .6rem;
-  font-size: 1rem; font-weight: 800; font-family: inherit; color: #fff; background: linear-gradient(135deg, #DCBE87, #C6A15B);
-  box-shadow: 0 8px 26px rgba(198,161,91,.35); transition: filter .15s, transform .1s; }
+  font-size: 1rem; font-weight: 800; font-family: inherit; color: #fff; background: linear-gradient(135deg, #3FCB92, #008457);
+  box-shadow: 0 8px 26px rgba(0,132,87,.35); transition: filter .15s, transform .1s; }
 .sd-submit:hover:not(:disabled) { filter: brightness(1.08); }
 .sd-submit:active:not(:disabled) { transform: scale(.985); }
 .sd-submit:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
@@ -77,18 +77,18 @@ textarea.sd-input { padding-left: 1rem; min-height: 78px; resize: vertical; }
 /* ── Écran de chargement ── */
 .sd-loading { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1.1rem; padding: 2rem; text-align: center; color: #fff;
-  background: radial-gradient(circle at 50% 35%, rgba(27,73,118,.96) 0%, rgba(3,25,47,.98) 70%); backdrop-filter: blur(6px); }
+  background: radial-gradient(circle at 50% 35%, rgba(27,73,118,.96) 0%, rgba(15,13,54,.98) 70%); backdrop-filter: blur(6px); }
 .sd-loading__bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
-.sd-loading__bar::after { content: ''; position: absolute; top: 0; bottom: 0; width: 40%; background: linear-gradient(90deg, transparent, #DCBE87, transparent);
+.sd-loading__bar::after { content: ''; position: absolute; top: 0; bottom: 0; width: 40%; background: linear-gradient(90deg, transparent, #3FCB92, transparent);
   animation: sd-slide 1.2s ease-in-out infinite; }
 @keyframes sd-slide { from { left: -40%; } to { left: 100%; } }
 .sd-loading__ring { position: relative; width: 84px; height: 84px; }
-.sd-loading__ring::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 3px solid rgba(255,255,255,.14); border-top-color: #DCBE87; animation: sd-spin .85s linear infinite; }
-.sd-loading__ring i { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #DCBE87; animation: sd-fly 1.6s ease-in-out infinite; }
+.sd-loading__ring::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 3px solid rgba(255,255,255,.14); border-top-color: #3FCB92; animation: sd-spin .85s linear infinite; }
+.sd-loading__ring i { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #3FCB92; animation: sd-fly 1.6s ease-in-out infinite; }
 @keyframes sd-spin { to { transform: rotate(360deg); } }
 @keyframes sd-fly { 0%, 100% { transform: translate(-2px, 2px); } 50% { transform: translate(3px, -3px); } }
 .sd-loading__title { font-size: 1.15rem; font-weight: 800; }
-.sd-loading__amount { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 800; color: #DCBE87; }
+.sd-loading__amount { font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 800; color: #3FCB92; }
 .sd-loading__hint { font-size: .8rem; color: rgba(255,255,255,.65); max-width: 300px; line-height: 1.5; }
 @media (prefers-reduced-motion: reduce) { .sd-loading__ring::before, .sd-loading__ring i, .sd-loading__bar::after { animation-duration: 3s; } }
 </style>

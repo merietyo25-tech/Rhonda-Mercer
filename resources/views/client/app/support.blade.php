@@ -77,8 +77,8 @@
   position: relative;
   width: 40px; height: 40px;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(27,138,122,.35), rgba(27,138,122,.1));
-  border: 1.5px solid rgba(27,138,122,.3);
+  background: linear-gradient(145deg, rgba(0,132,87,.35), rgba(0,132,87,.1));
+  border: 1.5px solid rgba(0,132,87,.3);
   display: flex; align-items: center; justify-content: center;
   font-size: .95rem;
   color: var(--ca-teal-l);
@@ -173,7 +173,7 @@
 }
 .sc-bw--me .sc-bubble {
   background: var(--ca-teal-l);
-  color: #041810;
+  color: #0F0D36;
   border-bottom-right-radius: 5px;
 }
 .sc-bw--them .sc-bubble {
@@ -183,9 +183,9 @@
   border-bottom-left-radius: 5px;
 }
 .sc-bw--bot .sc-bubble {
-  background: linear-gradient(135deg, rgba(27,138,122,.14), rgba(27,138,122,.06));
+  background: linear-gradient(135deg, rgba(0,132,87,.14), rgba(0,132,87,.06));
   color: var(--ca-text);
-  border: 1.5px solid rgba(27,138,122,.22);
+  border: 1.5px solid rgba(0,132,87,.22);
   border-bottom-left-radius: 5px;
 }
 .sc-bot-badge {
@@ -223,8 +223,8 @@
 .sc-empty-ico {
   width: 72px; height: 72px;
   border-radius: 50%;
-  background: linear-gradient(145deg, rgba(27,138,122,.18), rgba(27,138,122,.06));
-  border: 1.5px solid rgba(27,138,122,.2);
+  background: linear-gradient(145deg, rgba(0,132,87,.18), rgba(0,132,87,.06));
+  border: 1.5px solid rgba(0,132,87,.2);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.875rem;
   color: var(--ca-teal-l);
@@ -331,7 +331,7 @@
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: .9rem;
-  color: #041810;
+  color: #0F0D36;
   flex-shrink: 0;
   opacity: .3;
   transition: opacity .15s, transform .1s;

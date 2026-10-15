@@ -1,199 +1,193 @@
 @extends('layouts.app')
-@section('title', __('menu.about'))
+@section('title', __('site.about_title'))
 
 @section('content')
-@php $locale = app()->getLocale(); @endphp
+@php
+    $locale  = app()->getLocale();
+    $name    = site_name();
+    $contact = \App\Models\SiteContact::current();
+    $address = site_address();
+    $members = $members ?? collect();
+    $leaders = $members->where('is_leader', true)->values();
+    $others  = $members->where('is_leader', false)->values();
 
-@push('styles')
-<style>
-.about-engage-card {
-    display:flex; gap:1rem; padding:1rem 1.25rem;
-    background:var(--cream); border-radius:12px;
-    border-left:3px solid var(--accent); margin-bottom:.75rem;
-}
-.about-engage-icon {
-    width:42px; height:42px; flex-shrink:0; border-radius:10px;
-    background:var(--accent-pale); display:flex; align-items:center;
-    justify-content:center; color:var(--accent-dark); font-size:1rem;
-}
-.about-engage-title { font-size:.875rem; font-weight:800; color:var(--navy); margin-bottom:.2rem; }
-.about-engage-desc  { font-size:.78rem; color:#6b7280; margin:0; line-height:1.55; }
+    $values = [
+        ['icon' => 'fa-eye',        't' => 'site.about_v1_t', 'x' => 'site.about_v1_x'],
+        ['icon' => 'fa-shield-alt', 't' => 'site.about_v2_t', 'x' => 'site.about_v2_x'],
+        ['icon' => 'fa-mobile-alt', 't' => 'site.about_v3_t', 'x' => 'site.about_v3_x'],
+        ['icon' => 'fa-handshake',  't' => 'site.about_v4_t', 'x' => 'site.about_v4_x'],
+    ];
+    $highlights = [
+        ['icon' => 'fa-university',   'label' => 'menu.banking_account'],
+        ['icon' => 'fa-credit-card',  'label' => 'menu.banking_card'],
+        ['icon' => 'fa-exchange-alt', 'label' => 'menu.banking_transfer'],
+    ];
+@endphp
 
-.about-page-partners-marquee {
-    overflow:hidden;
-    -webkit-mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-    mask-image:linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
-}
-.about-page-partners-track {
-    display:flex; align-items:center; width:max-content; gap:.5rem;
-    animation:about-page-partners-scroll 60s linear infinite;
-}
-.about-page-partners-marquee:hover .about-page-partners-track { animation-play-state:paused; }
-@keyframes about-page-partners-scroll {
-    from { transform:translateX(0); }
-    to   { transform:translateX(-50%); }
-}
-@media (prefers-reduced-motion: reduce) {
-    .about-page-partners-track { animation:none; flex-wrap:wrap; width:100%; }
-}
-</style>
-@endpush
+{{-- ── Bandeau ─────────────────────────────────────────────────────── --}}
+<section class="ab-hero" style="background-image:url('{{ asset('assets/images/site/about-1.jpg') }}')">
+    <div class="ab-hero__shade"></div>
+    <div class="bo-wrap ab-hero__in">
+        <nav class="ab-crumb" aria-label="breadcrumb">
+            <a href="{{ route('home', ['locale' => $locale]) }}"><i class="fas fa-home"></i> @lang('menu.home')</a>
+            <span>/</span> <strong>@lang('site.about_title')</strong>
+        </nav>
+        <h1>@lang('site.about_banner')</h1>
+    </div>
+</section>
 
-{{-- Page hero --}}
-<div class="page-hero">
-    <div class="container">
-        <div class="page-hero__content">
-            <h1 class="page-hero__title">@lang('menu.about')</h1>
-            <ul class="page-hero__breadcrumb">
-                <li><a href="{{ route('home', ['locale' => $locale]) }}">@lang('menu.home')</a></li>
-                <li class="sep"><i class="fas fa-chevron-right"></i></li>
-                <li>@lang('menu.about')</li>
+{{-- ── Introduction ────────────────────────────────────────────────── --}}
+<section class="ab-intro">
+    <div class="bo-wrap">
+        <span class="ab-kicker">@lang('site.about_title')</span>
+        <p class="ab-lead">@lang('site.about_intro_1', ['name' => $name])</p>
+        <p class="ab-sub">@lang('site.about_intro_2')</p>
+        <div class="ab-pills">
+            @foreach ($highlights as $h)
+            <span class="ab-pill"><i class="fas {{ $h['icon'] }}"></i> @lang($h['label'])</span>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+{{-- ── Découvrez la banque ─────────────────────────────────────────── --}}
+<section class="ab-section">
+    <div class="bo-wrap ab-split">
+        <div class="ab-text">
+            <h2 class="ab-h2">@lang('site.about_discover', ['name' => $name])</h2>
+            <p class="ab-p ab-p--first">@lang('site.about_p1', ['name' => $name])</p>
+            <p class="ab-p">@lang('site.about_p2')</p>
+            <ul class="ab-checks">
+                <li><i class="fas fa-check"></i> @lang('site.about_li1')</li>
+                <li><i class="fas fa-check"></i> @lang('site.about_li2')</li>
+                <li><i class="fas fa-check"></i> @lang('site.about_li3')</li>
             </ul>
+            <p class="ab-p">@lang('site.about_p3')</p>
         </div>
-    </div>
-</div>
-
-{{-- About intro --}}
-<section class="py-24 bg-white">
-    <div class="container">
-        <div class="row g-4 gutter-y-60 align-items-center">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-duration="900ms">
-                <div class="about-image-wrap">
-                    <img src="{{ asset('assets/images/about/about-1-1.jpg') }}"
-                         alt="{{ site_name() }}" class="about-image-main">
-                    <img src="{{ asset('assets/images/about/about-1-2.jpg') }}"
-                         alt="" class="about-image-secondary"
-                         style="width:38%;right:1rem;bottom:1rem;">
-                    <div class="about-badge">
-                        <span class="about-badge__number">15</span>
-                        <span class="about-badge__label">{{ __('home.about.exptitle') }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 wow fadeInRight" data-wow-duration="900ms" data-wow-delay="150ms">
-                <div class="section-label">{{ __('home.about.sectagline') }}</div>
-                <h2 class="section-title">{{ __('home.about.sectitle') }}</h2>
-
-                <p style="color:var(--gray-500);font-size:.9375rem;line-height:1.8;margin-bottom:1.5rem;">
-                    {{ __('home.about.text2') }}
-                </p>
-
-                {{-- 3 engagements clés --}}
-                <div class="about-engage-card">
-                    <div class="about-engage-icon"><i class="fas fa-shield-alt"></i></div>
-                    <div>
-                        <div class="about-engage-title">{{ __('home.about.engage1_title') }}</div>
-                        <p class="about-engage-desc">{{ __('home.about.engage1_desc') }}</p>
-                    </div>
-                </div>
-                <div class="about-engage-card">
-                    <div class="about-engage-icon"><i class="fas fa-bolt"></i></div>
-                    <div>
-                        <div class="about-engage-title">{{ __('home.about.engage2_title') }}</div>
-                        <p class="about-engage-desc">{{ __('home.about.engage2_desc') }}</p>
-                    </div>
-                </div>
-                <div class="about-engage-card" style="margin-bottom:1.5rem;">
-                    <div class="about-engage-icon"><i class="fas fa-globe"></i></div>
-                    <div>
-                        <div class="about-engage-title">{{ __('home.about.engage3_title') }}</div>
-                        <p class="about-engage-desc">{{ __('home.about.engage3_desc') }}</p>
-                    </div>
-                </div>
-
-                {{-- Services proposés --}}
-                <div style="margin-bottom:.5rem;font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);">
-                    <i class="fas fa-tags" style="color:var(--accent);margin-right:.35rem;"></i>{{ __('home.services.sectitle') }}
-                </div>
-                <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem;">
-                    @foreach([
-                        ['fas fa-wallet',              'menu.banking_account'],
-                        ['fas fa-credit-card',         'menu.banking_card'],
-                        ['fas fa-money-bill-transfer', 'menu.banking_transfer'],
-                    ] as $t)
-                    <span style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .75rem;border-radius:999px;background:var(--cream);border:1px solid #e2ddd0;font-size:.75rem;font-weight:700;color:var(--navy);">
-                        <i class="{{ $t[0] }}" style="color:var(--accent-dark);font-size:.7rem;"></i> @lang($t[1])
-                    </span>
-                    @endforeach
-                </div>
-
-                {{-- Partenaires --}}
-                <div style="padding:.85rem 1.1rem;background:#f7f8fa;border:1px solid #eaecf0;border-radius:12px;margin-bottom:1.5rem;">
-                    <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#9ca3af;margin-bottom:.75rem;">@lang('home.partners_title')</div>
-                    <div class="about-page-partners-marquee">
-                        <div class="about-page-partners-track">
-                            @foreach (__('home.partners_list') as $bankName)
-                            <span style="font-size:.72rem;font-weight:700;color:var(--navy);background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:.25rem .7rem;white-space:nowrap;flex-shrink:0;">{{ $bankName }}</span>
-                            @endforeach
-                            @foreach (__('home.partners_list') as $bankName)
-                            <span style="font-size:.72rem;font-weight:700;color:var(--navy);background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:.25rem .7rem;white-space:nowrap;flex-shrink:0;" aria-hidden="true">{{ $bankName }}</span>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-
-                <a href="{{ route('signup', ['locale' => $locale]) }}" class="btn-primary btn-primary--lg">
-                    <i class="fas fa-user-plus"></i> @lang('menu.open_account')
-                </a>
-            </div>
-        </div>
+        <figure class="ab-photo">
+            <img src="{{ asset('assets/images/site/about-2.jpg') }}" alt="{{ $name }}" loading="lazy">
+            <figcaption>@lang('site.about_caption', ['name' => $name])</figcaption>
+        </figure>
     </div>
 </section>
 
-{{-- Stats --}}
-<section style="background:var(--navy);">
-    <div class="container">
-        <div class="row">
-            @php
-            $stats = [
-                ['stop'=>'8500','suffix'=>'+','prefix'=>'', 'label'=> __('home.customer_satisfaction_rate')],
-                ['stop'=>'5',    'suffix'=>' min','prefix'=>'','label'=> __('home.account_opening_time')],
-                ['stop'=>'24',  'suffix'=>'h','prefix'=>'', 'label'=> __('home.average_approval_time')],
-                ['stop'=>'15',   'suffix'=>'+','prefix'=>'', 'label'=> __('home.years_experience')],
-            ];
-            @endphp
-            @foreach ($stats as $i => $stat)
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-duration="800ms" data-wow-delay="{{ $i*80 }}ms">
-                <div class="stat-item {{ $i < 3 ? 'stat-item--sep' : '' }}">
-                    <div class="stat-item__number">
-                        @if($stat['prefix'])<span style="font-size:.6em;margin-right:2px;">{{ $stat['prefix'] }}</span>@endif
-                        <span class="count-text" data-stop="{{ $stat['stop'] }}" data-speed="1500">{{ $stat['stop'] }}</span>
-                        @if($stat['suffix'])<span style="font-size:.6em;margin-left:2px;">{{ $stat['suffix'] }}</span>@endif
-                    </div>
-                    <div class="stat-item__label">{{ $stat['label'] }}</div>
-                </div>
-            </div>
+{{-- ── Engagements ─────────────────────────────────────────────────── --}}
+<section class="ab-values">
+    <div class="bo-wrap">
+        <h2 class="ab-h2 ab-h2--light">@lang('site.about_values')</h2>
+        <div class="ab-values__grid">
+            @foreach ($values as $n => $v)
+            <article class="ab-value">
+                <span class="ab-value__num">0{{ $n + 1 }}</span>
+                <span class="ab-value__ico"><i class="fas {{ $v['icon'] }}"></i></span>
+                <h3>@lang($v['t'])</h3>
+                <p>@lang($v['x'])</p>
+            </article>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- Why choose us --}}
-<section class="py-24" style="background:var(--cream);">
-    <div class="container">
-        <div class="text-center mb-14">
-            <div class="section-label justify-content-center">{{ __('home.why_us.sectagline') }}</div>
-            <h2 class="section-title">{{ __('home.why_us.sectitle') }}</h2>
-        </div>
-        <div class="row g-4 gutter-y-30">
-            @foreach ([1,2,3] as $r)
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-duration="800ms" data-wow-delay="{{ ($r-1)*80 }}ms">
-                <div class="card-glass p-8" style="padding:2rem;">
-                    <div style="width:52px;height:52px;background:var(--accent-pale);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;color:var(--accent-dark);font-size:1.25rem;margin-bottom:1.25rem;">
-                        <i class="fas fa-{{ $r===1 ? 'shield-alt' : ($r===2 ? 'bolt' : 'headset') }}"></i>
-                    </div>
-                    <h3 style="font-family:'Fraunces',serif;font-size:1.125rem;font-weight:700;color:var(--navy);margin-bottom:.625rem;">
-                        {{ __('home.why_us.reasons.title' . $r) }}
-                    </h3>
-                    <p style="font-size:.875rem;color:var(--gray-500);line-height:1.75;margin:0;">
-                        {{ __('home.why_us.reasons.desc' . $r) }}
-                    </p>
+{{-- ── Direction ───────────────────────────────────────────────────── --}}
+@foreach ($leaders as $i => $l)
+<section class="ab-section">
+    <div class="bo-wrap">
+        @if($i === 0)<h2 class="ab-h2">@lang('site.about_leader')</h2>@endif
+        <div class="ab-leader">
+            <div class="ab-leader__pic">
+                @if($l->photoUrl())
+                    <img src="{{ $l->photoUrl() }}" alt="{{ $l->name }}" loading="lazy">
+                @else
+                    <span class="ab-leader__ph">{{ $l->initials() }}</span>
+                @endif
+            </div>
+            <div class="ab-leader__txt">
+                <i class="fas fa-quote-left ab-quote"></i>
+                @foreach (preg_split('/\R+/', trim((string) $l->bio)) as $para)
+                    @if($para !== '')<p>{{ $para }}</p>@endif
+                @endforeach
+                <div class="ab-leader__sign">
+                    <strong>{{ $l->name }}</strong>
+                    <span>{{ $l->title }}</span>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+@endforeach
+
+{{-- ── Membres acteurs ─────────────────────────────────────────────── --}}
+@if($others->isNotEmpty())
+<section class="ab-section ab-team">
+    <div class="bo-wrap">
+        <h2 class="ab-h2">@lang('site.about_team', ['name' => $name])</h2>
+        <p class="ab-team__lead">@lang('site.about_gov_text', ['name' => $name, 'count' => $members->count()])</p>
+        <div class="ab-team__grid">
+            @foreach ($others as $m)
+            <article class="ab-member">
+                <div class="ab-member__av" @if($m->photoUrl()) style="background-image:url('{{ $m->photoUrl() }}')" @endif>
+                    @unless($m->photoUrl()){{ $m->initials() }}@endunless
+                </div>
+                <h3>{{ $m->name }}</h3>
+                <span class="ab-member__role">{{ $m->title }}</span>
+                @if($m->bio)<p>{{ \Illuminate\Support\Str::limit($m->bio, 190) }}</p>@endif
+            </article>
             @endforeach
         </div>
     </div>
 </section>
+@endif
 
+{{-- ── Où nous trouver ─────────────────────────────────────────────── --}}
+@if($address !== '')
+<section class="ab-where">
+    <div class="ab-where__card">
+        <h2 class="ab-h2">@lang('site.about_where')</h2>
+        <p><i class="fas fa-map-marker-alt"></i> <span>{{ $address }}</span></p>
+        @if($contact->phone_1)<p><i class="fas fa-phone"></i> <a href="tel:{{ preg_replace('/[^\d+]/', '', $contact->phone_1) }}">{{ $contact->phone_1 }}</a></p>@endif
+        @if($contact->email)<p><i class="fas fa-envelope"></i> <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></p>@endif
+        <a href="{{ route('contact', ['locale' => $locale]) }}" class="bo-btn bo-btn--green">@lang('menu.contact') <i class="fas fa-chevron-right"></i></a>
+    </div>
+    <div class="ab-where__map">
+        <iframe title="{{ $name }}" loading="lazy" referrerpolicy="no-referrer"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=13.3836%2C52.5113%2C13.3956%2C52.5173&amp;layer=mapnik&amp;marker=52.5143%2C13.3896"></iframe>
+    </div>
+</section>
+@endif
+
+{{-- ── Découvrez aussi ─────────────────────────────────────────────── --}}
+<section class="ab-section ab-also">
+    <div class="bo-wrap">
+        <h2 class="ab-h2 ab-h2--center">@lang('site.about_also')</h2>
+        <div class="bo-promos__grid">
+            <article class="bo-promo">
+                <div class="bo-promo__img" style="background-image:url('{{ asset('assets/images/site/promo-card.jpg') }}')"></div>
+                <div class="bo-promo__body">
+                    <span class="bo-promo__label">@lang('site.about_c1_label')</span>
+                    <h3>@lang('site.about_c1_title')</h3>
+                    <p>@lang('site.about_c1_text')</p>
+                    <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-link">@lang('site.discover') <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </article>
+            <article class="bo-promo">
+                <div class="bo-promo__img" style="background-image:url('{{ asset('assets/images/site/manage-phone.jpg') }}')"></div>
+                <div class="bo-promo__body">
+                    <span class="bo-promo__label">@lang('site.about_c2_label')</span>
+                    <h3>@lang('site.about_c2_title')</h3>
+                    <p>@lang('site.about_c2_text')</p>
+                    <a href="{{ route('login') }}" class="bo-link">@lang('site.discover') <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+{{-- ── Contact ─────────────────────────────────────────────────────── --}}
+<section class="bo-contactband">
+    <div class="bo-wrap">
+        <h2>@lang('site.about_contact')</h2>
+        <p>@lang('site.about_contact_text')</p>
+        <a href="{{ route('contact', ['locale' => $locale]) }}" class="bo-btn bo-btn--green">@lang('menu.contact') <i class="fas fa-chevron-right"></i></a>
+    </div>
+</section>
 @endsection

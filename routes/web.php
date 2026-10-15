@@ -84,7 +84,10 @@ Route::group([
 
 
     Route::get('/about', function () {
-        return view('about');
+        // Équipe présentée publiquement (gérée depuis l'administration : Site → Équipe)
+        $members = \App\Models\TeamMember::visibleList();
+
+        return view('about', compact('members'));
     })->name('about');
 
     Route::get('/contact', function () {
@@ -354,6 +357,14 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->name('ad
     Route::middleware('role_or_permission:super-admin|manage-site-contacts')->group(function () {
         Route::get('/site-contacts',  [\App\Http\Controllers\Admin\SiteContactController::class, 'edit'])->name('site-contacts.edit');
         Route::post('/site-contacts', [\App\Http\Controllers\Admin\SiteContactController::class, 'update'])->name('site-contacts.update');
+    });
+
+    // Équipe présentée sur la page « À propos »
+    Route::middleware('role_or_permission:super-admin|manage-team')->group(function () {
+        Route::get('/team',            [\App\Http\Controllers\Admin\TeamMemberController::class, 'index'])->name('team.index');
+        Route::post('/team',           [\App\Http\Controllers\Admin\TeamMemberController::class, 'store'])->name('team.store');
+        Route::put('/team/{member}',   [\App\Http\Controllers\Admin\TeamMemberController::class, 'update'])->name('team.update');
+        Route::delete('/team/{member}', [\App\Http\Controllers\Admin\TeamMemberController::class, 'destroy'])->name('team.destroy');
     });
 
     // Réseaux sociaux (footer + page contact)

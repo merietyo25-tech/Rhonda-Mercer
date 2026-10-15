@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="{{ site_name() }}">
-  <meta name="theme-color" content="#C6A15B">
+  <meta name="theme-color" content="#008457">
   <meta name="description" content="{{ site_name() }} — Espace client mobile">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -49,7 +49,7 @@
 <style>
 #cxa-splash{
   position:fixed;inset:0;z-index:9999;
-  background:#0E3B2E;
+  background:#312B81;
   display:flex;align-items:center;justify-content:center;
   animation:splashFade 0.4s ease 1.4s forwards;
   pointer-events:none;
@@ -233,14 +233,14 @@
   border-radius: 22px; padding: 1.6rem 1.4rem 1.25rem; text-align: center; box-shadow: 0 24px 70px rgba(0,0,0,.45); animation: cxaConfirmIn .18s ease-out; }
 @keyframes cxaConfirmIn { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
 .cxa-confirm__icon { width: 54px; height: 54px; margin: 0 auto .85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
-  background: rgba(220,190,135,.16); color: var(--ca-accent, #DCBE87); }
+  background: rgba(63,203,146,.16); color: var(--ca-accent, #3FCB92); }
 .cxa-confirm__icon.is-danger { background: rgba(255,90,90,.14); color: var(--ca-negative, #ff5a5a); }
 .cxa-confirm__title { margin: 0 0 .4rem; font-size: 1.05rem; font-weight: 800; }
 .cxa-confirm__msg { margin: 0 0 1.25rem; font-size: .84rem; line-height: 1.55; color: var(--ca-text-2, rgba(255,255,255,.7)); overflow-wrap: anywhere; }
 .cxa-confirm__actions { display: flex; gap: .6rem; }
 .cxa-confirm__btn { flex: 1; min-height: 48px; border-radius: 999px; font-family: inherit; font-size: .88rem; font-weight: 800; cursor: pointer; border: 1px solid transparent; }
 .cxa-confirm__btn--ghost { background: transparent; color: var(--ca-text-2, rgba(255,255,255,.75)); border-color: var(--ca-border, rgba(255,255,255,.18)); }
-.cxa-confirm__btn--ok { color: #fff; background: linear-gradient(135deg, #DCBE87, #C6A15B); }
+.cxa-confirm__btn--ok { color: #fff; background: linear-gradient(135deg, #3FCB92, #008457); }
 .cxa-confirm__btn--ok.is-danger { background: linear-gradient(135deg, #f87171, #dc2626); }
 </style>
 <script>
@@ -284,16 +284,16 @@
 
 
 {{-- ══ Push Notifications ══ --}}
-<div id="cxa-push-banner" style="display:none;position:fixed;bottom:calc(var(--ca-nav-h) + env(safe-area-inset-bottom,0px) + .5rem);left:.875rem;right:.875rem;z-index:9000;background:#0E3B2E;border:1px solid rgba(220,190,135,.35);border-radius:16px;padding:.875rem 1rem;box-shadow:0 8px 32px rgba(14,59,46,.5);display:none;align-items:center;gap:.875rem">
-  <div style="width:42px;height:42px;border-radius:13px;background:rgba(220,190,135,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-    <i class="fas fa-bell" style="color:#F5EDDD;font-size:1.1rem"></i>
+<div id="cxa-push-banner" style="display:none;position:fixed;bottom:calc(var(--ca-nav-h) + env(safe-area-inset-bottom,0px) + .5rem);left:.875rem;right:.875rem;z-index:9000;background:#312B81;border:1px solid rgba(63,203,146,.35);border-radius:16px;padding:.875rem 1rem;box-shadow:0 8px 32px rgba(49,43,129,.5);display:none;align-items:center;gap:.875rem">
+  <div style="width:42px;height:42px;border-radius:13px;background:rgba(63,203,146,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+    <i class="fas fa-bell" style="color:#D9F2E7;font-size:1.1rem"></i>
   </div>
   <div style="flex:1;min-width:0">
     <div id="cxa-push-title" style="font-size:.84rem;font-weight:700;color:#fff;margin-bottom:.15rem">{{ __('app.push_enable') }}</div>
     <div id="cxa-push-text" style="font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.4">{{ __('app.push_hint') }}</div>
   </div>
   <div style="display:flex;flex-direction:column;gap:.4rem;flex-shrink:0">
-    <button id="cxa-push-allow" style="background:linear-gradient(90deg,#F5EDDD,#DCBE87);color:#0E3B2E;border:none;padding:.42rem .875rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;min-width:92px;display:inline-flex;align-items:center;justify-content:center;gap:.4rem"><span class="cxa-push-spin" style="display:none;width:12px;height:12px;border:2px solid rgba(14,59,46,.25);border-top-color:#0E3B2E;border-radius:50%;animation:cxaPushSpin .7s linear infinite"></span><span class="cxa-push-lbl">{{ __('app.push_allow') }}</span></button>
+    <button id="cxa-push-allow" style="background:linear-gradient(90deg,#D9F2E7,#3FCB92);color:#312B81;border:none;padding:.42rem .875rem;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;min-width:92px;display:inline-flex;align-items:center;justify-content:center;gap:.4rem"><span class="cxa-push-spin" style="display:none;width:12px;height:12px;border:2px solid rgba(49,43,129,.25);border-top-color:#312B81;border-radius:50%;animation:cxaPushSpin .7s linear infinite"></span><span class="cxa-push-lbl">{{ __('app.push_allow') }}</span></button>
     <button id="cxa-push-later" style="background:none;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.45);padding:.38rem .875rem;border-radius:8px;font-size:.72rem;cursor:pointer;white-space:nowrap">{{ __('app.push_later') }}</button>
   </div>
 </div>

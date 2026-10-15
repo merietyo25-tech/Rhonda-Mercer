@@ -1,127 +1,82 @@
 @php
     $locale = app()->getLocale(); $route = Route::currentRouteName() ?? 'home';
     $siteContact = \App\Models\SiteContact::current();
+    $languages = \App\Models\Language::enabledList();
+    $current   = $languages->firstWhere('code', $locale);
+    $links = [
+        ['route' => 'home',    'label' => 'menu.home',    'icon' => 'fa-home'],
+        ['route' => 'about',   'label' => 'menu.about',   'icon' => 'fa-university'],
+        ['route' => 'contact', 'label' => 'menu.contact', 'icon' => 'fa-envelope'],
+    ];
 @endphp
 
-<header id="site-header" class="site-header fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="max-w-screen-xl mx-auto px-3 flex items-center justify-between h-20">
+<header id="site-header" class="bo-header" x-data="{ drawer: false }" @keydown.escape.window="drawer = false">
+    <div class="bo-header__bar">
 
-        <!-- Logo -->
-        <a href="{{ route('home', ['locale' => $locale]) }}" class="flex items-center gap-3 flex-shrink-0">
-            <span class="logo-img logo-img--white">
-                <x-logo variant="full" theme="dark" size="lg" :dark="$siteContact->logo_dark_path ? Storage::url($siteContact->logo_dark_path) : null" :name="$siteContact->name" />
-            </span>
-            <span class="logo-img logo-img--color">
-                <x-logo variant="full" theme="light" size="lg" :light="$siteContact->logo_light_path ? Storage::url($siteContact->logo_light_path) : null" :name="$siteContact->name" />
-            </span>
+        {{-- Menu + accès rapide --}}
+        <div class="bo-header__left">
+            <button type="button" class="bo-burger" @click="drawer = true" aria-label="@lang('menu.menu')">
+                <span></span><span></span><span></span>
+            </button>
+            <nav class="bo-nav" aria-label="Navigation principale">
+                @foreach ($links as $link)
+                <a href="{{ route($link['route'], ['locale' => $locale]) }}" class="bo-nav__link {{ $route === $link['route'] ? 'is-active' : '' }}">@lang($link['label'])</a>
+                @endforeach
+            </nav>
+        </div>
+
+        {{-- Logo centré --}}
+        <a href="{{ route('home', ['locale' => $locale]) }}" class="bo-logo" aria-label="{{ $siteContact->name }}">
+            <x-logo variant="full" theme="light" size="lg" :light="$siteContact->logo_light_path ? Storage::url($siteContact->logo_light_path) : null" :name="$siteContact->name" />
         </a>
 
-        <!-- Desktop nav -->
-        <nav class="hidden lg:flex items-center gap-1">
-            @php
-            $links = [
-                ['route' => 'home',     'label' => 'menu.home'],
-                ['route' => 'about',    'label' => 'menu.about'],
-                ['route' => 'contact',  'label' => 'menu.contact'],
-            ];
-            @endphp
-            @foreach ($links as $link)
-            @php
-            $active = $route === $link['route'];
-            @endphp
-            <a href="{{ route($link['route'], ['locale' => $locale]) }}"
-               class="nav-link px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200 {{ $active ? 'nav-link--active' : '' }}">
-                @lang($link['label'])
-            </a>
-            @endforeach
-        </nav>
-
-        <!-- Right actions -->
-        <div class="flex items-center gap-3">
-
-            <!-- Language switcher -->
-            <div class="relative" x-data="{ open: false }">
-                <button @click="open = !open" @click.outside="open = false"
-                    class="lang-btn flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors duration-200">
-                    @php $flagExt = \App\Models\Language::enabledList()->firstWhere('code', $locale)->flag_ext ?? 'png'; @endphp
-                    <img src="{{ asset('images/' . $locale . '.' . $flagExt) }}" alt="{{ $locale }}" class="w-5 h-auto rounded-sm">
-                    <span class="hidden sm:inline">{{ strtoupper($locale) }}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-200" :class="{ 'rotate-180': open }" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
+        {{-- Langue --}}
+        <div class="bo-header__right">
+            <div class="bo-lang" x-data="{ open: false }" @click.outside="open = false">
+                <button type="button" class="bo-lang__btn" @click="open = !open" :aria-expanded="open">
+                    <span>{{ strtoupper($locale) }}</span>
+                    @if($current)<img src="{{ asset('images/' . $locale . '.' . $current->flag_ext) }}" alt="{{ $locale }}">@endif
                 </button>
-                <div x-show="open" x-transition:enter="transition ease-out duration-150"
-                    x-transition:enter-start="opacity-0 translate-y-1"
-                    x-transition:enter-end="opacity-100 translate-y-0"
-                    class="absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-card-hover border border-gray-100 py-1.5 z-50" style="display:none">
-                    @foreach (\App\Models\Language::enabledList() as $lang)
+                <div class="bo-lang__menu" x-show="open" x-cloak x-transition.opacity>
+                    @foreach ($languages as $lang)
                     @if ($lang->code !== $locale)
-                    <a href="{{ route($route ?? 'home', ['locale' => $lang->code]) }}"
-                        class="flex items-center gap-2.5 px-3.5 py-2.5 text-sm font-medium text-gray-700 hover:bg-cream hover:text-navy transition-colors duration-150 rounded-lg mx-1">
-                        <img src="{{ asset('images/' . $lang->code . '.' . $lang->flag_ext) }}" alt="{{ $lang->code }}" class="w-5 h-auto rounded-sm">
-                        {{ strtoupper($lang->code) }}
+                    <a href="{{ route($route, ['locale' => $lang->code]) }}">
+                        <img src="{{ asset('images/' . $lang->code . '.' . $lang->flag_ext) }}" alt="{{ $lang->code }}">
+                        {{ $lang->native_name ?? strtoupper($lang->code) }}
                     </a>
                     @endif
                     @endforeach
                 </div>
             </div>
-
-            <!-- CTA -->
-            <a href="{{ route('signup', ['locale' => $locale]) }}"
-               class="hidden lg:inline-flex items-center gap-2 btn-primary text-sm">
-                <span>@lang('menu.open_account')</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-            </a>
-
-            <!-- Mobile toggle -->
-            <button @click="mobileOpen = !mobileOpen"
-                class="lg:hidden p-2 rounded-lg mobile-menu-btn transition-colors duration-200"
-                aria-label="Menu">
-                <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-                <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display:none">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
         </div>
     </div>
 
-    <!-- Mobile menu -->
-    <div x-show="mobileOpen"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 -translate-y-2"
-         x-transition:enter-end="opacity-100 translate-y-0"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 translate-y-0"
-         x-transition:leave-end="opacity-0 -translate-y-2"
-         class="lg:hidden mobile-menu border-t" style="display:none; position:relative; z-index:9999;">
-        <div class="max-w-screen-xl mx-auto px-3 py-4 space-y-1">
-            @foreach ($links as $link)
-            @php
-            $active = $route === $link['route'];
-            @endphp
-            <a href="{{ route($link['route'], ['locale' => $locale]) }}"
-               class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-colors duration-150 {{ $active ? 'bg-navy text-white' : 'text-gray-700 hover:bg-gray-50' }}">
-                @lang($link['label'])
-            </a>
-            @endforeach
-            <div class="pt-3 border-t border-gray-100 mt-3">
-                <a href="{{ route('signup', ['locale' => $locale]) }}"
-                   class="flex items-center justify-center gap-2 btn-primary w-full py-3">
-                    <span>@lang('menu.open_account')</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </a>
+    {{-- Boutons accolés au bord droit --}}
+    <div class="bo-cta">
+        <a href="{{ route('login') }}" class="bo-cta__btn bo-cta__btn--green">@lang('site.online_bank') <i class="fas fa-chevron-right"></i></a>
+        <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-cta__btn bo-cta__btn--indigo">@lang('site.become_client') <i class="fas fa-chevron-right"></i></a>
+    </div>
+
+    {{-- Tiroir de navigation --}}
+    <div class="bo-drawer" x-show="drawer" x-cloak>
+        <div class="bo-drawer__bg" @click="drawer = false" x-transition.opacity></div>
+        <aside class="bo-drawer__panel" x-transition:enter="bo-slide-in" x-transition:enter-start="bo-slide-from" x-transition:enter-end="bo-slide-to">
+            <div class="bo-drawer__head">
+                <x-logo variant="full" theme="light" size="md" :light="$siteContact->logo_light_path ? Storage::url($siteContact->logo_light_path) : null" :name="$siteContact->name" />
+                <button type="button" class="bo-drawer__close" @click="drawer = false" aria-label="Fermer"><i class="fas fa-times"></i></button>
             </div>
-        </div>
+            <nav class="bo-drawer__nav">
+                @foreach ($links as $link)
+                <a href="{{ route($link['route'], ['locale' => $locale]) }}" class="{{ $route === $link['route'] ? 'is-active' : '' }}"><i class="fas {{ $link['icon'] }}"></i> @lang($link['label'])</a>
+                @endforeach
+                <a href="{{ route('signup', ['locale' => $locale]) }}"><i class="fas fa-user-plus"></i> @lang('menu.open_account')</a>
+                <a href="{{ route('terms', ['locale' => $locale]) }}"><i class="fas fa-file-alt"></i> @lang('menu.terms')</a>
+                <a href="{{ route('privacy', ['locale' => $locale]) }}"><i class="fas fa-shield-alt"></i> @lang('menu.privacy')</a>
+            </nav>
+            <div class="bo-drawer__actions">
+                <a href="{{ route('login') }}" class="bo-cta__btn bo-cta__btn--green">@lang('site.online_bank') <i class="fas fa-chevron-right"></i></a>
+                <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-cta__btn bo-cta__btn--indigo">@lang('site.become_client') <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </aside>
     </div>
 </header>
-
-<!-- Header spacer (non-home pages) -->
-@if(!request()->routeIs('home'))
-<div class="h-20"></div>
-@endif

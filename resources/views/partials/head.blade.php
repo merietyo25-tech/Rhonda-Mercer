@@ -70,6 +70,8 @@
          réseau (le <style> généré par le script Tailwind CDN n'est pas garanti
          d'arriver avant les <link> précédents selon la latence du CDN). --}}
     <link rel="stylesheet" href="{{ asset('assets/css/royal.css') }}">
+    {{-- Thème du site public (en-tête, bannière, accueil, pied de page) : après royal.css pour l'emporter --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/bank-theme.css') }}?v={{ @filemtime(public_path('assets/css/bank-theme.css')) }}">
 <link rel="manifest" href="{{ route('pwa.manifest') }}">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">

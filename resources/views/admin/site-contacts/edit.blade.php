@@ -21,7 +21,7 @@
 @media (max-width:560px){.sc-uploads{grid-template-columns:minmax(0,1fr)}}
 .sc-up{border:1px dashed var(--c-border);border-radius:12px;padding:.9rem;display:flex;flex-direction:column;gap:.6rem;min-width:0}
 .sc-up__prev{height:76px;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f0f2f5}
-.sc-up__prev--dark{background:#0E3B2E}
+.sc-up__prev--dark{background:#312B81}
 .sc-up__prev img{max-height:60px;max-width:90%;object-fit:contain}
 .sc-up__empty{font-size:.74rem;color:var(--c-muted)}
 .sc-up__rm{display:flex;align-items:center;gap:.4rem;font-size:.78rem;cursor:pointer}

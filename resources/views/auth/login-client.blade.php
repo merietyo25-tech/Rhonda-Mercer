@@ -14,7 +14,7 @@
 <style>
 .qlogin{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-bottom:1.6rem}
 .qavatar{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,var(--navy2),var(--navy));display:flex;align-items:center;justify-content:center;
-  font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;box-shadow:0 0 0 4px rgba(220,190,135,.14)}
+  font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;box-shadow:0 0 0 4px rgba(63,203,146,.14)}
 .qname{font-size:.95rem;font-weight:700}
 .qemail{font-size:.78rem;color:var(--sub);overflow-wrap:anywhere;text-align:center}
 .qchange{display:inline-flex;align-items:center;gap:.4rem;font-size:.74rem;font-weight:600;color:var(--muted);border:1.5px solid var(--bdr);

@@ -75,8 +75,8 @@
 
 /* ── Info banner ── */
 .trf-confirm__info{
-  width:100%;background:rgba(27,138,122,.07);
-  border:1px solid rgba(27,138,122,.2);
+  width:100%;background:rgba(0,132,87,.07);
+  border:1px solid rgba(0,132,87,.2);
   border-radius:14px;padding:.875rem 1rem;
   display:flex;align-items:flex-start;gap:.625rem;
   text-align:left;margin-bottom:1.5rem;

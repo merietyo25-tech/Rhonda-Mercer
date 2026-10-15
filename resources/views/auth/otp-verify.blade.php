@@ -13,12 +13,12 @@
 @push('styles')
 <style>
 .otp-icon{width:64px;height:64px;margin:0 auto 1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:rgba(220,190,135,.12);color:var(--accent);font-size:1.6rem}
+  background:rgba(63,203,146,.12);color:var(--accent);font-size:1.6rem}
 .odigits{display:flex;justify-content:center;gap:.55rem;margin:1.4rem 0 1rem}
 .odigit{width:46px;height:56px;border-radius:12px;background:var(--inp);border:1.5px solid var(--bdr);display:flex;align-items:center;justify-content:center;
   font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:700;transition:border-color .15s,box-shadow .15s}
-.odigit.filled{border-color:rgba(220,190,135,.55)}
-.odigit.active{border-color:var(--accent);box-shadow:0 0 0 3.5px rgba(220,190,135,.16)}
+.odigit.filled{border-color:rgba(63,203,146,.55)}
+.odigit.active{border-color:var(--accent);box-shadow:0 0 0 3.5px rgba(63,203,146,.16)}
 .odigit.err{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.15)}
 .odigit.shake{animation:oshake .35s}
 @keyframes oshake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -31,7 +31,7 @@
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem;margin-top:1.1rem;-webkit-user-select:none;user-select:none}
 .kbtn{min-height:54px;border-radius:14px;background:var(--inp);border:1px solid var(--bdr);color:var(--text);cursor:pointer;display:flex;flex-direction:column;
   align-items:center;justify-content:center;font-family:inherit;touch-action:manipulation}
-.kbtn:active{background:rgba(220,190,135,.18)}
+.kbtn:active{background:rgba(63,203,146,.18)}
 .kbtn .knum{font-size:1.25rem;font-weight:600;line-height:1}
 .kbtn .ksub{font-size:.55rem;letter-spacing:.12em;color:var(--muted);margin-top:.15rem}
 .kbtn-empty{visibility:hidden}

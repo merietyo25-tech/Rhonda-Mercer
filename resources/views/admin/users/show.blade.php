@@ -85,7 +85,7 @@
 @section('content')
 
 @php
-  $palette = ['#2563EB','#059669','#D97706','#7C3AED','#DC2626','#0D9488','#C6A15B'];
+  $palette = ['#2563EB','#059669','#D97706','#7C3AED','#DC2626','#0D9488','#008457'];
   $avatarBg = $palette[crc32($user->email) % count($palette)];
   
 @endphp
@@ -162,7 +162,7 @@
         </button>
       </form>
       @endif
-      <a href="{{ route('admin.users.banking.edit', $user) }}" class="btn-navy" style="background:rgba(198,161,91,.1);color:var(--c-accent, #C6A15B);border:1px solid rgba(198,161,91,.25)">
+      <a href="{{ route('admin.users.banking.edit', $user) }}" class="btn-navy" style="background:rgba(0,132,87,.1);color:var(--c-accent, #008457);border:1px solid rgba(0,132,87,.25)">
         <i class="fas fa-university"></i> {{ $user->bankAccount ? 'Coordonnées bancaires' : 'Attribuer IBAN / Carte' }}
       </a>
     @endif

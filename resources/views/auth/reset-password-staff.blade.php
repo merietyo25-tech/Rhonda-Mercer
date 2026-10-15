@@ -78,7 +78,7 @@ function updateStrength(val) {
   if (/[A-Z]/.test(val)) score++;
   if (/[0-9]/.test(val)) score++;
   if (/[^A-Za-z0-9]/.test(val)) score++;
-  var colors = ['#ef4444','#f97316','#eab308','#22c55e','#DCBE87'], widths = ['20%','40%','60%','80%','100%'];
+  var colors = ['#ef4444','#f97316','#eab308','#22c55e','#3FCB92'], widths = ['20%','40%','60%','80%','100%'];
   fill.style.width = score ? widths[score-1] : '0';
   fill.style.background = score ? colors[score-1] : 'transparent';
 }

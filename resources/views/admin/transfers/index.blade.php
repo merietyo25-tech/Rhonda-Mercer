@@ -87,7 +87,7 @@
 <style>
 [x-cloak]{display:none !important}
 .at-list{display:flex;flex-direction:column;gap:.875rem}
-.at-card{background:var(--c-white,#fff);border:1px solid var(--c-border);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(2,24,46,.05)}
+.at-card{background:var(--c-white,#fff);border:1px solid var(--c-border);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(15,13,54,.05)}
 .at-top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;gap:1.5rem;align-items:center;padding:1.1rem 1.4rem}
 .at-who{display:flex;align-items:center;gap:.85rem;min-width:0}
 .at-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--c-navy),var(--c-navy-3));display:flex;align-items:center;justify-content:center;color:var(--c-accent);font-weight:800;font-size:.9rem}
@@ -113,8 +113,8 @@
 @media (max-width:820px){.at-top{grid-template-columns:1fr;gap:.9rem}.at-amt{text-align:left}}
 
 .at-modal{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:1rem}
-.at-modal__bg{position:absolute;inset:0;background:rgba(2,24,46,.55);backdrop-filter:blur(2px)}
-.at-modal__box{position:relative;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;background:var(--c-white,#fff);border-radius:18px;box-shadow:0 24px 60px rgba(2,24,46,.3);padding:1.6rem 1.7rem 1.4rem}
+.at-modal__bg{position:absolute;inset:0;background:rgba(15,13,54,.55);backdrop-filter:blur(2px)}
+.at-modal__box{position:relative;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;background:var(--c-white,#fff);border-radius:18px;box-shadow:0 24px 60px rgba(15,13,54,.3);padding:1.6rem 1.7rem 1.4rem}
 .at-modal__x{position:absolute;top:.9rem;right:.9rem;width:32px;height:32px;border-radius:50%;border:0;background:var(--c-bg);color:var(--c-muted);cursor:pointer}
 .at-modal__ico{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.8rem}
 .at-modal__title{font-size:1.0625rem;font-weight:800;color:var(--c-navy);margin:0 0 .25rem}
@@ -186,7 +186,7 @@
   <div class="at-mid">
     <div class="at-bar">
       <div class="at-bar__row"><span>Avancement</span><span>{{ $trf->progressValue() }} %</span></div>
-      <div class="at-bar__trk"><div class="at-bar__fill" style="width:{{ $trf->progressValue() }}%;background:{{ $trf->code_required ? '#D97706' : 'var(--c-accent, #C6A15B)' }}"></div></div>
+      <div class="at-bar__trk"><div class="at-bar__fill" style="width:{{ $trf->progressValue() }}%;background:{{ $trf->code_required ? '#D97706' : 'var(--c-accent, #008457)' }}"></div></div>
     </div>
     @if($trf->code_required)
       <span class="at-chip at-chip--warn"><i class="fas fa-lock"></i> Code n°{{ (int) $trf->code_stage + 1 }} → {{ $trf->nextStageTarget() }} % en attente de saisie</span>

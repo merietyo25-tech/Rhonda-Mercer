@@ -85,7 +85,7 @@ $salutationName = ($gender === 'N') ? explode(' ', $user->name)[0] : $user->name
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#C6A15B">
+<meta name="theme-color" content="#008457">
 <link rel="icon" type="image/png" sizes="32x32" href="/site-icon-32.png">
 <title>{{ $t['title'] }}</title>
 
@@ -96,19 +96,19 @@ $salutationName = ($gender === 'N') ? explode(' ', $user->name)[0] : $user->name
 
 <style>
 :root{
-  --bg:   #02182E;
-  --inp:  #06304F;
-  --navy: #0E3B2E;
-  --navy2:#14503D;
-  --accent: #DCBE87;
+  --bg:   #0F0D36;
+  --inp:  #231E6B;
+  --navy: #312B81;
+  --navy2:#3C3694;
+  --accent: #3FCB92;
   --accent-2:#2B94F7;
   --text: #FFFFFF;
   --sub:  rgba(255,255,255,.52);
   --muted:rgba(255,255,255,.28);
-  --bdr:  rgba(220,190,135,.16);
+  --bdr:  rgba(63,203,146,.16);
   /* Compat: quelques accents ponctuels référencent encore --cyan/--cyan2 */
   --cyan: #2B94F7;
-  --cyan2:#DCBE87;
+  --cyan2:#3FCB92;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{
@@ -130,12 +130,12 @@ a{text-decoration:none;color:inherit}
 .orb{position:absolute;border-radius:50%;filter:blur(90px)}
 .orb-1{
   width:520px;height:520px;top:-15%;right:-10%;
-  background:radial-gradient(circle,rgba(220,190,135,.11) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(63,203,146,.11) 0%,transparent 65%);
   animation:orbf 10s ease-in-out infinite alternate;
 }
 .orb-2{
   width:380px;height:380px;bottom:-15%;left:-8%;
-  background:radial-gradient(circle,rgba(220,190,135,.06) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(63,203,146,.06) 0%,transparent 65%);
   animation:orbf 14s ease-in-out infinite alternate-reverse;
 }
 @keyframes orbf{from{transform:scale(1)}to{transform:scale(1.1) translate(2%,3%)}}
@@ -153,9 +153,9 @@ a{text-decoration:none;color:inherit}
   width:fit-content;max-width:100%;
   border-radius:20px;overflow:hidden;
   background:linear-gradient(135deg,var(--navy2),var(--navy));
-  border:1px solid rgba(220,190,135,.18);
+  border:1px solid rgba(63,203,146,.18);
   margin:0 auto 1.375rem;
-  box-shadow:0 12px 34px rgba(2,24,46,.55),0 0 44px rgba(198,161,91,.22);
+  box-shadow:0 12px 34px rgba(15,13,54,.55),0 0 44px rgba(0,132,87,.22);
 }
 /* Sans rembourrage : un logo carre opaque remplit la tuile, un PNG transparent
    laisse voir le degrade. Le !important neutralise la hauteur posee en inline. */
@@ -168,7 +168,7 @@ a{text-decoration:none;color:inherit}
   display:flex;align-items:center;justify-content:center;
   font-family:'Outfit',sans-serif;font-size:1.5rem;font-weight:800;
   color:var(--accent);margin:0 auto 1rem;
-  box-shadow:0 0 24px rgba(14,59,46,.3);
+  box-shadow:0 0 24px rgba(49,43,129,.3);
 }
 
 /* Heading */
@@ -182,8 +182,8 @@ a{text-decoration:none;color:inherit}
 /* Info box */
 .info-box{
   display:flex;gap:.75rem;align-items:flex-start;
-  background:rgba(220,190,135,.07);
-  border:1px solid rgba(220,190,135,.18);
+  background:rgba(63,203,146,.07);
+  border:1px solid rgba(63,203,146,.18);
   border-radius:12px;padding:.875rem 1rem;margin-bottom:1.5rem;
 }
 .info-box i{color:var(--accent);font-size:.88rem;flex-shrink:0;margin-top:.15rem}
@@ -214,7 +214,7 @@ a{text-decoration:none;color:inherit}
   outline:none;transition:border-color .2s,box-shadow .2s,background .2s;
 }
 .finput::placeholder{color:rgba(255,255,255,.2)}
-.finput:focus{border-color:var(--navy);background:#161E30;box-shadow:0 0 0 3.5px rgba(14,59,46,.25)}
+.finput:focus{border-color:var(--navy);background:#161E30;box-shadow:0 0 0 3.5px rgba(49,43,129,.25)}
 .finput:focus ~ .ficon,.frel:focus-within .ficon{color:var(--accent)}
 .finput.err{border-color:#ef4444}
 .finput[readonly]{
@@ -238,12 +238,12 @@ a{text-decoration:none;color:inherit}
   width:100%;padding:.92rem 1.5rem;border:none;border-radius:999px;
   font-size:.97rem;font-weight:700;font-family:'Outfit',sans-serif;
   cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.625rem;
-  background:linear-gradient(135deg,#DCBE87 0%,#C6A15B 100%);
+  background:linear-gradient(135deg,#3FCB92 0%,#008457 100%);
   color:#fff;letter-spacing:.01em;
-  box-shadow:0 6px 28px rgba(220,190,135,.35),0 2px 8px rgba(0,0,0,.3);
+  box-shadow:0 6px 28px rgba(63,203,146,.35),0 2px 8px rgba(0,0,0,.3);
   transition:filter .2s,box-shadow .2s,transform .1s;margin-top:1.25rem;
 }
-.fbtn:hover{filter:brightness(1.08);box-shadow:0 8px 36px rgba(220,190,135,.5)}
+.fbtn:hover{filter:brightness(1.08);box-shadow:0 8px 36px rgba(63,203,146,.5)}
 .fbtn:active{transform:scale(.975)}
 .fbtn:disabled{opacity:.6;cursor:not-allowed;filter:none}
 
@@ -366,7 +366,7 @@ a{text-decoration:none;color:inherit}
 <script>
 const strengths = @json($t['strengths']);
 const strPh     = @json($t['str_ph']);
-const colors    = ['','#ef4444','#f97316','#eab308','#22c55e','#DCBE87'];
+const colors    = ['','#ef4444','#f97316','#eab308','#22c55e','#3FCB92'];
 const widths    = ['0%','25%','50%','75%','90%','100%'];
 
 function tglPwd(id, btn) {

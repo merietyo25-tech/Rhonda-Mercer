@@ -36,8 +36,8 @@
 }
 .nx-filter.active,
 .nx-filter:hover{
-  background:rgba(27,138,122,.12);
-  border-color:rgba(27,138,122,.3);
+  background:rgba(0,132,87,.12);
+  border-color:rgba(0,132,87,.3);
   color:var(--ca-teal-l);
 }
 .nx-filter__dot{
@@ -78,7 +78,7 @@
 }
 .nx-item.nx-unread{
   background:var(--ca-bg3);
-  border-color:rgba(27,138,122,.2);
+  border-color:rgba(0,132,87,.2);
 }
 .nx-item.nx-unread::before{
   content:'';
@@ -93,8 +93,8 @@
   display:flex;align-items:center;justify-content:center;
   font-size:1rem;position:relative;
 }
-.nx-ico--transfer{background:linear-gradient(145deg,rgba(27,138,122,.25),rgba(27,138,122,.1));color:var(--ca-teal-l)}
-.nx-ico--loan    {background:linear-gradient(145deg,rgba(220,190,135,.25),rgba(220,190,135,.1));color:var(--ca-accent-l)}
+.nx-ico--transfer{background:linear-gradient(145deg,rgba(0,132,87,.25),rgba(0,132,87,.1));color:var(--ca-teal-l)}
+.nx-ico--loan    {background:linear-gradient(145deg,rgba(63,203,146,.25),rgba(63,203,146,.1));color:var(--ca-accent-l)}
 .nx-ico--credit  {background:linear-gradient(145deg,rgba(74,222,128,.2),rgba(74,222,128,.07));color:#4ade80}
 .nx-ico--debit   {background:linear-gradient(145deg,rgba(248,113,113,.2),rgba(248,113,113,.07));color:#f87171}
 .nx-ico--system  {background:linear-gradient(145deg,rgba(96,165,250,.2),rgba(96,165,250,.07));color:#60a5fa}
@@ -105,7 +105,7 @@
   width:10px;height:10px;border-radius:50%;
   background:var(--ca-teal-l);
   border:2px solid var(--ca-bg3);
-  box-shadow:0 0 6px rgba(27,138,122,.5);
+  box-shadow:0 0 6px rgba(0,132,87,.5);
 }
 
 /* ── Body ── */
@@ -118,8 +118,8 @@
   font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
   padding:.1rem .45rem;border-radius:999px;
 }
-.nx-type--transfer{background:rgba(27,138,122,.12);color:var(--ca-teal-l)}
-.nx-type--loan    {background:rgba(220,190,135,.12);color:var(--ca-accent-l)}
+.nx-type--transfer{background:rgba(0,132,87,.12);color:var(--ca-teal-l)}
+.nx-type--loan    {background:rgba(63,203,146,.12);color:var(--ca-accent-l)}
 .nx-type--credit  {background:rgba(74,222,128,.12);color:#4ade80}
 .nx-type--debit   {background:rgba(248,113,113,.12);color:#f87171}
 .nx-type--system  {background:rgba(96,165,250,.12);color:#60a5fa}

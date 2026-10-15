@@ -512,8 +512,8 @@ class AppController extends Controller
             'scope'            => '/app',
             'display'          => 'standalone',
             'orientation'      => 'any',
-            'background_color' => '#C6A15B',
-            'theme_color'      => '#C6A15B',
+            'background_color' => '#0F0D36',
+            'theme_color'      => '#312B81',
             'lang'             => app()->getLocale(),
             'categories'       => ['finance', 'business'],
             'icons'            => [
@@ -564,8 +564,8 @@ class AppController extends Controller
             'scope'            => '/',
             'display'          => 'standalone',
             'orientation'      => 'any',
-            'background_color' => '#C6A15B',
-            'theme_color'      => '#C6A15B',
+            'background_color' => '#0F0D36',
+            'theme_color'      => '#312B81',
             'lang'             => app()->getLocale(),
             'categories'       => ['finance', 'business'],
             'icons'            => [

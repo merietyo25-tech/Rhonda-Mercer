@@ -16,21 +16,21 @@
   position: relative; overflow: hidden;
   aspect-ratio: 1.586 / 1; min-height: 190px; max-width: 440px; width: 100%;
   border-radius: 22px; padding: 1.35rem 1.5rem;
-  background: linear-gradient(135deg, #1B4976 0%, #0D2E52 50%, #0A1E38 100%);
+  background: linear-gradient(135deg, #3A3590 0%, #231F5F 50%, #1A1750 100%);
   box-shadow: 0 12px 40px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08);
   display: flex; flex-direction: column; justify-content: space-between;
   color: #fff;
 }
 .cd-card::before {
   content: ''; position: absolute; top: -70px; right: -70px; width: 240px; height: 240px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(220,190,135,.2) 0%, transparent 65%); pointer-events: none;
+  background: radial-gradient(circle, rgba(63,203,146,.2) 0%, transparent 65%); pointer-events: none;
 }
 .cd-card--blocked, .cd-card--suspended { filter: grayscale(.85); opacity: .8; }
 .cd-card__top { display: flex; align-items: center; justify-content: space-between; position: relative; }
 .cd-card__brand { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); }
 .cd-card__chip {
   width: 42px; height: 31px; border-radius: 7px;
-  background: linear-gradient(135deg, #E9D5A1, #C6A15B 55%, #7BA6D9);
+  background: linear-gradient(135deg, #8EDDBC, #008457 55%, #7BA6D9);
 }
 .cd-card__num {
   position: relative; font-family: 'Space Grotesk', ui-monospace, monospace;
@@ -70,7 +70,7 @@
 .cd-pending { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.2rem; border-radius: 999px; font-size: .82rem; font-weight: 700; background: rgba(245,158,11,.12); color: var(--ca-amber); }
 button.cd-empty__btn { border: 0; cursor: pointer; font-family: inherit; }
 .cd-empty__btn { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.4rem; border-radius: 999px; font-size: .85rem; font-weight: 700;
-  color: #fff; background: linear-gradient(135deg, #DCBE87, #C6A15B); }
+  color: #fff; background: linear-gradient(135deg, #3FCB92, #008457); }
 
 [x-cloak]{display:none !important}
 .cd-pay{max-width:440px;margin:0 auto;text-align:left;background:var(--ca-bg3);border:1px solid var(--ca-border);border-radius:18px;padding:1.1rem 1.2rem}

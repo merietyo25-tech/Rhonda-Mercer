@@ -25,7 +25,7 @@
 }
 .cp-input:focus {
   outline:none;border-color:var(--ca-teal-l);
-  box-shadow:0 0 0 3px rgba(27,138,122,.15);
+  box-shadow:0 0 0 3px rgba(0,132,87,.15);
 }
 .cp-ico-left {
   position:absolute;left:1rem;top:50%;transform:translateY(-50%);

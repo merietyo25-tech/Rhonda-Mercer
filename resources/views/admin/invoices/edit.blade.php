@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div class="card-pro" style="background:linear-gradient(135deg,#1B4976,#0D2E52);color:#fff;border:none">
+      <div class="card-pro" style="background:linear-gradient(135deg,#3A3590,#231F5F);color:#fff;border:none">
         <div class="card-pro-body">
           <div style="display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.8rem;color:rgba(255,255,255,.6)">
             <span>Sous-total</span><span x-text="fmt(subtotal) + ' ' + currency">0</span>
@@ -140,7 +140,7 @@
                        x-model.number="line.qty" min="0.01" step="0.01" @input="calcTotals()" required>
                 <input type="number" :name="'items['+idx+'][unit_price]'" class="form-control-pro"
                        x-model.number="line.price" min="0" step="0.01" @input="calcTotals()" required>
-                <div style="padding:.5rem .625rem;background:rgba(198,161,91,.08);border:1.5px solid rgba(198,161,91,.25);border-radius:var(--radius-sm);font-size:.8125rem;font-weight:700;color:var(--c-navy);text-align:right"
+                <div style="padding:.5rem .625rem;background:rgba(0,132,87,.08);border:1.5px solid rgba(0,132,87,.25);border-radius:var(--radius-sm);font-size:.8125rem;font-weight:700;color:var(--c-navy);text-align:right"
                      x-text="fmt(line.qty * line.price)">0</div>
                 <button type="button" @click="removeLine(idx)" x-show="lines.length > 1"
                         style="width:36px;height:36px;border:none;background:rgba(220,38,38,.1);color:#dc2626;border-radius:var(--radius-sm);cursor:pointer;font-size:.8rem">

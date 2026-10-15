@@ -12,156 +12,138 @@
     $socialLinks = \App\Models\SocialLink::where('is_visible', true)->orderBy('sort_order')->get();
     $addresses = collect([$siteContact->address_1, $siteContact->address_2, $siteContact->address_3])->filter();
     $phones    = collect([$siteContact->phone_1, $siteContact->phone_2])->filter();
+    $subjects  = [
+        'Ouverture de compte' => 'menu.banking_account',
+        'Carte bancaire'      => 'menu.banking_card',
+        'Virements'           => 'menu.banking_transfer',
+        'Autre'               => 'site.contact_other',
+    ];
 @endphp
 
-{{-- Page hero --}}
-<div class="page-hero">
-    <div class="container">
-        <div class="page-hero__content">
-            <h1 class="page-hero__title">@lang('menu.contact')</h1>
-            <ul class="page-hero__breadcrumb">
-                <li><a href="{{ route('home', ['locale' => $locale]) }}">@lang('menu.home')</a></li>
-                <li class="sep"><i class="fas fa-chevron-right"></i></li>
-                <li>@lang('menu.contact')</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<section class="py-24 bg-white">
-    <div class="container">
-        <div class="row g-4 gutter-y-40 align-items-start">
-            {{-- Contact form --}}
-            <div class="col-lg-7 wow fadeInLeft" data-wow-duration="900ms" x-data="{ submitting: false }">
-                <div class="form-card">
-                    <div class="section-label mb-2">{{ __('contact.form_title') }}</div>
-                    <h2 class="section-title mb-6">{{ __('contact.detail_title') }}</h2>
-
-                    @if (session('success'))
-                        <div class="alert alert-success">{{ __('message.success_contact') }}</div>
-                    @endif
-                    @if (session('error'))
-                        <div class="alert alert-danger">{{ __('message.error') }}</div>
-                    @endif
-
-                    <form method="POST" action="{{ route('contact.send') }}" @submit="submitting = true">
-                        @csrf
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{ __('contact.placeholder_name') }} *</label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}"
-                                           placeholder="{{ __('contact.placeholder_name') }}" required>
-                                    @error('name')<span class="form-error">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>{{ __('contact.placeholder_email') }} *</label>
-                                    <input type="email" name="email" class="form-control" value="{{ old('email') }}"
-                                           placeholder="{{ __('contact.placeholder_email') }}" required>
-                                    @error('email')<span class="form-error">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>{{ __('contact.subject') }} *</label>
-                                    <select name="subject" class="form-control" required>
-                                        <option value="">— {{ __('contact.subject') }} —</option>
-                                        <option value="Ouverture de compte" {{ old('subject')=='Ouverture de compte' ?'selected':'' }}>@lang('menu.banking_account')</option>
-                                        <option value="Carte bancaire"      {{ old('subject')=='Carte bancaire'      ?'selected':'' }}>@lang('menu.banking_card')</option>
-                                        <option value="Virements"           {{ old('subject')=='Virements'           ?'selected':'' }}>@lang('menu.banking_transfer')</option>
-                                        <option value="Autre"           {{ old('subject')=='Autre'           ?'selected':'' }}>Autre</option>
-                                    </select>
-                                    @error('subject')<span class="form-error">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Message *</label>
-                                    <textarea name="message" class="form-control" rows="6"
-                                              placeholder="{{ __('contact.placeholder_message') }}" required>{{ old('message') }}</textarea>
-                                    @error('message')<span class="form-error">{{ $message }}</span>@enderror
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn-primary btn-primary--lg w-100 justify-content-center" :disabled="submitting">
-                                    <i class="fas fa-spinner fa-spin" x-show="submitting" x-cloak></i>
-                                    <i class="fas fa-paper-plane" x-show="!submitting"></i>
-                                    <span x-text="submitting ? '{{ __('contact.sending') }}' : '{{ __('contact.button') }}'"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            {{-- Coordonnees : cartes empilees, sans photo, comme le modele --}}
-            <div class="col-lg-5 wow fadeInRight" data-wow-duration="900ms" data-wow-delay="150ms">
-                <div class="contact-cards">
-
-                    @if ($addresses->isNotEmpty())
-                    <div class="contact-card">
-                        <div class="contact-card__icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div>
-                            <p class="contact-card__title">{{ __('contact.address_title') }}</p>
-                            @foreach ($addresses as $adresse)
-                            <p class="contact-card__value">{{ $adresse }}</p>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
-
-                    @if ($phones->isNotEmpty())
-                    <div class="contact-card">
-                        <div class="contact-card__icon"><i class="fas fa-phone-alt"></i></div>
-                        <div>
-                            <p class="contact-card__title">{{ __('contact.phone_title') }}</p>
-                            @foreach ($phones as $telephone)
-                            <p class="contact-card__value">
-                                <a href="tel:{{ preg_replace('/[^\d+]/', '', $telephone) }}">{{ $telephone }}</a>
-                            </p>
-                            @endforeach
-                        </div>
-                    </div>
-                    @endif
-
-                    @if ($siteContact->email)
-                    <div class="contact-card">
-                        <div class="contact-card__icon"><i class="fas fa-envelope"></i></div>
-                        <div>
-                            <p class="contact-card__title">{{ __('contact.mail_title') }}</p>
-                            <p class="contact-card__value">
-                                <a href="mailto:{{ $siteContact->email }}">{{ $siteContact->email }}</a>
-                            </p>
-                        </div>
-                    </div>
-                    @endif
-
-                    <div class="contact-card">
-                        <div class="contact-card__icon"><i class="fas fa-building"></i></div>
-                        <div>
-                            <p class="contact-card__title">{{ $siteContact->name }}</p>
-                            <p class="contact-card__value contact-card__value--plain">{{ __('contact.detail_desc') }}</p>
-                        </div>
-                    </div>
-
-                    @if ($socialLinks->isNotEmpty())
-                    <div class="contact-cards__social">
-                        @foreach ($socialLinks as $link)
-                        <a href="{{ $link->url }}" aria-label="{{ $link->label }}"
-                           @if(str_starts_with($link->url, 'http')) target="_blank" rel="noopener" @endif>
-                            <i class="{{ $link->icon_class }}"></i>
-                        </a>
-                        @endforeach
-                    </div>
-                    @endif
-
-                </div>
-            </div>
-
-        </div>
+{{-- ── Bandeau ─────────────────────────────────────────────────────── --}}
+<section class="ab-hero ct-hero" style="background-image:url('{{ asset('assets/images/site/contact-hero.jpg') }}')">
+    <div class="ab-hero__shade"></div>
+    <div class="bo-wrap ab-hero__in">
+        <nav class="ab-crumb" aria-label="breadcrumb">
+            <a href="{{ route('home', ['locale' => $locale]) }}"><i class="fas fa-home"></i> @lang('menu.home')</a>
+            <span>/</span> <strong>@lang('menu.contact')</strong>
+        </nav>
+        <h1>@lang('contact.banner_title')</h1>
+        <p class="ct-hero__sub">@lang('contact.banner_description')</p>
     </div>
 </section>
 
+{{-- ── Formulaire + coordonnées ────────────────────────────────────── --}}
+<section class="ct-main">
+    <div class="bo-wrap ct-grid">
+
+        <div class="ct-form" x-data="{ submitting: false }">
+            <span class="ab-kicker">@lang('contact.form_title')</span>
+            <h2 class="ab-h2">@lang('contact.detail_title')</h2>
+            <p class="ct-form__lead">@lang('contact.form_description')</p>
+
+            @if (session('success'))
+                <div class="ct-alert ct-alert--ok" role="status"><i class="fas fa-check-circle"></i> {{ __('message.success_contact') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="ct-alert ct-alert--err" role="alert"><i class="fas fa-exclamation-triangle"></i> {{ __('message.error') }}</div>
+            @endif
+
+            <form method="POST" action="{{ route('contact.send') }}" @submit="submitting = true">
+                @csrf
+                <div class="ct-row">
+                    <div class="ct-field">
+                        <label for="ct-name">{{ __('contact.label_name') }} *</label>
+                        <input id="ct-name" type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('contact.placeholder_name') }}" autocomplete="name" required>
+                        @error('name')<span class="ct-err">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="ct-field">
+                        <label for="ct-email">{{ __('contact.label_email') }} *</label>
+                        <input id="ct-email" type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('contact.placeholder_email') }}" autocomplete="email" required>
+                        @error('email')<span class="ct-err">{{ $message }}</span>@enderror
+                    </div>
+                </div>
+                <div class="ct-field">
+                    <label for="ct-subject">{{ __('contact.subject') }} *</label>
+                    <select id="ct-subject" name="subject" required>
+                        <option value="">— {{ __('contact.subject') }} —</option>
+                        @foreach ($subjects as $value => $label)
+                        <option value="{{ $value }}" {{ old('subject') == $value ? 'selected' : '' }}>@lang($label)</option>
+                        @endforeach
+                    </select>
+                    @error('subject')<span class="ct-err">{{ $message }}</span>@enderror
+                </div>
+                <div class="ct-field">
+                    <label for="ct-message">{{ __('contact.label_message') }} *</label>
+                    <textarea id="ct-message" name="message" rows="6" placeholder="{{ __('contact.placeholder_message') }}" required>{{ old('message') }}</textarea>
+                    @error('message')<span class="ct-err">{{ $message }}</span>@enderror
+                </div>
+                <button type="submit" class="ct-submit" :disabled="submitting">
+                    <i class="fas fa-spinner fa-spin" x-show="submitting" x-cloak></i>
+                    <i class="fas fa-paper-plane" x-show="!submitting"></i>
+                    <span x-text="submitting ? @js(__('contact.sending')) : @js(__('contact.button'))"></span>
+                </button>
+            </form>
+        </div>
+
+        <aside class="ct-side">
+            @if ($addresses->isNotEmpty())
+            <div class="ct-card">
+                <span class="ct-card__ico"><i class="fas fa-map-marker-alt"></i></span>
+                <div>
+                    <h3>@lang('contact.address_title')</h3>
+                    @foreach ($addresses as $adresse)<p>{{ $adresse }}</p>@endforeach
+                </div>
+            </div>
+            @endif
+
+            @if ($phones->isNotEmpty())
+            <div class="ct-card">
+                <span class="ct-card__ico"><i class="fas fa-phone-alt"></i></span>
+                <div>
+                    <h3>@lang('contact.phone_title')</h3>
+                    @foreach ($phones as $telephone)
+                    <p><a href="tel:{{ preg_replace('/[^\d+]/', '', $telephone) }}">{{ $telephone }}</a></p>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+            @if ($siteContact->email)
+            <div class="ct-card">
+                <span class="ct-card__ico"><i class="fas fa-envelope"></i></span>
+                <div>
+                    <h3>@lang('contact.mail_title')</h3>
+                    <p><a href="mailto:{{ $siteContact->email }}">{{ $siteContact->email }}</a></p>
+                </div>
+            </div>
+            @endif
+
+            <div class="ct-help">
+                <i class="fas fa-headset"></i>
+                <div>
+                    <strong>{{ $siteContact->name }}</strong>
+                    <p>@lang('contact.detail_desc')</p>
+                </div>
+            </div>
+
+            @if ($socialLinks->isNotEmpty())
+            <div class="ct-social">
+                @foreach ($socialLinks as $link)
+                <a href="{{ $link->url }}" aria-label="{{ $link->label }}" @if(str_starts_with($link->url, 'http')) target="_blank" rel="noopener" @endif><i class="{{ $link->icon_class }}"></i></a>
+                @endforeach
+            </div>
+            @endif
+        </aside>
+    </div>
+</section>
+
+{{-- ── Localisation ────────────────────────────────────────────────── --}}
+@if ($addresses->isNotEmpty())
+<section class="ct-map">
+    <iframe title="{{ $siteContact->name }}" loading="lazy" referrerpolicy="no-referrer"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=13.3836%2C52.5113%2C13.3956%2C52.5173&amp;layer=mapnik&amp;marker=52.5143%2C13.3896"></iframe>
+    <div class="ct-map__tab">@lang('site.about_where')</div>
+</section>
+@endif
 @endsection

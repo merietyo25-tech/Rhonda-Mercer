@@ -11,7 +11,7 @@
 /* Carte bancaire visuelle */
 .pm-card {
   border-radius:22px;
-  background:linear-gradient(145deg,#1B527A 0%,#0D2E54 45%,#071828 100%);
+  background:linear-gradient(145deg,#3A3590 0%,#231F5F 45%,#15123F 100%);
   padding:1.5rem;position:relative;overflow:hidden;
   box-shadow:0 20px 56px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.07);
   margin-bottom:1.5rem;
@@ -25,7 +25,7 @@
 .pm-card::after {
   content:'';position:absolute;bottom:-70px;left:-40px;
   width:180px;height:180px;border-radius:50%;
-  background:radial-gradient(circle,rgba(220,190,135,.08) 0%,transparent 65%);
+  background:radial-gradient(circle,rgba(63,203,146,.08) 0%,transparent 65%);
   pointer-events:none;
 }
 .pm-card__top {
@@ -39,7 +39,7 @@
 }
 .pm-card__chip {
   width:32px;height:24px;border-radius:4px;
-  background:linear-gradient(135deg,#F5EDDD,#DCBE87,#2B94F7);
+  background:linear-gradient(135deg,#D9F2E7,#3FCB92,#2B94F7);
   box-shadow:0 2px 6px rgba(0,0,0,.35);position:relative;overflow:hidden;
 }
 .pm-card__chip::before {
@@ -126,7 +126,7 @@
   display:flex;align-items:center;justify-content:center;gap:.625rem;
   transition:background var(--ca-transition);
 }
-.pm-share-btn:hover { background:rgba(27,138,122,.1) }
+.pm-share-btn:hover { background:rgba(0,132,87,.1) }
 
 /* Alerte si non configuré */
 .pm-empty {

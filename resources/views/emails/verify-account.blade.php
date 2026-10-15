@@ -2,7 +2,7 @@
     $locale = $user->locale ?? 'fr';
     $site   = site_name();
     // Couleurs alignées sur les pages d'authentification (/login, /email/verify)
-    $bg = '#02182E'; $card = '#05243F'; $inp = '#06304F'; $gold = '#DCBE87'; $gold2 = '#C6A15B';
+    $bg = '#0F0D36'; $card = '#1B1757'; $inp = '#231E6B'; $gold = '#3FCB92'; $gold2 = '#008457';
 @endphp
 <!DOCTYPE html>
 <html lang="{{ $locale }}">
@@ -17,7 +17,7 @@
 <tr><td align="center" style="padding:32px 16px">
 
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="{{ $card }}"
-         style="max-width:520px;background:{{ $card }};border:1px solid rgba(220,190,135,.25);border-radius:20px">
+         style="max-width:520px;background:{{ $card }};border:1px solid rgba(63,203,146,.25);border-radius:20px">
     <tr><td align="center" style="padding:34px 32px 8px">
       <x-logo variant="full" theme="dark" size="md" />
     </td></tr>
@@ -25,8 +25,8 @@
     {{-- Pastille enveloppe, comme sur la page /email/verify --}}
     <tr><td align="center" style="padding:18px 32px 0">
       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
-        <td width="64" height="64" align="center" valign="middle" bgcolor="#0E2F46"
-            style="width:64px;height:64px;border-radius:32px;background:#0E2F46;font-size:28px;line-height:64px;color:{{ $gold }}">&#9993;</td>
+        <td width="64" height="64" align="center" valign="middle" bgcolor="#231F5F"
+            style="width:64px;height:64px;border-radius:32px;background:#231F5F;font-size:28px;line-height:64px;color:{{ $gold }}">&#9993;</td>
       </tr></table>
     </td></tr>
 
@@ -54,7 +54,7 @@
 
     <tr><td style="padding:24px 32px 0">
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="{{ $inp }}"
-             style="background:{{ $inp }};border:1px solid rgba(220,190,135,.18);border-radius:12px">
+             style="background:{{ $inp }};border:1px solid rgba(63,203,146,.18);border-radius:12px">
         <tr><td style="padding:14px 16px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.6);word-break:break-all">
           {{ __('onboarding.mail_fallback', [], $locale) }}<br>
           <a href="{{ $activationUrl }}" style="color:{{ $gold }};text-decoration:none">{{ $activationUrl }}</a>

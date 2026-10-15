@@ -7,7 +7,7 @@
 @section('content')
 
 <style>
-.mv-summary{margin:.75rem 1.25rem 1rem;background:linear-gradient(135deg,#1B4976,#0D2E52);border-radius:var(--ca-radius-md);padding:1rem 1.25rem;display:flex;gap:1.25rem;flex-wrap:wrap}
+.mv-summary{margin:.75rem 1.25rem 1rem;background:linear-gradient(135deg,#3A3590,#231F5F);border-radius:var(--ca-radius-md);padding:1rem 1.25rem;display:flex;gap:1.25rem;flex-wrap:wrap}
 .mv-summary__item{flex:1;min-width:0}
 .mv-summary__lbl{font-size:.65rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.2rem}
 .mv-summary__val{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:800;color:#fff}

@@ -23,7 +23,7 @@
   display:flex; align-items:center; justify-content:center; font-size:.85rem; font-weight:700;
   background:var(--ca-bg2); border:2px solid var(--ca-border); color:var(--ca-text-3);
 }
-.kyc-step.is-current .kyc-step__dot { border-color:var(--ca-accent); color:var(--ca-accent); box-shadow:0 0 0 4px rgba(198,161,91,.15) }
+.kyc-step.is-current .kyc-step__dot { border-color:var(--ca-accent); color:var(--ca-accent); box-shadow:0 0 0 4px rgba(0,132,87,.15) }
 .kyc-step.is-done .kyc-step__dot { background:var(--ca-accent); border-color:var(--ca-accent); color:#fff }
 .kyc-step__label { font-size:.74rem; font-weight:600; color:var(--ca-text-3); line-height:1.3; padding:0 .25rem; overflow-wrap:anywhere }
 .kyc-step.is-current .kyc-step__label, .kyc-step.is-done .kyc-step__label { color:var(--ca-text) }

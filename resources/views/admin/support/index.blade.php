@@ -127,7 +127,7 @@
 }
 .adsp-conv:last-child { border-bottom: 0; }
 .adsp-conv:hover { background: rgba(0,0,0,.025); }
-.adsp-conv.is-unread { background: rgba(198,161,91,.04); }
+.adsp-conv.is-unread { background: rgba(0,132,87,.04); }
 .adsp-conv.is-active {
   background: rgba(27,58,141,.05);
   border-left: 3px solid var(--c-navy);
@@ -139,7 +139,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--c-navy), #1a3a6c);
+  background: linear-gradient(135deg, var(--c-navy), #3A3590);
   color: var(--c-accent);
   font-weight: 900;
   font-size: .875rem;
@@ -327,7 +327,7 @@
           <div class="adsp-conv-name">{{ $c->name }}</div>
           <div class="adsp-conv-preview">
             @if($last && $last->sender_type === 'admin' && !$last->is_bot)
-              <span style="color:var(--c-accent-d,#9A7736);font-weight:600">Vous : </span>
+              <span style="color:var(--c-accent-d,#006A45);font-weight:600">Vous : </span>
             @elseif($last && $last->is_bot)
               <span style="color:#7c3aed;font-weight:600">IA : </span>
             @endif

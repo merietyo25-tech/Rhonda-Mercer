@@ -2,322 +2,231 @@
 @section('title', __('menu.home'))
 
 @section('content')
-@php $locale = app()->getLocale(); @endphp
+@php
+    $locale  = app()->getLocale();
+    $contact = \App\Models\SiteContact::current();
+    $phone   = $contact->phone_1;
+    $address = site_address();
 
-{{-- ============================================================
-     HÉROS SCINDÉ
-     Le carrousel posait le texte par-dessus une photo chargée :
-     le titre tombait sur les visages et le contraste variait d'une
-     diapositive à l'autre. Le texte a désormais son propre fond clair.
-============================================================ --}}
-<section class="hero-split">
-    <div class="hero-split__grid">
+    $slides = [
+        ['img' => 'hero-1.jpg',       'lines' => ['site.hero1_a', 'site.hero1_b', 'site.hero1_c']],
+        ['img' => 'hero-2.jpg',  'lines' => ['site.hero2_a', 'site.hero2_b', 'site.hero2_c']],
+    ];
 
-            <div class="hero-split__text wow fadeInUp" data-wow-duration="800ms">
-                <div class="hero-eyebrow">@lang('home.slide_1.title')</div>
+    $langCount = \App\Models\Language::enabledList()->count();
+    $features = [
+        ['icon' => 'fa-university',     'n' => 1],
+        ['icon' => 'fa-credit-card',    'n' => 2],
+        ['icon' => 'fa-exchange-alt',   'n' => 3],
+        ['icon' => 'fa-file-invoice',   'n' => 4],
+        ['icon' => 'fa-shield-alt',     'n' => 5],
+        ['icon' => 'fa-language',       'n' => 6],
+    ];
+    $steps = [
+        ['icon' => 'fa-user-plus',      'n' => 1],
+        ['icon' => 'fa-id-card',        'n' => 2],
+        ['icon' => 'fa-credit-card',    'n' => 3],
+        ['icon' => 'fa-paper-plane',    'n' => 4],
+    ];
 
-                <h1 class="hero-split__title">
-                    @lang('home.slide_1.text1')
-                    <em>@lang('home.slide_1.text2')</em>
-                </h1>
+    // Les cinq accès rapides « Quel est votre besoin ? »
+    $needs = [
+        ['icon' => 'fa-id-card',          'label' => 'site.need_open',     'route' => 'signup'],
+        ['icon' => 'fa-university', 'label' => 'site.need_account',  'route' => 'signup'],
+        ['icon' => 'fa-credit-card',      'label' => 'site.need_card',     'route' => 'signup'],
+        ['icon' => 'fa-exchange-alt', 'label' => 'site.need_transfer', 'route' => 'signup'],
+        ['icon' => 'fa-headset',          'label' => 'site.need_contact',  'route' => 'contact'],
+    ];
+@endphp
 
-                <p class="hero-split__lede">@lang('home.hero_subtitle')</p>
-
-                <div class="hero-split__actions">
-                    <a href="{{ route('signup', ['locale' => $locale]) }}" class="btn-primary btn-primary--lg">
-                        <i class="fas fa-user-plus"></i>
-                        @lang('menu.open_account')
-                    </a>
-                    <a href="{{ route('login') }}" class="btn-outline btn-outline--lg"><i class="fas fa-right-to-bracket"></i> @lang('menu.login')</a>
-                </div>
-
-                <div class="hero-facts">
-                    @foreach ([
-                        ['4.9/5',  __('home.customer_satisfaction_rate')],
-                        ['48h',    __('home.average_approval_time')],
-                        ['8 500+', __('home.member')],
-                        ['15',     __('home.about.exptitle')],
-                    ] as $fait)
-                    <div class="hero-fact">
-                        <span class="hero-fact__num">{{ $fait[0] }}</span>
-                        <span class="hero-fact__label">{{ $fait[1] }}</span>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <div class="hero-split__media wow fadeIn" data-wow-duration="1100ms">
-                <img src="{{ asset('assets/images/refonte/hero-siege.jpg') }}"
-                     alt="{{ site_name() }}">
-            </div>
-
-    </div>
-</section>
-
-{{-- ============================================================
-     ABOUT
-============================================================ --}}
-@push('styles')
-<style>
-/* ── About section ── */
-
-.about-loan-grid {
-    display:grid; grid-template-columns:1fr 1fr; gap:.4rem .75rem; margin-bottom:1.25rem;
-}
-.about-loan-item {
-    display:flex; align-items:center; gap:.55rem;
-    font-size:.82rem; font-weight:600; color:var(--navy); padding:.4rem 0;
-    border-bottom:1px solid #f3f4f6;
-}
-.about-loan-item i { color:var(--accent); width:16px; text-align:center; font-size:.8rem; }
-
-.about-partner-bar {
-    display:flex; align-items:center; gap:.55rem;
-    padding:.75rem 1rem; background:#f7f8fa; border-radius:10px;
-    border:1px solid #eaecf0; margin-bottom:1.5rem;
-    flex-wrap:wrap;
-}
-.about-partner-bar__lbl { font-size:.6rem; font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:#9ca3af; white-space:nowrap; flex-shrink:0; }
-.about-partner-bar:hover .about-partner-bar__name {
-    font-size:.78rem; font-weight:700; color:var(--navy);
-    background:#fff; border:1px solid #e5e7eb; border-radius:999px;
-    padding:.3rem .8rem; white-space:nowrap; flex-shrink:0;
-    transition:border-color .25s ease, box-shadow .25s ease;
-}
-.about-partner-bar__name:hover { border-color:var(--accent); box-shadow:0 2px 10px rgba(198,161,91,.18); }
-@media (prefers-reduced-motion: reduce) {
-    }
-</style>
-@endpush
-
-<section class="py-24 bg-white" id="about">
-    <div class="container">
-        <div class="row gutter-y-60 align-items-center">
-
-            {{-- ── Image ── --}}
-            <div class="col-lg-6 wow fadeInLeft" data-wow-duration="1000ms">
-                {{-- Deux photos decalees, sans pastille chiffree : le modele ne
-                     pose plus de badge sur l'image. --}}
-                <div class="about-stack">
-                    <img src="{{ asset('assets/images/refonte/bureaux-couloir.jpg') }}"
-                         alt="{{ __('home.about.sectitle') }}" class="about-stack__tall" loading="lazy">
-                    <img src="{{ asset('assets/images/refonte/bureaux-reunion.jpg') }}"
-                         alt="" class="about-stack__wide" loading="lazy">
-                </div>
-            </div>
-
-            {{-- ── Contenu ── --}}
-            <div class="col-lg-6 wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="150ms">
-
-                <div class="rule-label">{{ __('home.about.sectagline') }}</div>
-                <h2 class="section-title">{{ __('home.about.sectitle') }}</h2>
-
-                <p style="color:var(--gray-500);font-size:.9375rem;line-height:1.8;margin-bottom:1.5rem;">
-                    {{ __('home.about.text2') }}
-                </p>
-
-                {{-- 3 engagements clés --}}
-                <div class="about-point">
-                    <div class="about-point__icon"><i class="fas fa-shield-alt"></i></div>
-                    <div>
-                        <div class="about-point__title">{{ __('home.about.engage1_title') }}</div>
-                        <p class="about-point__desc">{{ __('home.about.engage1_desc') }}</p>
-                    </div>
-                </div>
-                <div class="about-point">
-                    <div class="about-point__icon"><i class="fas fa-bolt"></i></div>
-                    <div>
-                        <div class="about-point__title">{{ __('home.about.engage2_title') }}</div>
-                        <p class="about-point__desc">{{ __('home.about.engage2_desc') }}</p>
-                    </div>
-                </div>
-                <div class="about-point">
-                    <div class="about-point__icon"><i class="fas fa-globe"></i></div>
-                    <div>
-                        <div class="about-point__title">{{ __('home.about.engage3_title') }}</div>
-                        <p class="about-point__desc">{{ __('home.about.engage3_desc') }}</p>
-                    </div>
-                </div>
-
-                {{-- Services bancaires --}}
-                <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-bottom:.6rem;">
-                    <i class="fas fa-tags" style="color:var(--accent);margin-right:.35rem;"></i>{{ __('home.services.sectitle') }}
-                </div>
-                <div class="about-loan-grid">
-                    <div class="about-loan-item"><i class="fas fa-wallet"></i> @lang('menu.banking_account')</div>
-                    <div class="about-loan-item"><i class="fas fa-credit-card"></i> @lang('menu.banking_card')</div>
-                    <div class="about-loan-item"><i class="fas fa-money-bill-transfer"></i> @lang('menu.banking_transfer')</div>
-                </div>
-
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="{{ route('signup', ['locale' => $locale]) }}" class="btn-primary btn-primary--lg">
-                        <i class="fas fa-user-plus"></i> @lang('menu.open_account')
-                    </a>
-                    <a href="{{ route('about', ['locale' => $locale]) }}" class="btn-outline">
-                        @lang('menu.about') <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-</section>
-
-{{-- ============================================================
-     HOW IT WORKS
-============================================================ --}}
-<section class="py-24 bg-white">
-    <div class="container">
-        <div class="row mb-10">
-            <div class="col-lg-7">
-                <div class="rule-label">{{ __('home.works.sectagline') }}</div>
-                <h2 class="section-title mb-0">{{ __('home.works.sectitle') }}</h2>
-            </div>
-        </div>
-        {{-- Rangees numerotees separees par des filets : le modele a remplace
-             les quatre cartes en verre par une liste editoriale. --}}
-        <div class="steps-list">
-            @foreach ([1,2,3,4] as $s)
-            <div class="step-row wow fadeInUp" data-wow-duration="700ms" data-wow-delay="{{ ($s-1)*60 }}ms">
-                <span class="step-row__num">0{{ $s }}</span>
-                <h3 class="step-row__title">{{ __('home.works.step' . $s . '.title') }}</h3>
-                <p class="step-row__desc">{{ __('home.works.step' . $s . '.desc') }}</p>
-            </div>
+{{-- ── Bannière à diapositives ─────────────────────────────────────────── --}}
+<section class="bo-hero" x-data="{ i: 0, n: {{ count($slides) }}, t: null,
+        go(k){ this.i = (k + this.n) % this.n; this.restart(); },
+        restart(){ clearInterval(this.t); this.t = setInterval(() => this.i = (this.i + 1) % this.n, 6500); } }"
+        x-init="restart()" @mouseenter="clearInterval(t)" @mouseleave="restart()">
+    @foreach ($slides as $k => $slide)
+    <div class="bo-hero__slide {{ $k === 0 ? 'is-on' : '' }}" :class="{ 'is-on': i === {{ $k }} }"
+         style="background-image:url('{{ asset('assets/images/site/' . $slide['img']) }}')">
+        <div class="bo-hero__shade"></div>
+        <div class="bo-wrap bo-hero__text">
+            @foreach ($slide['lines'] as $n => $line)
+            <h2 class="bo-hero__line bo-hero__line--{{ $n % 2 === 0 ? 'indigo' : 'grey' }}">@lang($line)</h2>
             @endforeach
         </div>
     </div>
+    @endforeach
+
+    <button type="button" class="bo-hero__arrow bo-hero__arrow--prev" @click="go(i - 1)" aria-label="‹"><i class="fas fa-chevron-left"></i></button>
+    <button type="button" class="bo-hero__arrow bo-hero__arrow--next" @click="go(i + 1)" aria-label="›"><i class="fas fa-chevron-right"></i></button>
+    <div class="bo-hero__dots">
+        @foreach ($slides as $k => $slide)
+        <button type="button" :class="{ 'is-on': i === {{ $k }} }" @click="go({{ $k }})" aria-label="{{ $k + 1 }}"></button>
+        @endforeach
+    </div>
 </section>
 
-{{-- ============================================================
-     COMMENT FONCTIONNE LA BANQUE
-============================================================ --}}
-<section class="calc-section py-24" id="simulate">
-    <div class="container">
-        <div class="row gutter-y-50 align-items-center">
-            <div class="col-lg-6 wow fadeInLeft" data-wow-duration="900ms">
-                <div class="rule-label" style="color:var(--accent);">{{ __('home.why_us.sectagline') }}</div>
-                <h2 class="section-title section-title--white">{{ __('home.why_us.sectitle') }}</h2>
-                <p class="section-sub section-sub--white mb-8">{{ __('home.about.text2') }}</p>
+{{-- Bandeau d'accès rapide fixé au bord droit --}}
+<aside class="bo-side" aria-label="@lang('menu.contact')">
+    @if($phone)<a href="tel:{{ preg_replace('/[^\d+]/', '', $phone) }}" class="bo-side__a bo-side__a--green" aria-label="{{ $phone }}"><i class="fas fa-phone-volume"></i></a>@endif
+    <a href="#agence" class="bo-side__a bo-side__a--black" aria-label="@lang('site.find_title')"><i class="fas fa-map-marker-alt"></i></a>
+    @if($contact->email)<a href="mailto:{{ $contact->email }}" class="bo-side__a bo-side__a--indigo" aria-label="{{ $contact->email }}"><i class="fas fa-envelope"></i></a>@endif
+</aside>
 
-                @foreach ([1,2,3] as $r)
-                <div class="d-flex align-items-start gap-3 mb-4">
-                    <div style="width:36px;height:36px;background:rgba(198,161,91,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);flex-shrink:0;">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div>
-                        <h4 style="font-family:'Fraunces',serif;font-size:1rem;font-weight:700;color:#fff;margin:0 0 .25rem;">
-                            {{ __('home.why_us.reasons.title' . $r) }}
-                        </h4>
-                        <p style="font-size:.875rem;color:rgba(255,255,255,.55);margin:0;line-height:1.65;">
-                            {{ __('home.why_us.reasons.desc' . $r) }}
-                        </p>
-                    </div>
-                </div>
+{{-- ── Quel est votre besoin ? ─────────────────────────────────────────── --}}
+<section class="bo-section bo-needs">
+    <div class="bo-wrap">
+        <h2 class="bo-title">@lang('site.need_title')</h2>
+        <div class="bo-needs__row">
+            @foreach ($needs as $need)
+            <a href="{{ route($need['route'], ['locale' => $locale]) }}" class="bo-need">
+                <span class="bo-need__ico"><i class="fas {{ $need['icon'] }}"></i></span>
+                <span class="bo-need__lbl">@lang($need['label'])</span>
+            </a>
+            @endforeach
+        </div>
+
+        <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-cta-banner">
+            <span class="bo-cta-banner__txt"><strong>@lang('site.cta_title')</strong> <em>@lang('site.cta_light')</em></span>
+            <span class="bo-cta-banner__ico">
+                <i class="fas fa-id-card"></i><i class="fas fa-credit-card"></i><i class="fas fa-mobile-alt"></i><i class="fas fa-bolt"></i><i class="fas fa-shield-alt"></i>
+            </span>
+        </a>
+    </div>
+</section>
+
+{{-- ── L'application en images ─────────────────────────────────────────── --}}
+<section class="hm-app">
+    <div class="bo-wrap hm-app__grid">
+        <div class="hm-app__txt">
+            <h2 class="ab-h2 ab-h2--light">@lang('site.home_app_title')</h2>
+            <p class="hm-app__lead">@lang('site.home_app_text')</p>
+            <ul class="hm-app__list">
+                @foreach (['site.home_app_b1', 'site.home_app_b2', 'site.home_app_b3', 'site.home_app_b4'] as $b)
+                <li><i class="fas fa-check"></i> @lang($b)</li>
                 @endforeach
-
-                <div class="mt-6">
-                    <a href="{{ route('login') }}" class="btn-primary btn-primary--lg"><i class="fas fa-right-to-bracket"></i> @lang('menu.login')</a>
-                </div>
-            </div>
-
-            <div class="col-lg-5 offset-lg-1 wow fadeInRight" data-wow-duration="900ms" data-wow-delay="150ms">
-                <img src="{{ asset('assets/images/about/about-3-1.jpg') }}" alt="{{ __('home.why_us.sectitle') }}"
-                     style="width:100%;height:100%;max-height:520px;object-fit:cover;border-radius:var(--radius-xl);" loading="lazy">
-            </div>
+            </ul>
+            <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-btn bo-btn--green">@lang('site.become_client') <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="hm-phones" aria-label="@lang('site.home_app_title')">
+            <figure class="hm-phone hm-phone--side">
+                <div class="hm-phone__frame"><img src="{{ asset('assets/images/app/screen-cards.png') }}" alt="@lang('site.home_app_cap2')" loading="lazy"></div>
+                <figcaption>@lang('site.home_app_cap2')</figcaption>
+            </figure>
+            <figure class="hm-phone hm-phone--main">
+                <div class="hm-phone__frame"><img src="{{ asset('assets/images/app/screen-home.png') }}" alt="@lang('site.home_app_cap1')" loading="lazy"></div>
+                <figcaption>@lang('site.home_app_cap1')</figcaption>
+            </figure>
+            <figure class="hm-phone hm-phone--side">
+                <div class="hm-phone__frame"><img src="{{ asset('assets/images/app/screen-transfers.png') }}" alt="@lang('site.home_app_cap3')" loading="lazy"></div>
+                <figcaption>@lang('site.home_app_cap3')</figcaption>
+            </figure>
         </div>
     </div>
 </section>
 
-{{-- ============================================================
-     STATS
-============================================================ --}}
-{{-- Bandeau de chiffres pleine largeur, cellules separees par des filets.
-     Les compteurs animes disparaissent : le modele affiche les valeurs
-     directement, sans dependre de jquery-appear. --}}
-<section class="figure-band">
-    <div class="container">
-        @php
-        $chiffres = [
-            ['8 500+',   __('home.customer_satisfaction_rate')],
-            ['5 min',    __('home.account_opening_time')],
-            ['48h',      __('home.average_approval_time')],
-            ['15+',      __('home.years_experience')],
-        ];
-        @endphp
-        <div class="figure-band__grid">
-            @foreach ($chiffres as $i => $c)
-            <div class="figure-cell wow fadeInUp" data-wow-duration="700ms" data-wow-delay="{{ $i*70 }}ms">
-                <span class="figure-cell__num">{{ $c[0] }}</span>
-                <span class="figure-cell__label">{{ $c[1] }}</span>
-            </div>
+{{-- ── Fonctionnalités détaillées ──────────────────────────────────────── --}}
+<section class="bo-section hm-feat">
+    <div class="bo-wrap">
+        <h2 class="bo-title">@lang('site.home_feat_title')</h2>
+        <div class="hm-feat__grid">
+            @foreach ($features as $f)
+            <article class="hm-feat__card">
+                <span class="hm-feat__ico"><i class="fas {{ $f['icon'] }}"></i></span>
+                <h3>@lang('site.home_feat_' . $f['n'] . '_t')</h3>
+                <p>@lang('site.home_feat_' . $f['n'] . '_x', ['count' => $langCount])</p>
+            </article>
             @endforeach
         </div>
     </div>
 </section>
 
-{{-- ============================================================
-     TESTIMONIALS — Swiper carousel
-============================================================ --}}
-<section class="py-24" style="background:var(--gray-50);" id="testimonials">
-    <div class="container">
-        <div class="mb-10">
-            <div class="rule-label">{{ __('home.testimonials_title') }}</div>
-            <h2 class="section-title mb-0">{{ __('home.testimonials_title') }}</h2>
-        </div>
-        {{-- Grille figee : le modele a supprime le carrousel Swiper et le badge
-             Google au profit de citations lisibles d'un seul coup d'oeil. --}}
-        <div class="quote-grid">
-            @foreach (range(1, 6) as $i)
-            @php $t = __('home.testimonial_' . $i); @endphp
-            <div class="quote-cell wow fadeInUp" data-wow-duration="700ms" data-wow-delay="{{ ($i-1)*60 }}ms">
-                <span class="quote-cell__mark">&ldquo;</span>
-                <p class="quote-cell__text">{{ $t['quote'] }}</p>
-                <p class="quote-cell__who">{{ $t['name'] }}</p>
-                <p class="quote-cell__when">{{ trans_choice('home.testimonials_months_ago', $t['months_ago'], ['count' => $t['months_ago']]) }}</p>
+{{-- ── Deux cartes promotionnelles ─────────────────────────────────────── --}}
+<section class="bo-section bo-promos">
+    <div class="bo-wrap bo-promos__grid">
+        <article class="bo-promo">
+            <div class="bo-promo__img" style="background-image:url('{{ asset('assets/images/site/promo-card.jpg') }}')"></div>
+            <div class="bo-promo__body">
+                <span class="bo-promo__label">@lang('site.promo1_label')</span>
+                <h3>@lang('site.promo1_title')</h3>
+                <p>@lang('site.promo1_text')</p>
+                <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-link">@lang('site.discover') <i class="fas fa-chevron-right"></i></a>
             </div>
+        </article>
+        <article class="bo-promo">
+            <div class="bo-promo__img bo-promo__img--phone"><i class="fas fa-mobile-alt"></i></div>
+            <div class="bo-promo__body">
+                <span class="bo-promo__label">@lang('site.promo2_label')</span>
+                <h3>@lang('site.promo2_title')</h3>
+                <p>@lang('site.promo2_text')</p>
+                <a href="{{ route('login') }}" class="bo-link">@lang('site.discover') <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </article>
+    </div>
+</section>
+
+{{-- ── Comment ça marche ───────────────────────────────────────────────── --}}
+<section class="bo-section hm-steps">
+    <div class="bo-wrap">
+        <h2 class="bo-title">@lang('site.home_steps_title')</h2>
+        <ol class="hm-steps__row">
+            @foreach ($steps as $st)
+            <li class="hm-step">
+                <span class="hm-step__num">{{ $st['n'] }}</span>
+                <span class="hm-step__ico"><i class="fas {{ $st['icon'] }}"></i></span>
+                <h3>@lang('site.home_step_' . $st['n'] . '_t')</h3>
+                <p>@lang('site.home_step_' . $st['n'] . '_x')</p>
+            </li>
             @endforeach
-        </div>
+        </ol>
     </div>
 </section>
 
-{{-- ============================================================
-     CTA BANNER
-============================================================ --}}
-<section class="cta-banner">
-    <div class="container">
-        <div class="row align-items-center gutter-y-30">
-            <div class="col-lg-7 wow fadeInLeft" data-wow-duration="900ms">
-                <div class="rule-label" style="color:var(--accent);">@lang('menu.open_account')</div>
-                <h2 class="section-title section-title--white mb-0">@lang('home.cta_title')</h2>
-            </div>
-            <div class="col-lg-5 text-lg-end wow fadeInRight" data-wow-duration="900ms" data-wow-delay="150ms">
-                <div class="d-flex flex-wrap justify-content-lg-end gap-3">
-                    <a href="{{ route('signup',  ['locale' => $locale]) }}" class="btn-primary btn-primary--lg">
-                        <i class="fas fa-user-plus"></i> @lang('menu.open_account')
-                    </a>
-                    <a href="{{ route('contact', ['locale' => $locale]) }}" class="btn-outline-white">
-                        <i class="fas fa-envelope"></i> @lang('menu.contact')
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <hr style="border-color:rgba(255,255,255,.08);margin:3rem 0;">
-
-        <div class="row align-items-center gutter-y-20">
-            <div class="col-lg-4 wow fadeInLeft" data-wow-duration="900ms">
-                <p style="color:rgba(255,255,255,.6);font-size:.9375rem;margin:0;">@lang('menu.newsletter_title')</p>
-            </div>
-            <div class="col-lg-8 text-lg-end wow fadeInRight" data-wow-duration="900ms" data-wow-delay="100ms">
-                <form action="{{ route('subscribe.send') }}" method="POST" class="newsletter-form d-inline-flex">
-                    @csrf
-                    <input type="email" name="email" placeholder="@lang('menu.email_placeholder')" required>
-                    <button type="submit" class="btn-primary">@lang('menu.subscribe')</button>
-                </form>
-            </div>
-        </div>
+{{-- ── Trouver mon agence ──────────────────────────────────────────────── --}}
+@if($address !== '')
+<section class="bo-agency" id="agence">
+    <iframe title="{{ site_name() }}" loading="lazy" referrerpolicy="no-referrer"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=13.3836%2C52.5113%2C13.3956%2C52.5173&amp;layer=mapnik&amp;marker=52.5143%2C13.3896"></iframe>
+    <div class="bo-agency__tab">@lang('site.find_title')</div>
+    <div class="bo-agency__panel">
+        <strong>{{ site_name() }}</strong>
+        <p><i class="fas fa-map-marker-alt"></i> {{ $address }}</p>
+        @if($phone)<p><i class="fas fa-phone"></i> <a href="tel:{{ preg_replace('/[^\d+]/', '', $phone) }}">{{ $phone }}</a></p>@endif
+        @if($contact->email)<p><i class="fas fa-envelope"></i> <a href="mailto:{{ $contact->email }}">{{ $contact->email }}</a></p>@endif
+        <a href="{{ route('contact', ['locale' => $locale]) }}" class="bo-link bo-link--dark">@lang('menu.contact') <i class="fas fa-chevron-right"></i></a>
     </div>
 </section>
+@endif
 
+{{-- ── Gérez vos comptes avec votre téléphone ──────────────────────────── --}}
+<section class="bo-section bo-manage">
+    <div class="bo-wrap bo-manage__grid">
+        <div>
+            <h2 class="bo-title bo-title--left">@lang('site.manage_title')</h2>
+            <ul class="bo-checks">
+                @foreach (['site.manage_1', 'site.manage_2', 'site.manage_3', 'site.manage_4'] as $m)
+                <li><i class="fas fa-check"></i> @lang($m)</li>
+                @endforeach
+            </ul>
+            <a href="{{ route('login') }}" class="bo-btn bo-btn--green">@lang('site.manage_btn') <i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="bo-manage__img" style="background-image:url('{{ asset('assets/images/site/manage-phone.jpg') }}')"></div>
+    </div>
+</section>
+{{-- ── Questions fréquentes ────────────────────────────────────────────── --}}
+<section class="bo-section hm-faq" x-data="{ open: 1 }">
+    <div class="bo-wrap hm-faq__wrap">
+        <h2 class="bo-title">@lang('site.home_faq_title')</h2>
+        @foreach ([1, 2, 3, 4, 5] as $q)
+        <div class="hm-faq__item" :class="{ 'is-open': open === {{ $q }} }">
+            <button type="button" class="hm-faq__q" @click="open = open === {{ $q }} ? 0 : {{ $q }}" :aria-expanded="open === {{ $q }}">
+                <span>@lang('site.home_faq_' . $q . '_q')</span>
+                <i class="fas" :class="open === {{ $q }} ? 'fa-minus' : 'fa-plus'"></i>
+            </button>
+            <div class="hm-faq__a" x-show="open === {{ $q }}" x-cloak x-transition>
+                <p>@lang('site.home_faq_' . $q . '_a', ['count' => $langCount])</p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</section>
 @endsection

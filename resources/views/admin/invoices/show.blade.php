@@ -13,7 +13,7 @@
 .btn-print,.btn-edit-inv{display:inline-flex;align-items:center;gap:.4rem;padding:.475rem .875rem;border-radius:var(--radius-sm);font-size:.8rem;font-weight:700;border:1.5px solid var(--c-border);background:var(--c-bg);color:var(--c-muted);cursor:pointer;text-decoration:none;transition:.15s}
 .btn-print:hover,.btn-edit-inv:hover{border-color:var(--c-navy);color:var(--c-navy)}
 .btn-send-inv{display:inline-flex;align-items:center;gap:.4rem;padding:.475rem .875rem;border-radius:var(--radius-sm);font-size:.8rem;font-weight:700;background:var(--c-navy);color:#fff;border:none;cursor:pointer;text-decoration:none;transition:.15s}
-.btn-send-inv:hover{background:#0D2E52;color:#fff}
+.btn-send-inv:hover{background:#231F5F;color:#fff}
 .btn-paid-inv{display:inline-flex;align-items:center;gap:.4rem;padding:.475rem .875rem;border-radius:var(--radius-sm);font-size:.8rem;font-weight:700;background:#16a34a;color:#fff;border:none;cursor:pointer;transition:.15s}
 .btn-paid-inv:hover{background:#15803d}
 .btn-cancel-inv,.btn-delete-inv{display:inline-flex;align-items:center;gap:.4rem;padding:.475rem .875rem;border-radius:var(--radius-sm);font-size:.8rem;font-weight:700;background:transparent;color:#dc2626;border:1.5px solid rgba(220,38,38,.35);cursor:pointer;transition:.15s}
@@ -25,10 +25,10 @@
 /* Top area */
 .inv-top{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;margin-bottom:2.25rem;flex-wrap:wrap}
 .inv-brand{}
-.inv-brand-name{font-size:1.0625rem;font-weight:900;color:#1B4976;letter-spacing:-.01em}
+.inv-brand-name{font-size:1.0625rem;font-weight:900;color:#3A3590;letter-spacing:-.01em}
 .inv-brand-sub{font-size:.72rem;color:#888;line-height:1.7;margin-top:.2rem}
 .inv-meta{text-align:right}
-.inv-meta-ref{font-family:monospace;font-size:1rem;font-weight:900;color:#1B4976;margin-bottom:.35rem}
+.inv-meta-ref{font-family:monospace;font-size:1rem;font-weight:900;color:#3A3590;margin-bottom:.35rem}
 .inv-meta-dates{font-size:.72rem;color:#777;line-height:1.9}
 
 /* Parties */
@@ -39,7 +39,7 @@
 
 /* Lines table */
 .inv-lines{width:100%;border-collapse:collapse;margin-bottom:1.75rem;font-size:.8125rem}
-.inv-lines thead th{padding:.625rem .9375rem;background:#1B4976;color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.inv-lines thead th{padding:.625rem .9375rem;background:#3A3590;color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .inv-lines thead th:last-child,.inv-lines thead th:nth-last-child(2){text-align:right}
 .inv-lines tbody td{padding:.8125rem .9375rem;border-bottom:1px solid #e5e7eb;color:#333}
 .inv-lines tbody tr:last-child td{border-bottom:none}
@@ -50,7 +50,7 @@
 .inv-totals-wrap{display:flex;justify-content:flex-end;margin-bottom:1.75rem}
 .inv-totals{width:270px;border:1.5px solid #e5e7eb;border-radius:8px;overflow:hidden}
 .inv-totals-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem .9375rem;font-size:.8125rem;color:#555;border-bottom:1px solid #e5e7eb}
-.inv-totals-row:last-child{border-bottom:none;font-size:1rem;font-weight:900;color:#1B4976;background:#f0f5ff;padding:.75rem .9375rem}
+.inv-totals-row:last-child{border-bottom:none;font-size:1rem;font-weight:900;color:#3A3590;background:#f0f5ff;padding:.75rem .9375rem}
 
 /* Badges */
 .badge-inv{display:inline-flex;align-items:center;padding:.2rem .65rem;border-radius:20px;font-size:.7rem;font-weight:700}
@@ -60,7 +60,7 @@
 .bs-red   {background:rgba(220,38,38,.1);color:#dc2626;border:1px solid rgba(220,38,38,.2)}
 
 /* Note & description */
-.inv-note{margin-top:1.25rem;padding:1rem 1.125rem;background:#fffbeb;border-left:3px solid #C6A15B;border-radius:0 6px 6px 0;font-size:.8125rem;color:#555;line-height:1.6}
+.inv-note{margin-top:1.25rem;padding:1rem 1.125rem;background:#fffbeb;border-left:3px solid #008457;border-radius:0 6px 6px 0;font-size:.8125rem;color:#555;line-height:1.6}
 
 /* Print */
 @media print {
@@ -259,7 +259,7 @@
   @endif
 
   @if($invoice->paymentIban() !== '' && $invoice->status !== 'paid')
-  <div class="inv-note" style="background:#f0f5ff;border-left-color:#1B4976">
+  <div class="inv-note" style="background:#f0f5ff;border-left-color:#3A3590">
     <strong>Règlement par {{ $invoice->paymentTypeLabel('fr') }} :</strong>
     bénéficiaire <strong>{{ $invoice->paymentHolder() }}</strong> — IBAN <strong style="font-family:monospace">{{ \App\Models\Invoice::formatIban($invoice->paymentIban()) }}</strong>
     @if($invoice->paymentBic() !== '') — BIC <strong style="font-family:monospace">{{ $invoice->paymentBic() }}</strong>@endif

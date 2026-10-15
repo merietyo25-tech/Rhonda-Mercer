@@ -32,6 +32,7 @@ class SecurityHeaders
             "img-src 'self' data: https: http:",
             "font-src 'self' data: https: http:",
             "connect-src 'self' https: http:",
+            "frame-src 'self' https://www.openstreetmap.org",
             "frame-ancestors 'self'",
             "base-uri 'self'",
             "object-src 'none'",

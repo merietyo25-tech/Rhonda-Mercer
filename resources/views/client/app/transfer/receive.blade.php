@@ -12,7 +12,7 @@
 /* ── Hero card ── */
 .rcv-hero{
   margin:.875rem 1.25rem 0;
-  background:linear-gradient(145deg,#1B527A,#0D2E54);
+  background:linear-gradient(145deg,#3A3590,#231F5F);
   border-radius:20px;padding:1.625rem 1.5rem;
   position:relative;overflow:hidden;
   box-shadow:0 12px 32px rgba(0,0,0,.4);
@@ -21,12 +21,12 @@
 .rcv-hero::before{
   content:'';position:absolute;bottom:-50px;right:-50px;
   width:180px;height:180px;border-radius:50%;
-  background:radial-gradient(circle,rgba(220,190,135,.18) 0%,transparent 70%);
+  background:radial-gradient(circle,rgba(63,203,146,.18) 0%,transparent 70%);
   pointer-events:none;
 }
 .rcv-hero__avatar{
   width:68px;height:68px;border-radius:50%;
-  background:linear-gradient(145deg,rgba(27,138,122,.6),rgba(27,138,122,.3));
+  background:linear-gradient(145deg,rgba(0,132,87,.6),rgba(0,132,87,.3));
   border:2px solid rgba(255,255,255,.15);
   display:flex;align-items:center;justify-content:center;
   font-family:'Space Grotesk',sans-serif;font-size:1.5rem;font-weight:800;
@@ -36,8 +36,8 @@
 .rcv-hero__badge{
   display:inline-flex;align-items:center;gap:.35rem;
   font-size:.68rem;font-weight:600;
-  color:rgba(220,190,135,.9);
-  background:rgba(220,190,135,.12);border:1px solid rgba(220,190,135,.25);
+  color:rgba(63,203,146,.9);
+  background:rgba(63,203,146,.12);border:1px solid rgba(63,203,146,.25);
   border-radius:999px;padding:.2rem .65rem;margin-bottom:.25rem;
 }
 
@@ -57,11 +57,11 @@
 .rcv-copy-btn{
   display:flex;align-items:center;justify-content:center;gap:.5rem;
   width:100%;padding:.625rem;border-radius:12px;
-  background:rgba(27,138,122,.1);border:1px solid rgba(27,138,122,.22);
+  background:rgba(0,132,87,.1);border:1px solid rgba(0,132,87,.22);
   color:var(--ca-teal-l);font-size:.8rem;font-weight:600;cursor:pointer;
   transition:.18s;
 }
-.rcv-copy-btn:active{background:rgba(27,138,122,.2)}
+.rcv-copy-btn:active{background:rgba(0,132,87,.2)}
 .rcv-copy-btn--ok{background:rgba(74,222,128,.1)!important;border-color:rgba(74,222,128,.25)!important;color:var(--ca-positive)!important}
 
 /* ── Details card ── */
@@ -131,7 +131,7 @@
 </div>
 
 {{-- Notice ── --}}
-<div style="margin:.875rem 1.25rem;padding:.75rem 1rem;background:rgba(27,138,122,.06);border:1px solid rgba(27,138,122,.18);border-radius:14px;display:flex;align-items:flex-start;gap:.5rem">
+<div style="margin:.875rem 1.25rem;padding:.75rem 1rem;background:rgba(0,132,87,.06);border:1px solid rgba(0,132,87,.18);border-radius:14px;display:flex;align-items:flex-start;gap:.5rem">
   <i class="fas fa-circle-info" style="color:var(--ca-teal-l);font-size:.8rem;margin-top:.1rem;flex-shrink:0"></i>
   <span style="font-size:.75rem;color:var(--ca-text-3);line-height:1.5">
     Partagez ces coordonnées bancaires pour recevoir des fonds directement sur votre compte {{ site_name() }}.

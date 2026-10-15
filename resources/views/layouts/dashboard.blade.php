@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<meta name="theme-color" content="#C6A15B">
+<meta name="theme-color" content="#008457">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="{{ site_name() }} Admin">
@@ -32,17 +32,17 @@
   Mellenthin Financial — DESIGN SYSTEM v2
    ═══════════════════════════════════════════════ */
 :root {
-  --c-navy:       #0E3B2E;
-  --c-navy-2:     #14503D;
-  --c-navy-3:     #9A7736;
-  --c-accent:       #C6A15B;
+  --c-navy:       #312B81;
+  --c-navy-2:     #3C3694;
+  --c-navy-3:     #006A45;
+  --c-accent:       #008457;
   --c-on-accent:  #FFFFFF;  /* texte sur aplat d accent */
-  --c-accent-d:     #9A7736;
-  --c-accent-l:     #DCBE87;
+  --c-accent-d:     #006A45;
+  --c-accent-l:     #3FCB92;
   --c-bg:         #F7F8F9;
   --c-surface:    #FFFFFF;
   --c-border:     #DBDDDE;
-  --c-text:       #0E3B2E;
+  --c-text:       #312B81;
   --c-muted:      #95A3B1;
   --c-green:      #059669;
   --c-green-l:    #D1FAE5;
@@ -58,8 +58,8 @@
   --topbar-h:     64px;
   --radius:       12px;
   --radius-sm:    8px;
-  --shadow:       0 1px 3px rgba(14,59,46,.06), 0 4px 16px rgba(14,59,46,.07);
-  --shadow-sm:    0 1px 2px rgba(14,59,46,.05);
+  --shadow:       0 1px 3px rgba(49,43,129,.06), 0 4px 16px rgba(49,43,129,.07);
+  --shadow-sm:    0 1px 2px rgba(49,43,129,.05);
   --transition:   all .2s ease;
 }
 
@@ -77,7 +77,7 @@ a { text-decoration:none; }
    ══════════════════ */
 .sidebar {
   /* Fond bleu profond : l accent doit s eclaircir pour rester lisible. */
-  --c-accent:#DCBE87;
+  --c-accent:#3FCB92;
   position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
   background:var(--c-navy);
   display:flex; flex-direction:column; z-index:300;
@@ -125,7 +125,7 @@ a { text-decoration:none; }
 }
 .sidebar-link .icon { width:18px; text-align:center; font-size:.8rem; flex-shrink:0; }
 .sidebar-link:hover { color:#fff; background:rgba(255,255,255,.04); border-left-color:rgba(255,255,255,.15); }
-.sidebar-link.active { color:var(--c-accent); background:rgba(198,161,91,.1); border-left-color:var(--c-accent); font-weight:600; }
+.sidebar-link.active { color:var(--c-accent); background:rgba(0,132,87,.1); border-left-color:var(--c-accent); font-weight:600; }
 .sidebar-link.active .icon { color:var(--c-accent); }
 
 .sidebar-footer {
@@ -244,7 +244,7 @@ a { text-decoration:none; }
 }
 /* Icon color variants */
 .mi-navy  { background:#EEF2FF; color:var(--c-navy); }
-.mi-accent  { background:#FEF9EC; color:var(--c-accent-d); }
+.mi-accent  { background:#E9F6F0; color:var(--c-accent-d); }
 .mi-green { background:var(--c-green-l); color:var(--c-green); }
 .mi-red   { background:var(--c-red-l); color:var(--c-red); }
 .mi-blue  { background:var(--c-blue-l); color:var(--c-blue); }
@@ -413,7 +413,7 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
   font-family:inherit; transition:var(--transition);
   appearance:none;
 }
-.form-control-pro:focus { outline:none; border-color:var(--c-accent); box-shadow:0 0 0 3px rgba(198,161,91,.12); }
+.form-control-pro:focus { outline:none; border-color:var(--c-accent); box-shadow:0 0 0 3px rgba(0,132,87,.12); }
 .form-control-pro::placeholder { color:#C4CADC; }
 .form-help { font-size:.73rem; color:var(--c-muted); margin-top:.3rem; }
 
@@ -456,7 +456,7 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
   transition:var(--transition);
 }
 .step-dot.done { background:var(--c-accent); color:var(--c-on-accent); border-color:var(--c-accent); }
-.step-dot.current { background:var(--c-navy); color:#DCBE87; border-color:#DCBE87; }
+.step-dot.current { background:var(--c-navy); color:#3FCB92; border-color:#3FCB92; }
 .step-label { font-size:.62rem; text-align:center; color:var(--c-muted); margin-top:.4rem; max-width:65px; line-height:1.3; }
 .step-label.done,.step-label.current { color:var(--c-navy); font-weight:600; }
 
@@ -490,7 +490,7 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
 }
 .filter-bar input:focus, .filter-bar select:focus {
   outline:none; border-color:var(--c-accent); background:var(--c-surface);
-  box-shadow:0 0 0 3px rgba(198,161,91,.1);
+  box-shadow:0 0 0 3px rgba(0,132,87,.1);
 }
 .filter-bar input::placeholder { color:#C4CADC; }
 
@@ -513,7 +513,7 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
 .stat-c { background:var(--c-surface); border-radius:var(--radius); border:1px solid var(--c-border); padding:1.25rem; box-shadow:var(--shadow-sm); display:flex; align-items:center; gap:1rem; }
 .stat-c__icon { width:48px; height:48px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.125rem; flex-shrink:0; }
 .ic--blue   { background:#EFF6FF; color:var(--c-blue); }
-.ic--accent   { background:#FEF9EC; color:var(--c-accent-d); }
+.ic--accent   { background:#E9F6F0; color:var(--c-accent-d); }
 .ic--green  { background:var(--c-green-l); color:var(--c-green); }
 .ic--red    { background:var(--c-red-l); color:var(--c-red); }
 .ic--navy   { background:#EEF2FF; color:var(--c-navy); }
@@ -767,6 +767,10 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
       <a href="{{ route('admin.site-contacts.edit') }}"
          class="sidebar-link {{ request()->routeIs('admin.site-contacts*') ? 'active':'' }}">
         <i class="fas fa-map-marker-alt icon"></i> Coordonnées
+      </a>
+      <a href="{{ route('admin.team.index') }}"
+         class="sidebar-link {{ request()->routeIs('admin.team*') ? 'active':'' }}">
+        <i class="fas fa-users icon"></i> Équipe (À propos)
       </a>
       <a href="{{ route('admin.social-links.index') }}"
          class="sidebar-link {{ request()->routeIs('admin.social-links*') ? 'active':'' }}">
@@ -1085,14 +1089,14 @@ function _renderNotifs(list) {
   const bgMap    = { support:'rgba(124,58,237,.1)', transfer:'rgba(37,99,235,.1)', system:'rgba(217,119,6,.1)' };
   el.innerHTML = list.map(n => {
     const col = colorMap[n.type] || 'var(--c-accent)';
-    const bg  = bgMap[n.type]   || 'rgba(198,161,91,.1)';
+    const bg  = bgMap[n.type]   || 'rgba(0,132,87,.1)';
     const unreadDot = n.read ? '' : `<div style="width:6px;height:6px;border-radius:50%;background:var(--c-accent);flex-shrink:0;margin-top:.4rem"></div>`;
     return `<div onclick="${n.url ? `window.location='${n.url}'` : ''}"
       style="display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1.125rem;
         border-bottom:1px solid var(--c-border);cursor:${n.url ? 'pointer' : 'default'};
-        background:${n.read ? 'transparent' : 'rgba(198,161,91,.04)'};transition:.15s"
+        background:${n.read ? 'transparent' : 'rgba(0,132,87,.04)'};transition:.15s"
       onmouseover="this.style.background='var(--c-bg)'"
-      onmouseout="this.style.background='${n.read ? 'transparent' : 'rgba(198,161,91,.04)'}'">
+      onmouseout="this.style.background='${n.read ? 'transparent' : 'rgba(0,132,87,.04)'}'">
       <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;display:flex;
         align-items:center;justify-content:center;font-size:.8rem;background:${bg};color:${col}">
         <i class="fas fa-${n.icon}"></i>
@@ -1207,7 +1211,7 @@ function doInstallPwa() {
     border-radius:var(--radius);padding:1rem 1.125rem;
     box-shadow:0 8px 32px rgba(0,0,0,.25);z-index:9999;
     flex-direction:column;gap:.625rem;
-    border:1px solid rgba(198,161,91,.3)">
+    border:1px solid rgba(0,132,87,.3)">
   <div style="display:flex;align-items:center;justify-content:space-between">
     <div style="display:flex;align-items:center;gap:.625rem">
       <img src="/site-icon-192.png" style="width:36px;height:36px;border-radius:8px" alt="">
@@ -1223,15 +1227,15 @@ function doInstallPwa() {
   </div>
   <div style="font-size:.73rem;color:rgba(255,255,255,.65);line-height:1.6">
     <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem">
-      <span style="background:rgba(198,161,91,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">1</span>
+      <span style="background:rgba(0,132,87,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">1</span>
       Appuyez sur <strong style="color:#fff">Partager</strong> <i class="fas fa-share-square" style="color:var(--c-accent)"></i>
     </div>
     <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem">
-      <span style="background:rgba(198,161,91,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">2</span>
+      <span style="background:rgba(0,132,87,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">2</span>
       Puis <strong style="color:#fff">Sur l'écran d'accueil</strong> <i class="fas fa-plus-square" style="color:var(--c-accent)"></i>
     </div>
     <div style="display:flex;align-items:center;gap:.5rem">
-      <span style="background:rgba(198,161,91,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">3</span>
+      <span style="background:rgba(0,132,87,.15);border-radius:4px;padding:.1rem .4rem;font-size:.7rem;color:var(--c-accent);font-weight:700">3</span>
       Appuyez sur <strong style="color:#fff">Ajouter</strong>
     </div>
   </div>
@@ -1270,11 +1274,11 @@ function doInstallPwa() {
 <style>
 .cfx { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; padding:1rem; }
 .cfx[hidden] { display:none; }
-.cfx__backdrop { position:absolute; inset:0; background:rgba(2,24,46,.55); backdrop-filter:blur(2px); }
+.cfx__backdrop { position:absolute; inset:0; background:rgba(15,13,54,.55); backdrop-filter:blur(2px); }
 .cfx__box {
   position:relative; background:var(--c-surface); border-radius:var(--radius);
   padding:1.75rem 1.5rem 1.25rem; width:100%; max-width:420px; text-align:center;
-  box-shadow:0 18px 60px rgba(2,24,46,.35); border:1px solid var(--c-border);
+  box-shadow:0 18px 60px rgba(15,13,54,.35); border:1px solid var(--c-border);
 }
 .cfx__icon {
   width:52px; height:52px; border-radius:50%; margin:0 auto .875rem;
