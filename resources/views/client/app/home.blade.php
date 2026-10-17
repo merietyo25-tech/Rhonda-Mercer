@@ -15,23 +15,6 @@
 
   {{-- Right: lang + bell --}}
   <div class="h-header__actions">
-    <div x-data="langMenu()" style="position:relative">
-      <button class="h-topbtn" @click="toggle()" title="{{ __('app.language') }}">
-        <i class="fas fa-globe"></i>
-      </button>
-      <div x-show="open" @click.outside="close()" x-transition
-           style="position:absolute;right:0;top:48px;background:var(--ca-bg4);border:1px solid var(--ca-border);border-radius:14px;min-width:144px;overflow:hidden;z-index:500;box-shadow:0 12px 40px rgba(0,0,0,.45)">
-        @foreach(\App\Models\Language::enabledList() as $lang)
-        @php [$lc, $label] = [$lang->code, $lang->native_name]; @endphp
-        <form method="POST" action="{{ route('client.app.locale') }}">
-          @csrf<input type="hidden" name="locale" value="{{ $lc }}">
-          <button type="submit" style="width:100%;padding:.6rem 1rem;background:none;border:none;color:{{ app()->getLocale()===$lc?'var(--ca-teal-l)':'var(--ca-text-2)' }};font-size:.82rem;text-align:left;cursor:pointer;font-family:inherit;font-weight:{{ app()->getLocale()===$lc?'700':'400' }}">
-            {{ $label }}
-          </button>
-        </form>
-        @endforeach
-      </div>
-    </div>
     <a href="{{ route('client.app.notifications') }}" class="h-topbtn" style="position:relative;text-decoration:none" aria-label="{{ __('app.notifications_title') }}">
       <i class="fas fa-bell"></i>
       <span class="h-notif-dot" id="notif-dot" style="{{ ($unreadCount ?? 0) > 0 ? '' : 'display:none' }}"></span>
@@ -191,13 +174,18 @@
 }
 
 /* ── Quick actions ── */
-.h-actions{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:1rem;
-  padding:1.25rem 1.25rem .25rem;
-  max-width:420px;
+.h-actions{ padding:1rem 1.25rem .25rem }
+.h-send{
+  display:flex;align-items:center;justify-content:center;gap:.65rem;min-height:54px;border-radius:999px;
+  background:linear-gradient(135deg,#3FCB92,#008457);color:#fff;font-weight:800;font-size:.95rem;
+  box-shadow:0 10px 26px rgba(0,132,87,.3);transition:transform .15s,box-shadow .2s;
 }
+.h-send:active{ transform:scale(.98) }
 .h-action__ico{ width:64px !important;height:64px !important;font-size:1.3rem !important }
+@media (min-width:768px){
+  .h-avatar{ display:none }
+  .h-actions{ display:none }
+}
 .h-action__lbl{ font-size:.8rem !important }
 .h-action{
   display:flex;flex-direction:column;align-items:center;
@@ -358,9 +346,11 @@
   <div class="h-card__top">
     <div class="h-card__brand">
       <i class="fas fa-landmark" style="font-size:.6rem;margin-right:.3rem"></i>
-     {{ site_name() }} &nbsp;·&nbsp; {{ __('app.account_num') }}
+     {{ __('app.account_num') }}
     </div>
-    <div class="h-card__chip" aria-hidden="true"></div>
+    @if($card)
+    <div class="h-card__net" aria-label="{{ ucfirst($card->network) }}"><i class="fa-brands {{ strtolower($card->network) === 'visa' ? 'fa-cc-visa' : 'fa-cc-mastercard' }}"></i></div>
+    @endif
   </div>
 
   {{-- Balance label + toggle --}}
@@ -379,49 +369,23 @@
     &bull;&bull;&bull;&bull;&bull;&bull;
   </div>
 
-  {{-- Bottom row: name + card number | currency badge --}}
+  {{-- Bas de carte : IBAN uniquement (nom, BIC et devise sont dans les autres écrans) --}}
   <div class="h-card__bottom">
     <div>
-      <div class="h-card__name">{{ Str::upper($user->name) }}</div>
       @if($bankAccount)
       <div class="h-card__num" x-show="shown">{{ trim($ibanClear) }}</div>
       <div class="h-card__num" x-show="!shown" style="display:none">{{ $bankAccount->maskedIban() }}</div>
-      <div class="h-card__num h-card__num--sub">
-        @if($bankAccount->bic)BIC {{ $bankAccount->bic }}@endif
-        @if($card) &nbsp;·&nbsp; {{ strtoupper($card->network) }} &bull;&bull;&bull;&bull; {{ $card->last_four }}@endif
-      </div>
       @else
       <div class="h-card__num">{{ __('app.not_configured') }}</div>
       @endif
-    </div>
-    <div class="h-card__right">
-      {{-- Logo du réseau de la carte réellement attribuée au client (aucun logo sans carte) --}}
-      @if($card)
-      <div class="h-card__net" aria-label="{{ ucfirst($card->network) }}">
-        <i class="fa-brands {{ strtolower($card->network) === 'visa' ? 'fa-cc-visa' : 'fa-cc-mastercard' }}"></i>
-      </div>
-      @endif
-    <div class="h-card__badge">
-      <i class="fas fa-shield-halved" style="font-size:.6rem"></i>
-      {{ $user->currency ?? \App\Models\Currency::default() }}
-    </div>
     </div>
   </div>
 </div>
 
 {{-- ── Quick Actions ─────────────────────────────────────────────── --}}
 <div class="h-actions">
-  <a href="{{ route('client.app.transfer.send') }}" class="h-action">
-    <div class="h-action__ico h-action__ico--teal">
-      <i class="fas fa-paper-plane"></i>
-    </div>
-    <span class="h-action__lbl">{{ __('app.action_send') }}</span>
-  </a>
-  <a href="{{ route('client.app.transfer.receive') }}" class="h-action">
-    <div class="h-action__ico h-action__ico--green">
-      <i class="fas fa-building-columns"></i>
-    </div>
-    <span class="h-action__lbl">IBAN</span>
+  <a href="{{ route('client.app.transfer.send') }}" class="h-send">
+    <i class="fas fa-paper-plane"></i> {{ __('app.action_send') }}
   </a>
 </div>
 
@@ -434,7 +398,7 @@
 </div>
 
 <div class="h-txn-list">
-  @forelse($recentActivity as $mv)
+  @forelse($recentActivity->take(5) as $mv)
   @php
     $isCredit  = $mv->type === 'credit';
     $isPending = in_array($mv->status, ['pending', 'fee_required']);

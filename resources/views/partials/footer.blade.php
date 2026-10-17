@@ -7,6 +7,7 @@
 @endphp
 
 {{-- Bandeau « pas encore client » : repris sur toutes les pages publiques, juste avant le pied de page --}}
+@sectionMissing('no_band')
 <section class="bo-band">
     <div class="bo-wrap bo-band__inner">
         <div>
@@ -16,6 +17,7 @@
         <a href="{{ route('signup', ['locale' => $locale]) }}" class="bo-btn bo-btn--outline-light">@lang('site.become_client') <i class="fas fa-chevron-right"></i></a>
     </div>
 </section>
+@endif
 
 <footer class="bo-footer site-footer">
     <div class="bo-wrap bo-footer__grid">

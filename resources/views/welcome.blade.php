@@ -42,8 +42,9 @@
 {{-- ── Bannière à diapositives ─────────────────────────────────────────── --}}
 <section class="bo-hero" x-data="{ i: 0, n: {{ count($slides) }}, t: null,
         go(k){ this.i = (k + this.n) % this.n; this.restart(); },
-        restart(){ clearInterval(this.t); this.t = setInterval(() => this.i = (this.i + 1) % this.n, 6500); } }"
-        x-init="restart()" @mouseenter="clearInterval(t)" @mouseleave="restart()">
+        restart(){ clearInterval(this.t); if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; this.t = setInterval(() => this.i = (this.i + 1) % this.n, 6500); } }"
+        x-init="restart()" @mouseenter="clearInterval(t)" @mouseleave="restart()" @focusin="clearInterval(t)" @focusout="restart()"
+        role="region" aria-roledescription="carousel" aria-label="{{ site_name() }}">
     @foreach ($slides as $k => $slide)
     <div class="bo-hero__slide {{ $k === 0 ? 'is-on' : '' }}" :class="{ 'is-on': i === {{ $k }} }"
          style="background-image:url('{{ asset('assets/images/site/' . $slide['img']) }}')">
@@ -56,8 +57,8 @@
     </div>
     @endforeach
 
-    <button type="button" class="bo-hero__arrow bo-hero__arrow--prev" @click="go(i - 1)" aria-label="‹"><i class="fas fa-chevron-left"></i></button>
-    <button type="button" class="bo-hero__arrow bo-hero__arrow--next" @click="go(i + 1)" aria-label="›"><i class="fas fa-chevron-right"></i></button>
+    <button type="button" class="bo-hero__arrow bo-hero__arrow--prev" @click="go(i - 1)" aria-label="@lang('site.prev')"><i class="fas fa-chevron-left"></i></button>
+    <button type="button" class="bo-hero__arrow bo-hero__arrow--next" @click="go(i + 1)" aria-label="@lang('site.next')"><i class="fas fa-chevron-right"></i></button>
     <div class="bo-hero__dots">
         @foreach ($slides as $k => $slide)
         <button type="button" :class="{ 'is-on': i === {{ $k }} }" @click="go({{ $k }})" aria-label="{{ $k + 1 }}"></button>

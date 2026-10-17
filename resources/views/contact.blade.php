@@ -54,29 +54,29 @@
                 <div class="ct-row">
                     <div class="ct-field">
                         <label for="ct-name">{{ __('contact.label_name') }} *</label>
-                        <input id="ct-name" type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('contact.placeholder_name') }}" autocomplete="name" required>
-                        @error('name')<span class="ct-err">{{ $message }}</span>@enderror
+                        <input id="ct-name" @error('name') aria-invalid="true" aria-describedby="ct-name-err" @enderror type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('contact.placeholder_name') }}" autocomplete="name" required>
+                        @error('name')<span class="ct-err" id="ct-name-err" role="alert">{{ $message }}</span>@enderror
                     </div>
                     <div class="ct-field">
                         <label for="ct-email">{{ __('contact.label_email') }} *</label>
-                        <input id="ct-email" type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('contact.placeholder_email') }}" autocomplete="email" required>
-                        @error('email')<span class="ct-err">{{ $message }}</span>@enderror
+                        <input id="ct-email" @error('email') aria-invalid="true" aria-describedby="ct-email-err" @enderror type="email" name="email" value="{{ old('email') }}" placeholder="{{ __('contact.placeholder_email') }}" autocomplete="email" required>
+                        @error('email')<span class="ct-err" id="ct-email-err" role="alert">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 <div class="ct-field">
                     <label for="ct-subject">{{ __('contact.subject') }} *</label>
-                    <select id="ct-subject" name="subject" required>
+                    <select id="ct-subject" @error('subject') aria-invalid="true" aria-describedby="ct-subject-err" @enderror name="subject" required>
                         <option value="">— {{ __('contact.subject') }} —</option>
                         @foreach ($subjects as $value => $label)
                         <option value="{{ $value }}" {{ old('subject') == $value ? 'selected' : '' }}>@lang($label)</option>
                         @endforeach
                     </select>
-                    @error('subject')<span class="ct-err">{{ $message }}</span>@enderror
+                    @error('subject')<span class="ct-err" id="ct-subject-err" role="alert">{{ $message }}</span>@enderror
                 </div>
                 <div class="ct-field">
                     <label for="ct-message">{{ __('contact.label_message') }} *</label>
-                    <textarea id="ct-message" name="message" rows="6" placeholder="{{ __('contact.placeholder_message') }}" required>{{ old('message') }}</textarea>
-                    @error('message')<span class="ct-err">{{ $message }}</span>@enderror
+                    <textarea id="ct-message" @error('message') aria-invalid="true" aria-describedby="ct-message-err" @enderror name="message" rows="6" placeholder="{{ __('contact.placeholder_message') }}" required>{{ old('message') }}</textarea>
+                    @error('message')<span class="ct-err" id="ct-message-err" role="alert">{{ $message }}</span>@enderror
                 </div>
                 <button type="submit" class="ct-submit" :disabled="submitting">
                     <i class="fas fa-spinner fa-spin" x-show="submitting" x-cloak></i>

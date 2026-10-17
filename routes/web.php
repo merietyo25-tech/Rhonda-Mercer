@@ -79,7 +79,7 @@ Route::group([
     'where' => ['locale' => implode('|', $supportedLocales)]
 ], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('landing');
     })->name('home');
 
 
@@ -93,6 +93,11 @@ Route::group([
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
+
+    // Landing page orientée conversion (ouverture de compte)
+    Route::get('/start', function () {
+        return view('landing');
+    })->name('landing');
 
 
     Route::get('/signup', [SignupController::class, 'create'])->name('signup');

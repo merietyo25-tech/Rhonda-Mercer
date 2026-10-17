@@ -3,9 +3,10 @@
 <!-- Alpine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+<a href="#main-content" class="skip-link">@lang('site.skip')</a>
 <div id="page-wrapper" class="relative flex flex-col min-h-screen">
     @include('partials.header')
-    <main class="flex-1">
+    <main id="main-content" tabindex="-1" class="flex-1">
         @yield('content')
     </main>
     @include('partials.footer')

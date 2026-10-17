@@ -32,7 +32,7 @@
        garde la main via le sélecteur de thème, stocké sous la même clé 'v2'. --}}
   <script>
     (function(){
-      var t = localStorage.getItem('solberg-theme-v2') || 'dark';
+      var t = localStorage.getItem('solberg-theme-v2') || 'light';
       document.documentElement.dataset.theme = t;
     })();
   </script>
@@ -182,6 +182,14 @@
     <span>{{ __('app.nav_home') }}</span>
   </a>
 
+  {{-- Envoyer (barre latérale uniquement) --}}
+  <a href="{{ route('client.app.transfer.send') }}"
+     class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.transfer.*') ? 'active' : '' }}"
+     aria-label="{{ __('app.action_send') }}">
+    <i class="fas fa-paper-plane"></i>
+    <span>{{ __('app.action_send') }}</span>
+  </a>
+
   {{-- Cartes --}}
   <a href="{{ route('client.app.cards') }}"
      class="ca-nav-item {{ request()->routeIs('client.app.cards') ? 'active' : '' }}"
@@ -196,6 +204,20 @@
      aria-label="IBAN">
     <i class="fas fa-building-columns"></i>
     <span>IBAN</span>
+  </a>
+
+  {{-- Mouvements + notifications (barre latérale uniquement) --}}
+  <a href="{{ route('client.app.movements') }}"
+     class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.movements') ? 'active' : '' }}"
+     aria-label="{{ __('app.movements_title') }}">
+    <i class="fas fa-arrow-right-arrow-left"></i>
+    <span>{{ __('app.movements_title') }}</span>
+  </a>
+  <a href="{{ route('client.app.notifications') }}"
+     class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.notifications') ? 'active' : '' }}"
+     aria-label="{{ __('app.notifications_title') }}">
+    <i class="fas fa-bell"></i>
+    <span>{{ __('app.notifications_title') }}</span>
   </a>
 
   {{-- Profil --}}
@@ -225,6 +247,13 @@
   </div>
 </div>
 <style>
+/* Les fenêtres modales passent au-dessus du menu : l'animation d'entrée ne doit pas laisser de
+   contexte d'empilement sur .ca-shell une fois terminée (sinon tout modal y reste coincé sous la barre de navigation). */
+.ca-shell { animation-fill-mode: backwards !important; }
+.pwa-fab { z-index: 900 !important; }
+/* Entrées de menu réservées à la barre latérale (tablette / PC) */
+.ca-nav-item--side { display: none !important; }
+@media (min-width: 768px) { .ca-nav-item--side { display: flex !important; } }
 #cxa-confirm { position: fixed; inset: 0; z-index: 30000; display: flex; align-items: flex-end; justify-content: center; padding: 1rem; }
 #cxa-confirm[hidden] { display: none; }
 @media (min-width: 640px) { #cxa-confirm { align-items: center; } }
