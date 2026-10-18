@@ -206,6 +206,14 @@
     <span>IBAN</span>
   </a>
 
+  {{-- Prêts (barre latérale uniquement) --}}
+  <a href="{{ route('client.app.loans') }}"
+     class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.loans*') ? 'active' : '' }}"
+     aria-label="{{ __('loans.nav') }}">
+    <i class="fas fa-hand-holding-dollar"></i>
+    <span>{{ __('loans.nav') }}</span>
+  </a>
+
   {{-- Mouvements + notifications (barre latérale uniquement) --}}
   <a href="{{ route('client.app.movements') }}"
      class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.movements') ? 'active' : '' }}"

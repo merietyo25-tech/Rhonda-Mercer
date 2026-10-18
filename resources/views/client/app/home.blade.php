@@ -188,6 +188,13 @@
   box-shadow:0 10px 26px rgba(0,132,87,.3);transition:transform .15s,box-shadow .2s;
 }
 .h-send:active{ transform:scale(.98) }
+.h-loan{
+  display:flex;align-items:center;gap:.7rem;margin-top:.7rem;min-height:52px;padding:.6rem 1.1rem;border-radius:16px;
+  background:var(--ca-bg2);border:1px solid var(--ca-border);color:var(--ca-text);font-weight:700;font-size:.88rem;
+  transition:border-color .2s,transform .15s;
+}
+.h-loan i:first-child{ width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,132,87,.12);color:var(--ca-accent-l,#008457);font-size:.85rem }
+.h-loan:hover{ border-color:var(--ca-accent) }
 .h-action__ico{ width:64px !important;height:64px !important;font-size:1.3rem !important }
 @media (min-width:768px){
   .h-avatar{ display:none }
@@ -403,6 +410,9 @@
 <div class="h-actions">
   <a href="{{ route('client.app.transfer.send') }}" class="h-send">
     <i class="fas fa-paper-plane"></i> {{ __('app.action_send') }}
+  </a>
+  <a href="{{ route('client.app.loans') }}" class="h-loan">
+    <i class="fas fa-hand-holding-dollar"></i> {{ __('loans.title') }} <i class="fas fa-chevron-right" style="margin-left:auto;font-size:.65rem;opacity:.6"></i>
   </a>
 </div>
 

@@ -342,4 +342,10 @@ return [
     'notif_account_blocked_body' => 'Twoje konto i karta są zablokowane. Skontaktuj się z doradcą, aby uzyskać więcej informacji.',
     'notif_account_unblocked' => 'Twoje konto zostało odblokowane',
     'notif_account_unblocked_body' => 'Twoje konto i karta są ponownie aktywne.',
+    'notif_pending_added' => 'Kwota oczekująca',
+    'notif_pending_added_body' => ':amount :currency oczekuje na zatwierdzenie. Zostanie dodane do salda po zatwierdzeniu.',
+    'notif_card_cap' => 'Limit karty zaktualizowany',
+    'notif_card_cap_body' => 'Maksymalny limit Twojej karty to :amount :currency.',
+    'pending_balance' => 'Oczekujące',
+    'pending_balance_hint' => 'Ta kwota zostanie dodana do salda po zatwierdzeniu.',
 ];

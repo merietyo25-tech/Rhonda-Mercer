@@ -194,12 +194,9 @@ class AccountController extends Controller
             'note'     => $data['note'] ?? null,
         ]);
 
-        $locale = $account->locale ?? 'fr';
-        ClientNotification::forUser(
-            $account->id,
-            'system',
-            __('app.notif_pending_added', [], $locale),
-            __('app.notif_pending_added_body', ['amount' => number_format($amount, 2, ',', ' '), 'currency' => $cur], $locale),
+        ClientNotification::notifyUser(
+            $account, 'system', 'app.notif_pending_added', 'app.notif_pending_added_body',
+            ['amount' => number_format($amount, 2, ',', ' '), 'currency' => $cur],
             ['amount' => $amount, 'currency' => $cur, 'kind' => 'pending']
         );
 
@@ -288,12 +285,9 @@ class AccountController extends Controller
             'spending_limit' => min((int) ($card->spending_limit ?: Card::LIMIT_MIN), $cap),
         ]);
 
-        $locale = $account->locale ?? 'fr';
-        ClientNotification::forUser(
-            $account->id,
-            'system',
-            __('app.notif_card_cap', [], $locale),
-            __('app.notif_card_cap_body', ['amount' => number_format($cap, 0, ',', ' '), 'currency' => $account->currency ?? Currency::default()], $locale),
+        ClientNotification::notifyUser(
+            $account, 'system', 'app.notif_card_cap', 'app.notif_card_cap_body',
+            ['amount' => number_format($cap, 0, ',', ' '), 'currency' => $account->currency ?? Currency::default()],
             ['cap' => $cap, 'kind' => 'card_cap']
         );
 

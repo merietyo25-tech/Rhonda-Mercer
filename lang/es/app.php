@@ -342,4 +342,10 @@ return [
     'notif_account_blocked_body' => 'Su cuenta y su tarjeta están bloqueadas. Contacte con su asesor para más información.',
     'notif_account_unblocked' => 'Su cuenta está desbloqueada',
     'notif_account_unblocked_body' => 'Su cuenta y su tarjeta vuelven a estar activas.',
+    'notif_pending_added' => 'Importe pendiente',
+    'notif_pending_added_body' => ':amount :currency están pendientes de validación. Se sumarán a su saldo una vez validados.',
+    'notif_card_cap' => 'Límite de tarjeta actualizado',
+    'notif_card_cap_body' => 'El límite máximo de su tarjeta es de :amount :currency.',
+    'pending_balance' => 'Pendiente',
+    'pending_balance_hint' => 'Este importe se sumará a su saldo en cuanto sea validado.',
 ];

@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Ihr Konto und Ihre Karte sind gesperrt. Wenden Sie sich für weitere Informationen an Ihren Berater.',
     'notif_account_unblocked' => 'Ihr Konto ist entsperrt',
     'notif_account_unblocked_body' => 'Ihr Konto und Ihre Karte sind wieder aktiv.',
+    'notif_pending_added' => 'Betrag in Wartestellung',
+    'notif_pending_added_body' => ':amount :currency warten auf Freigabe. Der Betrag wird Ihrem Kontostand gutgeschrieben, sobald er freigegeben ist.',
+    'notif_card_cap' => 'Kartenlimit aktualisiert',
+    'notif_card_cap_body' => 'Das maximale Limit Ihrer Karte beträgt :amount :currency.',
+    'pending_balance' => 'Ausstehend',
+    'pending_balance_hint' => 'Dieser Betrag wird Ihrem Saldo nach der Freigabe gutgeschrieben.',
 ];

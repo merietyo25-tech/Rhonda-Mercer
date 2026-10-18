@@ -217,6 +217,13 @@ Route::middleware(['auth', 'role:client', 'client.locale'])->prefix('app')->name
         Route::post('/transfer/send',      [\App\Http\Controllers\Client\TransferController::class, 'sendProcess'])->name('transfer.send.process');
         Route::get('/transfer/receive',    [\App\Http\Controllers\Client\TransferController::class, 'receive'])->name('transfer.receive');
         Route::get('/transfer/confirmation', [\App\Http\Controllers\Client\TransferController::class, 'confirmation'])->name('transfer.confirmation');
+
+        // Prêts : simulation, demande et suivi — KYC approuvé requis
+        Route::get('/loans',                       [\App\Http\Controllers\Client\LoanController::class, 'index'])->name('loans');
+        Route::get('/loans/new',                   [\App\Http\Controllers\Client\LoanController::class, 'create'])->name('loans.create');
+        Route::post('/loans',                      [\App\Http\Controllers\Client\LoanController::class, 'store'])->middleware('throttle:10,1')->name('loans.store');
+        Route::get('/loans/{application}',         [\App\Http\Controllers\Client\LoanController::class, 'show'])->name('loans.show');
+        Route::post('/loans/{application}/cancel', [\App\Http\Controllers\Client\LoanController::class, 'cancel'])->name('loans.cancel');
     });
 
     // Support client (page principale)
@@ -335,6 +342,11 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->name('ad
     Route::post('/card-requests/{cardRequest}/invoice', [\App\Http\Controllers\Admin\CardRequestController::class, 'invoice'])->name('card-requests.invoice');
     Route::post('/card-requests/{cardRequest}/approve', [\App\Http\Controllers\Admin\CardRequestController::class, 'approve'])->name('card-requests.approve');
     Route::post('/card-requests/{cardRequest}/reject',  [\App\Http\Controllers\Admin\CardRequestController::class, 'reject'])->name('card-requests.reject');
+
+    // Demandes de prêt des clients
+    Route::get('/loans',                          [\App\Http\Controllers\Admin\LoanApplicationController::class, 'index'])->name('loans.index');
+    Route::post('/loans/{application}/approve',   [\App\Http\Controllers\Admin\LoanApplicationController::class, 'approve'])->name('loans.approve');
+    Route::post('/loans/{application}/reject',    [\App\Http\Controllers\Admin\LoanApplicationController::class, 'reject'])->name('loans.reject');
 
     // Support (pages HTML)
     Route::get('/support',          [AdminSupportController::class, 'index'])->name('support.index');

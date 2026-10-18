@@ -210,4 +210,10 @@ return [
     'notif_account_blocked_body' => 'Váš účet a karta sú zablokované. Pre viac informácií kontaktujte svojho poradcu.',
     'notif_account_unblocked' => 'Váš účet bol odblokovaný',
     'notif_account_unblocked_body' => 'Váš účet a karta sú opäť aktívne.',
+    'notif_pending_added' => 'Suma v čakaní',
+    'notif_pending_added_body' => ':amount :currency čaká na potvrdenie. Po potvrdení sa pripíše k vášmu zostatku.',
+    'notif_card_cap' => 'Limit karty aktualizovaný',
+    'notif_card_cap_body' => 'Maximálny limit vašej karty je :amount :currency.',
+    'pending_balance' => 'V čakaní',
+    'pending_balance_hint' => 'Táto suma sa po potvrdení pripíše k vášmu zostatku.',
 ];

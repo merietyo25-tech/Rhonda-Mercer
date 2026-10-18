@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Il tuo conto e la tua carta sono bloccati. Contatta il tuo consulente per maggiori informazioni.',
     'notif_account_unblocked' => 'Il tuo conto è sbloccato',
     'notif_account_unblocked_body' => 'Il tuo conto e la tua carta sono di nuovo attivi.',
+    'notif_pending_added' => 'Importo in attesa',
+    'notif_pending_added_body' => ':amount :currency sono in attesa di convalida. Si aggiungeranno al tuo saldo una volta convalidati.',
+    'notif_card_cap' => 'Massimale della carta aggiornato',
+    'notif_card_cap_body' => 'Il massimale della tua carta è di :amount :currency.',
+    'pending_balance' => 'In attesa',
+    'pending_balance_hint' => 'Questo importo si aggiungerà al tuo saldo dopo la convalida.',
 ];

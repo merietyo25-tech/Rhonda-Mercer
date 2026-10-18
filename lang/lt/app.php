@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Jūsų paskyra ir kortelė užblokuotos. Dėl išsamesnės informacijos susisiekite su konsultantu.',
     'notif_account_unblocked' => 'Jūsų paskyra atblokuota',
     'notif_account_unblocked_body' => 'Jūsų paskyra ir kortelė vėl aktyvios.',
+    'notif_pending_added' => 'Laukiama suma',
+    'notif_pending_added_body' => ':amount :currency laukia patvirtinimo. Patvirtinus ji bus pridėta prie jūsų likučio.',
+    'notif_card_cap' => 'Kortelės limitas atnaujintas',
+    'notif_card_cap_body' => 'Didžiausias jūsų kortelės limitas yra :amount :currency.',
+    'pending_balance' => 'Laukiama',
+    'pending_balance_hint' => 'Ši suma bus pridėta prie likučio, kai bus patvirtinta.',
 ];

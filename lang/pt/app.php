@@ -369,4 +369,10 @@ return [
     'notif_account_blocked_body' => 'A sua conta e o seu cartão estão bloqueados. Contacte o seu consultor para mais informações.',
     'notif_account_unblocked' => 'A sua conta foi desbloqueada',
     'notif_account_unblocked_body' => 'A sua conta e o seu cartão estão novamente ativos.',
+    'notif_pending_added' => 'Montante pendente',
+    'notif_pending_added_body' => ':amount :currency aguardam validação. Serão somados ao seu saldo depois de validados.',
+    'notif_card_cap' => 'Limite do cartão atualizado',
+    'notif_card_cap_body' => 'O limite máximo do seu cartão é de :amount :currency.',
+    'pending_balance' => 'Pendente',
+    'pending_balance_hint' => 'Este montante será somado ao seu saldo após a validação.',
 ];

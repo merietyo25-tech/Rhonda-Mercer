@@ -210,4 +210,10 @@ return [
     'notif_account_blocked_body' => 'Vaš račun in kartica sta blokirana. Za več informacij se obrnite na svojega svetovalca.',
     'notif_account_unblocked' => 'Vaš račun je odblokiran',
     'notif_account_unblocked_body' => 'Vaš račun in kartica sta spet aktivna.',
+    'notif_pending_added' => 'Znesek v čakanju',
+    'notif_pending_added_body' => ':amount :currency čaka na potrditev. Po potrditvi bo dodan vašemu stanju.',
+    'notif_card_cap' => 'Limit kartice posodobljen',
+    'notif_card_cap_body' => 'Najvišji limit vaše kartice je :amount :currency.',
+    'pending_balance' => 'V čakanju',
+    'pending_balance_hint' => 'Ta znesek bo po potrditvi dodan vašemu stanju.',
 ];

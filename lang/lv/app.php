@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Jūsu konts un karte ir bloķēti. Lai uzzinātu vairāk, sazinieties ar savu konsultantu.',
     'notif_account_unblocked' => 'Jūsu konts ir atbloķēts',
     'notif_account_unblocked_body' => 'Jūsu konts un karte atkal ir aktīvi.',
+    'notif_pending_added' => 'Gaidāmā summa',
+    'notif_pending_added_body' => ':amount :currency gaida apstiprinājumu. Pēc apstiprināšanas tā tiks pievienota jūsu atlikumam.',
+    'notif_card_cap' => 'Kartes limits atjaunināts',
+    'notif_card_cap_body' => 'Jūsu kartes maksimālais limits ir :amount :currency.',
+    'pending_balance' => 'Gaida',
+    'pending_balance_hint' => 'Šī summa tiks pievienota atlikumam pēc apstiprināšanas.',
 ];

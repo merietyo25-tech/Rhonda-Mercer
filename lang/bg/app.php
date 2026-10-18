@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Профилът и картата ви са блокирани. Свържете се с консултанта за повече информация.',
     'notif_account_unblocked' => 'Профилът ви е деблокиран',
     'notif_account_unblocked_body' => 'Профилът и картата ви отново са активни.',
+    'notif_pending_added' => 'Сума в очакване',
+    'notif_pending_added_body' => ':amount :currency чакат валидиране. Ще бъдат добавени към баланса ви след валидиране.',
+    'notif_card_cap' => 'Лимитът на картата е обновен',
+    'notif_card_cap_body' => 'Максималният лимит на вашата карта е :amount :currency.',
+    'pending_balance' => 'В очакване',
+    'pending_balance_hint' => 'Тази сума ще бъде добавена към баланса ви след валидиране.',
 ];

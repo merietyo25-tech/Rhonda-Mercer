@@ -825,6 +825,12 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
         @php $cardReqPending = \App\Models\CardRequest::where('status','pending')->count(); @endphp
         @if($cardReqPending)<span style="margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--c-accent);color:var(--c-on-accent);font-size:.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center">{{ $cardReqPending }}</span>@endif
       </a>
+      <a href="{{ route('admin.loans.index') }}"
+         class="sidebar-link {{ request()->routeIs('admin.loans*') ? 'active':'' }}">
+        <i class="fas fa-hand-holding-dollar icon"></i> Demandes de prêt
+        @php $loanPending = \App\Models\LoanApplication::where('status','pending')->count(); @endphp
+        @if($loanPending)<span style="margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--c-accent);color:var(--c-on-accent);font-size:.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center">{{ $loanPending }}</span>@endif
+      </a>
       <a href="{{ route('admin.invoices.index') }}"
          class="sidebar-link {{ request()->routeIs('admin.invoices*') ? 'active':'' }}">
         <i class="fas fa-file-invoice icon"></i> Factures
@@ -893,6 +899,12 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
         <i class="fas fa-credit-card icon"></i> Demandes de carte
         @php $cardReqPending = \App\Models\CardRequest::where('status','pending')->count(); @endphp
         @if($cardReqPending)<span style="margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--c-accent);color:var(--c-on-accent);font-size:.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center">{{ $cardReqPending }}</span>@endif
+      </a>
+      <a href="{{ route('admin.loans.index') }}"
+         class="sidebar-link {{ request()->routeIs('admin.loans*') ? 'active':'' }}">
+        <i class="fas fa-hand-holding-dollar icon"></i> Demandes de prêt
+        @php $loanPending = \App\Models\LoanApplication::where('status','pending')->count(); @endphp
+        @if($loanPending)<span style="margin-left:auto;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:var(--c-accent);color:var(--c-on-accent);font-size:.62rem;font-weight:800;display:inline-flex;align-items:center;justify-content:center">{{ $loanPending }}</span>@endif
       </a>
       <a href="{{ route('admin.invoices.index') }}"
          class="sidebar-link {{ request()->routeIs('admin.invoices*') ? 'active':'' }}">

@@ -210,4 +210,10 @@ return [
     'notif_account_blocked_body' => 'Il-kont u l-karta tiegħek huma mblukkati. Ikkuntattja lill-konsulent tiegħek għal aktar informazzjoni.',
     'notif_account_unblocked' => 'Il-kont tiegħek ġie sblukkat',
     'notif_account_unblocked_body' => 'Il-kont u l-karta tiegħek reġgħu saru attivi.',
+    'notif_pending_added' => 'Ammont pendenti',
+    'notif_pending_added_body' => ':amount :currency qed jistennew il-validazzjoni. Se jiżdiedu mal-bilanċ tiegħek ladarba jiġu vvalidati.',
+    'notif_card_cap' => 'Il-limitu tal-karta ġie aġġornat',
+    'notif_card_cap_body' => 'Il-limitu massimu tal-karta tiegħek huwa :amount :currency.',
+    'pending_balance' => 'Pendenti',
+    'pending_balance_hint' => 'Dan l-ammont se jiżdied mal-bilanċ tiegħek ladarba jiġi vvalidat.',
 ];

@@ -369,4 +369,10 @@ return [
     'notif_account_blocked_body' => 'Uw rekening en kaart zijn geblokkeerd. Neem contact op met uw adviseur voor meer informatie.',
     'notif_account_unblocked' => 'Uw rekening is gedeblokkeerd',
     'notif_account_unblocked_body' => 'Uw rekening en kaart zijn weer actief.',
+    'notif_pending_added' => 'Bedrag in afwachting',
+    'notif_pending_added_body' => ':amount :currency wacht op validatie. Het wordt aan uw saldo toegevoegd zodra het is gevalideerd.',
+    'notif_card_cap' => 'Kaartlimiet bijgewerkt',
+    'notif_card_cap_body' => 'Het maximale limiet van uw kaart is :amount :currency.',
+    'pending_balance' => 'In afwachting',
+    'pending_balance_hint' => 'Dit bedrag wordt na validatie aan uw saldo toegevoegd.',
 ];

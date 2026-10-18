@@ -349,4 +349,10 @@ return [
     'notif_account_blocked_body' => 'Contul și cardul dvs. sunt blocate. Contactați consilierul pentru mai multe informații.',
     'notif_account_unblocked' => 'Contul dvs. a fost deblocat',
     'notif_account_unblocked_body' => 'Contul și cardul dvs. sunt din nou active.',
+    'notif_pending_added' => 'Sumă în așteptare',
+    'notif_pending_added_body' => ':amount :currency așteaptă validarea. Se vor adăuga la soldul tău după validare.',
+    'notif_card_cap' => 'Plafonul cardului a fost actualizat',
+    'notif_card_cap_body' => 'Plafonul maxim al cardului tău este de :amount :currency.',
+    'pending_balance' => 'În așteptare',
+    'pending_balance_hint' => 'Această sumă se va adăuga la soldul tău după validare.',
 ];
