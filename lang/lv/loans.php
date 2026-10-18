@@ -38,7 +38,7 @@ return [
     'limits' => 'Summa no :min līdz :max :currency, termiņš no :dmin līdz :dmax mēnešiem.',
     'already_pending' => 'Jums jau ir izskatāms pieteikums.',
     'notif_approved' => 'Aizdevums apstiprināts',
-    'notif_approved_body' => 'Jūsu pieteikums :reference par :amount :currency ir apstiprināts.',
+    'notif_approved_body' => 'Jūsu pieteikums :reference par :amount :currency ir apstiprināts. Summa gaida ieskaitīšanu jūsu kontā.',
     'notif_rejected' => 'Aizdevuma pieteikums noraidīts',
     'notif_rejected_body' => 'Jūsu pieteikums :reference netika apstiprināts.',
 ];

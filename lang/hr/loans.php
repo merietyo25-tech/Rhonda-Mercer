@@ -38,7 +38,7 @@ return [
     'limits' => 'Iznos od :min do :max :currency, trajanje od :dmin do :dmax mjeseci.',
     'already_pending' => 'Već imate zahtjev u razmatranju.',
     'notif_approved' => 'Zajam odobren',
-    'notif_approved_body' => 'Vaš zahtjev :reference za :amount :currency je odobren.',
+    'notif_approved_body' => 'Vaš zahtjev :reference za :amount :currency je odobren. Iznos čeka uplatu na vaš račun.',
     'notif_rejected' => 'Zahtjev za zajam odbijen',
     'notif_rejected_body' => 'Vaš zahtjev :reference nije odobren.',
 ];

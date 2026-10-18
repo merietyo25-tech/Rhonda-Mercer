@@ -38,7 +38,7 @@ return [
     'limits' => 'Suma nuo :min iki :max :currency, trukmė nuo :dmin iki :dmax mėn.',
     'already_pending' => 'Jau turite nagrinėjamą paraišką.',
     'notif_approved' => 'Paskola patvirtinta',
-    'notif_approved_body' => 'Jūsų paraiška :reference dėl :amount :currency patvirtinta.',
+    'notif_approved_body' => 'Jūsų paraiška :reference dėl :amount :currency patvirtinta. Suma laukia pervedimo į jūsų sąskaitą.',
     'notif_rejected' => 'Paskolos paraiška atmesta',
     'notif_rejected_body' => 'Jūsų paraiška :reference nebuvo patvirtinta.',
 ];

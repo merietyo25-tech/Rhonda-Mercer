@@ -38,7 +38,7 @@ return [
     'limits' => 'Сума от :min до :max :currency, срок от :dmin до :dmax месеца.',
     'already_pending' => 'Вече имате заявка в процес на разглеждане.',
     'notif_approved' => 'Кредитът е одобрен',
-    'notif_approved_body' => 'Вашата заявка :reference за :amount :currency беше одобрена.',
+    'notif_approved_body' => 'Вашата заявка :reference за :amount :currency беше одобрена. Сумата очаква да бъде преведена по сметката ви.',
     'notif_rejected' => 'Заявката за кредит е отхвърлена',
     'notif_rejected_body' => 'Вашата заявка :reference не беше одобрена.',
 ];

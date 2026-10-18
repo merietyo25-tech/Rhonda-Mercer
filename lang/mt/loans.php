@@ -38,7 +38,7 @@ return [
     'limits' => 'Ammont minn :min sa :max :currency, tul ta\' żmien minn :dmin sa :dmax xhur.',
     'already_pending' => 'Diġà għandek talba li qed tiġi eżaminata.',
     'notif_approved' => 'Self approvat',
-    'notif_approved_body' => 'It-talba tiegħek :reference ta\' :amount :currency ġiet approvata.',
+    'notif_approved_body' => 'It-talba tiegħek :reference ta\' :amount :currency ġiet approvata. L-ammont qed jistenna li jiddaħħal fil-kont tiegħek.',
     'notif_rejected' => 'Talba għal self miċħuda',
     'notif_rejected_body' => 'It-talba tiegħek :reference ma ġietx approvata.',
 ];

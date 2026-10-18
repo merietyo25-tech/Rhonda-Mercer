@@ -12,7 +12,7 @@ class PendingCredit extends Model
     public const VALIDATED = 'validated';
     public const CANCELLED = 'cancelled';
 
-    protected $fillable = ['user_id', 'admin_id', 'validated_by', 'amount', 'currency', 'label', 'note', 'status', 'movement_id', 'resolved_at'];
+    protected $fillable = ['user_id', 'admin_id', 'validated_by', 'amount', 'currency', 'label', 'note', 'status', 'movement_id', 'loan_application_id', 'resolved_at'];
 
     protected $casts = [
         'amount'      => 'float',

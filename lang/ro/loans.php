@@ -38,7 +38,7 @@ return [
     'limits' => 'Sumă de la :min la :max :currency, durată de la :dmin la :dmax luni.',
     'already_pending' => 'Ai deja o cerere în analiză.',
     'notif_approved' => 'Împrumut aprobat',
-    'notif_approved_body' => 'Cererea ta :reference de :amount :currency a fost aprobată.',
+    'notif_approved_body' => 'Cererea ta :reference de :amount :currency a fost aprobată. Suma este în așteptarea virării în contul tău.',
     'notif_rejected' => 'Cerere de împrumut respinsă',
     'notif_rejected_body' => 'Cererea ta :reference nu a fost aprobată.',
 ];

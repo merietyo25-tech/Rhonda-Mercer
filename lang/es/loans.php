@@ -38,7 +38,7 @@ return [
     'limits' => 'Importe de :min a :max :currency, duración de :dmin a :dmax meses.',
     'already_pending' => 'Ya tiene una solicitud en estudio.',
     'notif_approved' => 'Préstamo aprobado',
-    'notif_approved_body' => 'Su solicitud :reference de :amount :currency ha sido aprobada.',
+    'notif_approved_body' => 'Su solicitud :reference de :amount :currency ha sido aprobada. El importe está pendiente de ingreso en su cuenta.',
     'notif_rejected' => 'Solicitud de préstamo rechazada',
     'notif_rejected_body' => 'Su solicitud :reference no ha sido aprobada.',
 ];

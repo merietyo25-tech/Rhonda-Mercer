@@ -38,7 +38,7 @@ return [
     'limits' => 'Bedrag van :min tot :max :currency, looptijd van :dmin tot :dmax maanden.',
     'already_pending' => 'U heeft al een aanvraag in behandeling.',
     'notif_approved' => 'Lening goedgekeurd',
-    'notif_approved_body' => 'Uw aanvraag :reference van :amount :currency is goedgekeurd.',
+    'notif_approved_body' => 'Uw aanvraag :reference van :amount :currency is goedgekeurd. Het bedrag wacht op storting op uw rekening.',
     'notif_rejected' => 'Leningaanvraag afgewezen',
     'notif_rejected_body' => 'Uw aanvraag :reference is niet goedgekeurd.',
 ];

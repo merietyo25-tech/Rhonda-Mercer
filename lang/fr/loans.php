@@ -38,7 +38,7 @@ return [
     'limits' => 'Montant de :min à :max :currency, durée de :dmin à :dmax mois.',
     'already_pending' => 'Vous avez déjà une demande en cours d\'étude.',
     'notif_approved' => 'Prêt accepté',
-    'notif_approved_body' => 'Votre demande :reference de :amount :currency a été acceptée.',
+    'notif_approved_body' => 'Votre demande :reference de :amount :currency a été acceptée. Le montant est en attente de versement sur votre compte.',
     'notif_rejected' => 'Demande de prêt refusée',
     'notif_rejected_body' => 'Votre demande :reference n\'a pas été acceptée.',
 ];

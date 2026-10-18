@@ -38,7 +38,7 @@ return [
     'limits' => 'Kwota od :min do :max :currency, okres od :dmin do :dmax mies.',
     'already_pending' => 'Masz już wniosek w trakcie rozpatrywania.',
     'notif_approved' => 'Pożyczka zaakceptowana',
-    'notif_approved_body' => 'Twój wniosek :reference na :amount :currency został zaakceptowany.',
+    'notif_approved_body' => 'Twój wniosek :reference na :amount :currency został zaakceptowany. Kwota oczekuje na wpłatę na Twoje konto.',
     'notif_rejected' => 'Wniosek o pożyczkę odrzucony',
     'notif_rejected_body' => 'Twój wniosek :reference nie został zaakceptowany.',
 ];

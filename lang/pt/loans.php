@@ -38,7 +38,7 @@ return [
     'limits' => 'Montante de :min a :max :currency, duração de :dmin a :dmax meses.',
     'already_pending' => 'Já tem um pedido em análise.',
     'notif_approved' => 'Empréstimo aprovado',
-    'notif_approved_body' => 'O seu pedido :reference de :amount :currency foi aprovado.',
+    'notif_approved_body' => 'O seu pedido :reference de :amount :currency foi aprovado. O montante aguarda o crédito na sua conta.',
     'notif_rejected' => 'Pedido de empréstimo recusado',
     'notif_rejected_body' => 'O seu pedido :reference não foi aprovado.',
 ];

@@ -38,7 +38,7 @@ return [
     'limits' => 'Amount from :min to :max :currency, duration from :dmin to :dmax months.',
     'already_pending' => 'You already have a request under review.',
     'notif_approved' => 'Loan approved',
-    'notif_approved_body' => 'Your request :reference for :amount :currency has been approved.',
+    'notif_approved_body' => 'Your request :reference for :amount :currency has been approved. The amount is pending transfer to your account.',
     'notif_rejected' => 'Loan request declined',
     'notif_rejected_body' => 'Your request :reference was not approved.',
 ];

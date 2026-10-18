@@ -75,6 +75,10 @@
     <span><strong>Demandé le :</strong> {{ $a->created_at->format('d/m/Y H:i') }}</span>
     @if($a->message)<span style="flex:1 1 100%"><strong>Message du client :</strong> {{ $a->message }}</span>@endif
     @if($a->admin_note)<span style="flex:1 1 100%"><strong>Votre réponse :</strong> {{ $a->admin_note }}</span>@endif
+    @if($a->status === 'approved')
+    <span style="flex:1 1 100%"><i class="fas fa-hourglass-half" style="color:#b45309"></i> Le montant est en attente sur le compte du client —
+      <a href="{{ route('admin.accounts.show', $a->user) }}" style="font-weight:700;color:var(--c-accent)">valider le versement sur la fiche compte</a></span>
+    @endif
   </div>
   @if($a->isPending())
   <div class="ln-act" x-data="{ note: '' }">

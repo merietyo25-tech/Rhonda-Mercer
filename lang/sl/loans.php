@@ -38,7 +38,7 @@ return [
     'limits' => 'Znesek od :min do :max :currency, trajanje od :dmin do :dmax mesecev.',
     'already_pending' => 'Že imate vlogo v obravnavi.',
     'notif_approved' => 'Posojilo odobreno',
-    'notif_approved_body' => 'Vaša vloga :reference za :amount :currency je bila odobrena.',
+    'notif_approved_body' => 'Vaša vloga :reference za :amount :currency je bila odobrena. Znesek čaka na nakazilo na vaš račun.',
     'notif_rejected' => 'Vloga za posojilo zavrnjena',
     'notif_rejected_body' => 'Vaša vloga :reference ni bila odobrena.',
 ];

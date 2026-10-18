@@ -38,7 +38,7 @@ return [
     'limits' => 'Betrag von :min bis :max :currency, Laufzeit von :dmin bis :dmax Monaten.',
     'already_pending' => 'Sie haben bereits einen Antrag in Prüfung.',
     'notif_approved' => 'Kredit genehmigt',
-    'notif_approved_body' => 'Ihr Antrag :reference über :amount :currency wurde genehmigt.',
+    'notif_approved_body' => 'Ihr Antrag :reference über :amount :currency wurde genehmigt. Der Betrag steht zur Überweisung auf Ihr Konto aus.',
     'notif_rejected' => 'Kreditantrag abgelehnt',
     'notif_rejected_body' => 'Ihr Antrag :reference wurde nicht genehmigt.',
 ];

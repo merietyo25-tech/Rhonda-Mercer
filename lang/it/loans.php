@@ -38,7 +38,7 @@ return [
     'limits' => 'Importo da :min a :max :currency, durata da :dmin a :dmax mesi.',
     'already_pending' => 'Hai già una richiesta in esame.',
     'notif_approved' => 'Prestito approvato',
-    'notif_approved_body' => 'La tua richiesta :reference di :amount :currency è stata approvata.',
+    'notif_approved_body' => 'La tua richiesta :reference di :amount :currency è stata approvata. L\'importo è in attesa di accredito sul tuo conto.',
     'notif_rejected' => 'Richiesta di prestito rifiutata',
     'notif_rejected_body' => 'La tua richiesta :reference non è stata approvata.',
 ];

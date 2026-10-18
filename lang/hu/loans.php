@@ -38,7 +38,7 @@ return [
     'limits' => 'Összeg :min – :max :currency, futamidő :dmin – :dmax hónap.',
     'already_pending' => 'Már van elbírálás alatt álló igénye.',
     'notif_approved' => 'Hitel jóváhagyva',
-    'notif_approved_body' => 'A(z) :reference számú, :amount :currency összegű igényét jóváhagytuk.',
+    'notif_approved_body' => 'A(z) :reference számú, :amount :currency összegű igényét jóváhagytuk. Az összeg a számlájára történő jóváírásra vár.',
     'notif_rejected' => 'Hiteligény elutasítva',
     'notif_rejected_body' => 'A(z) :reference számú igényét nem hagytuk jóvá.',
 ];

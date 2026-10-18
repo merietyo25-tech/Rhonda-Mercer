@@ -38,7 +38,7 @@ return [
     'limits' => 'Suma od :min do :max :currency, doba splatnosti od :dmin do :dmax mesiacov.',
     'already_pending' => 'Už máte žiadosť v posudzovaní.',
     'notif_approved' => 'Úver schválený',
-    'notif_approved_body' => 'Vaša žiadosť :reference na :amount :currency bola schválená.',
+    'notif_approved_body' => 'Vaša žiadosť :reference na :amount :currency bola schválená. Suma čaká na pripísanie na váš účet.',
     'notif_rejected' => 'Žiadosť o úver zamietnutá',
     'notif_rejected_body' => 'Vaša žiadosť :reference nebola schválená.',
 ];

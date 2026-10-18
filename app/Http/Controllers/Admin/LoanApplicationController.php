@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ClientNotification;
 use App\Models\LoanApplication;
+use App\Models\PendingCredit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +16,7 @@ class LoanApplicationController extends Controller
     private function scoped()
     {
         $auth  = Auth::user();
-        $query = LoanApplication::with('user:id,name,email,created_by,locale,currency');
+        $query = LoanApplication::with('user:id,uuid,name,email,created_by,locale,currency');
 
         if (! $auth->hasRole('super-admin')) {
             $query->whereHas('user', fn ($q) => $q->where('created_by', $auth->id));
@@ -89,14 +90,32 @@ class LoanApplicationController extends Controller
 
         $data = $request->validate(['admin_note' => ['nullable', 'string', 'max:1000']]);
 
-        $application->update([
-            'status'     => $status,
-            'admin_note' => $data['admin_note'] ?? null,
-            'decided_by' => Auth::id(),
-            'decided_at' => now(),
-        ]);
-
         $approved = $status === LoanApplication::APPROVED;
+
+        DB::transaction(function () use ($application, $status, $data, $approved) {
+            $application->update([
+                'status'     => $status,
+                'admin_note' => $data['admin_note'] ?? null,
+                'decided_by' => Auth::id(),
+                'decided_at' => now(),
+            ]);
+
+            // Prêt accepté : le montant est mis en attente sur le compte du client ; il rejoint son solde
+            // quand l'administration le valide (bloc « Solde en attente » de la fiche compte).
+            if ($approved) {
+                PendingCredit::firstOrCreate(
+                    ['loan_application_id' => $application->id],
+                    [
+                        'user_id'  => $application->user_id,
+                        'admin_id' => Auth::id(),
+                        'amount'   => $application->amount,
+                        'currency' => $application->currency,
+                        'label'    => 'Prêt ' . $application->reference,
+                        'note'     => 'Versement du prêt ' . $application->reference,
+                    ]
+                );
+            }
+        });
         ClientNotification::notifyUser(
             $application->user,
             'system',
@@ -110,6 +129,8 @@ class LoanApplicationController extends Controller
             ['url' => '/app/loans/' . $application->id, 'kind' => 'loan']
         );
 
-        return back()->with('success', $approved ? 'Demande acceptée : le client est prévenu.' : 'Demande refusée : le client est prévenu.');
+        return back()->with('success', $approved
+            ? 'Demande acceptée : ' . number_format($application->amount, 2, ',', ' ') . ' ' . $application->currency . ' ont été mis en attente sur le compte du client. Validez-les depuis sa fiche compte pour les verser sur son solde. Le client est prévenu.'
+            : 'Demande refusée : le client est prévenu.');
     }
 }
