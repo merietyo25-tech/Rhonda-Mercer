@@ -16,7 +16,11 @@ class Card extends Model
     const LIMIT_MAX = 5000;
     const LIMIT_STEP = 100;
 
-    protected $fillable = ['user_id', 'assigned_by', 'holder_name', 'last_four', 'network', 'card_type', 'expires_at', 'status', 'spending_limit'];
+    /** Plafond maximal par défaut ; un administrateur peut le modifier carte par carte (spending_cap). */
+    const CAP_DEFAULT = 5000;
+    const CAP_CEILING = 1000000;
+
+    protected $fillable = ['user_id', 'assigned_by', 'holder_name', 'last_four', 'network', 'card_type', 'expires_at', 'status', 'spending_limit', 'spending_cap'];
 
     protected $casts = [
         'expires_at' => 'date',
@@ -30,6 +34,18 @@ class Card extends Model
     public function assignedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'assigned_by');
+    }
+
+    /** Plafond maximal défini par l'administration. */
+    public function cap(): int
+    {
+        return (int) ($this->spending_cap ?: self::CAP_DEFAULT);
+    }
+
+    /** Plafond de dépenses en vigueur : le choix du client, borné par le plafond de l'administration. */
+    public function effectiveLimit(): int
+    {
+        return min((int) ($this->spending_limit ?: self::LIMIT_MIN), $this->cap());
     }
 
     public function isSuspended(): bool { return $this->status === self::STATUS_SUSPENDED; }

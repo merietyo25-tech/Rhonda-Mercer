@@ -109,6 +109,13 @@
   content:'';position:absolute;left:50%;top:0;bottom:0;
   width:1px;background:rgba(0,0,0,.18);transform:translateX(-50%);
 }
+.h-pending{
+  display:inline-flex;align-items:center;gap:.45rem;margin:.55rem 0 .1rem;padding:.3rem .7rem;
+  border-radius:999px;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.4);
+  color:#FDE3A7;font-size:.72rem;font-weight:600;
+}
+.h-pending strong{ color:#fff;font-weight:800 }
+.h-pending i{ font-size:.68rem }
 /* Balance */
 .h-balance-row{
   display:flex;align-items:center;gap:.625rem;
@@ -368,6 +375,16 @@
   <div class="h-balance--hidden" x-show="!shown" aria-hidden="true">
     &bull;&bull;&bull;&bull;&bull;&bull;
   </div>
+
+  {{-- Solde en attente : il rejoint le solde dès sa validation par l'administration --}}
+  @if(($pendingBalance ?? 0) > 0)
+  <div class="h-pending" title="{{ __('app.pending_balance_hint') }}">
+    <i class="fas fa-hourglass-half" aria-hidden="true"></i>
+    <span>{{ __('app.pending_balance') }}</span>
+    <strong x-show="shown">+{{ number_format($pendingBalance, 2, ',', ' ') }} {{ $user->currency ?? \App\Models\Currency::default() }}</strong>
+    <strong x-show="!shown" style="display:none">&bull;&bull;&bull;&bull;</strong>
+  </div>
+  @endif
 
   {{-- Bas de carte : IBAN uniquement (nom, BIC et devise sont dans les autres écrans) --}}
   <div class="h-card__bottom">

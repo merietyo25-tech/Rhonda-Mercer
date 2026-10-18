@@ -20,6 +20,25 @@
 .acs-balance-val{font-family:'Space Grotesk',sans-serif;font-size:2.25rem;font-weight:900;line-height:1}
 .acs-balance-cur{font-size:.875rem;font-weight:600;color:rgba(255,255,255,.6);margin-left:.3rem}
 
+/* ── Solde en attente + plafond carte ── */
+.acs-pend{display:grid;grid-template-columns:1.1fr .9fr;gap:1.25rem;margin-bottom:2rem}
+@media(max-width:820px){.acs-pend{grid-template-columns:1fr}}
+.acs-pend__head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.acs-pend__title{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:.9375rem;color:#b45309}
+.acs-pend__title i{width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,.16);display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.acs-pend__total{font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:1.25rem;color:#b45309}
+.acs-pend__list{display:grid;gap:.5rem;margin-top:1rem}
+.acs-pend__row{display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;padding:.6rem .8rem;border:1px solid var(--c-border);border-radius:var(--radius-sm);font-size:.82rem}
+.acs-pend__row small{display:block;color:var(--c-muted);font-size:.72rem}
+.acs-pend__act{display:flex;gap:.4rem}
+.acs-mini{border:0;border-radius:999px;padding:.4rem .85rem;font-size:.74rem;font-weight:800;cursor:pointer;font-family:inherit}
+.acs-mini--ok{background:#16a34a;color:#fff}.acs-mini--ok:hover{background:#15803d}
+.acs-mini--ko{background:rgba(220,38,38,.1);color:#b91c1c}.acs-mini--ko:hover{background:rgba(220,38,38,.18)}
+.acs-pbadge{font-size:.66rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.12rem .5rem;border-radius:999px}
+.acs-pbadge--validated{background:rgba(22,163,74,.12);color:#15803d}
+.acs-pbadge--cancelled{background:rgba(100,116,139,.15);color:#475569}
+.acs-pbadge--pending{background:rgba(245,158,11,.16);color:#b45309}
+
 /* ── Alert / flash ── */
 .acs-flash{display:flex;align-items:center;gap:.625rem;padding:.875rem 1.125rem;border-radius:var(--radius-sm);margin-bottom:1.375rem;font-size:.8125rem;font-weight:500}
 .acs-flash--ok{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);color:#15803d}
@@ -195,6 +214,88 @@
     </form>
   </div>
 @endforeach
+</div>
+
+{{-- Solde en attente + plafond de la carte --}}
+<div class="acs-pend">
+  <div class="acs-op">
+    <div class="acs-pend__head">
+      <span class="acs-pend__title"><i class="fas fa-hourglass-half"></i> Solde en attente</span>
+      <span class="acs-pend__total">{{ number_format($pendingBalance, 2, ',', ' ') }} {{ $cur }}</span>
+    </div>
+    <p class="acs-hint" style="margin:-.5rem 0 1rem">Le client voit ce montant « en attente ». Une fois validé, il est ajouté au solde du compte et le client est prévenu.</p>
+    <form method="POST" action="{{ route('admin.accounts.pending.hold', $account) }}" x-data="{ amount: '' }"
+          :data-confirm="'Ajouter ' + (amount || '0') + ' {{ $cur }} au solde en attente de {{ addslashes($account->name) }} ? Le montant ne sera pas crédité avant sa validation.'"
+          data-confirm-title="Ajouter un solde en attente" data-confirm-ok="Ajouter">
+      @csrf
+      <div class="acs-row2">
+        <div class="acs-field">
+          <label>Montant ({{ $cur }})</label>
+          <input type="number" name="amount" step="0.01" min="0.01" max="9999999" placeholder="0,00" x-model="amount" required>
+        </div>
+        <div class="acs-field">
+          <label>Libellé</label>
+          <input type="text" name="label" maxlength="120" placeholder="Ex : virement reçu, dossier…">
+        </div>
+      </div>
+      <div class="acs-field">
+        <label>Note</label>
+        <input type="text" name="note" maxlength="255" placeholder="Visible dans l'historique une fois validé">
+      </div>
+      <button type="submit" class="btn-credit" style="background:#d97706"><i class="fas fa-hourglass-half"></i> Mettre en attente</button>
+    </form>
+
+    @if($pendingCredits->isNotEmpty())
+    <div class="acs-pend__list">
+      @foreach($pendingCredits as $pc)
+      <div class="acs-pend__row">
+        <div>
+          <strong>{{ number_format($pc->amount, 2, ',', ' ') }} {{ $pc->currency }}</strong>
+          <span class="acs-pbadge acs-pbadge--{{ $pc->status }}">{{ ['pending' => 'En attente', 'validated' => 'Validé', 'cancelled' => 'Annulé'][$pc->status] ?? $pc->status }}</span>
+          <small>{{ $pc->label ?: '—' }} · {{ $pc->created_at->format('d/m/Y H:i') }}</small>
+        </div>
+        @if($pc->isPending())
+        <div class="acs-pend__act">
+          <form method="POST" action="{{ route('admin.accounts.pending.validate', [$account, $pc]) }}"
+                data-confirm="Valider {{ number_format($pc->amount, 2, ',', ' ') }} {{ $pc->currency }} ? Le montant sera ajouté au solde du compte de {{ addslashes($account->name) }} et le client sera prévenu."
+                data-confirm-title="Valider le montant" data-confirm-ok="Valider">
+            @csrf <button type="submit" class="acs-mini acs-mini--ok"><i class="fas fa-check"></i> Valider</button>
+          </form>
+          <form method="POST" action="{{ route('admin.accounts.pending.cancel', [$account, $pc]) }}"
+                data-confirm="Annuler ce montant en attente ? Il ne sera jamais crédité." data-confirm-title="Annuler le montant" data-confirm-ok="Annuler" data-confirm-danger="1">
+            @csrf <button type="submit" class="acs-mini acs-mini--ko"><i class="fas fa-times"></i> Annuler</button>
+          </form>
+        </div>
+        @endif
+      </div>
+      @endforeach
+    </div>
+    @endif
+  </div>
+
+  <div class="acs-op">
+    <div class="acs-pend__head">
+      <span class="acs-pend__title" style="color:var(--c-navy)"><i class="fas fa-credit-card" style="background:rgba(27,73,118,.1)"></i> Plafond de la carte</span>
+      @if($card)<span class="acs-pend__total" style="color:var(--c-navy)">{{ number_format($card->cap(), 0, ',', ' ') }} {{ $cur }}</span>@endif
+    </div>
+    @if($card)
+    <p class="acs-hint" style="margin:-.5rem 0 1rem">Plafond maximal défini par l'administration. Le client règle ensuite son plafond de dépenses dans cette limite (actuellement {{ number_format($card->effectiveLimit(), 0, ',', ' ') }} {{ $cur }}).</p>
+    <form method="POST" action="{{ route('admin.accounts.card-cap', $account) }}"
+          x-data="{ cap: {{ (int) old('spending_cap', $card->cap()) }} }"
+          :data-confirm="'Fixer le plafond maximal de la carte •••• {{ $card->last_four }} à ' + new Intl.NumberFormat('fr-FR').format(cap) + ' {{ $cur }} ? Le client sera prévenu.'"
+          data-confirm-title="Plafond de la carte" data-confirm-ok="Enregistrer">
+      @csrf
+      <div class="acs-field">
+        <label>Plafond maximal ({{ $cur }})</label>
+        <input type="number" name="spending_cap" min="{{ \App\Models\Card::LIMIT_MIN }}" max="{{ \App\Models\Card::CAP_CEILING }}" step="100" x-model.number="cap" required>
+        <div class="acs-hint">Minimum {{ number_format(\App\Models\Card::LIMIT_MIN, 0, ',', ' ') }} {{ $cur }}.</div>
+      </div>
+      <button type="submit" class="btn-credit"><i class="fas fa-floppy-disk"></i> Enregistrer le plafond</button>
+    </form>
+    @else
+    <p class="acs-hint">Ce client n'a pas encore de carte : le plafond pourra être défini dès qu'une carte lui sera attribuée.</p>
+    @endif
+  </div>
 </div>
 
 {{-- Movement history --}}

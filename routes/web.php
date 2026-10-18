@@ -297,6 +297,10 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->name('ad
     Route::get('/accounts/{account}',              [AccountController::class, 'show'])->name('accounts.show');
     Route::post('/accounts/{account}/credit',      [AccountController::class, 'credit'])->name('accounts.credit');
     Route::post('/accounts/{account}/debit',       [AccountController::class, 'debit'])->name('accounts.debit');
+    Route::post('/accounts/{account}/pending',     [AccountController::class, 'holdPending'])->name('accounts.pending.hold');
+    Route::post('/accounts/{account}/pending/{credit}/validate', [AccountController::class, 'validatePending'])->name('accounts.pending.validate');
+    Route::post('/accounts/{account}/pending/{credit}/cancel',   [AccountController::class, 'cancelPending'])->name('accounts.pending.cancel');
+    Route::post('/accounts/{account}/card-cap',    [AccountController::class, 'updateCardCap'])->name('accounts.card-cap');
 
     // Validation des transferts clients
     Route::get('/transfers',                          [TransferValidationController::class, 'index'])->name('transfers.index');

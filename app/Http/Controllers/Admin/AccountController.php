@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Models\ClientNotification;
 use App\Models\Currency;
+use App\Models\PendingCredit;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -80,7 +81,10 @@ class AccountController extends Controller
         $cardSpent = (float) AccountMovement::where('user_id', $account->id)->where('kind', 'card')
             ->where('created_at', '>=', now()->startOfMonth())->sum('amount');
 
-        return view('admin.accounts.show', compact('account', 'movements', 'card', 'cardSpent'));
+        $pendingCredits = $account->pendingCredits()->latest()->limit(15)->get();
+        $pendingBalance = $account->pendingBalance();
+
+        return view('admin.accounts.show', compact('account', 'movements', 'card', 'cardSpent', 'pendingCredits', 'pendingBalance'));
     }
 
     public function credit(Request $request, User $account)
@@ -131,7 +135,7 @@ class AccountController extends Controller
             }
             $spent = (float) AccountMovement::where('user_id', $account->id)->where('kind', 'card')
                 ->where('created_at', '>=', now()->startOfMonth())->sum('amount');
-            $limit = (int) ($card->spending_limit ?: Card::LIMIT_MIN);
+            $limit = $card->effectiveLimit(); // choix du client, borné par le plafond défini par l'administration
             if ($spent + $amount > $limit) {
                 return back()->withErrors(['amount' => 'Plafond de la carte dépassé : ' . number_format($spent, 2, ',', ' ') . ' déjà dépensés ce mois-ci sur '
                     . number_format($limit, 0, ',', ' ') . ' ' . $cur . '.'])->withInput();
@@ -165,6 +169,135 @@ class AccountController extends Controller
 
         return back()->with('success', ($direction === 'credit' ? 'Compte crédité de ' : 'Compte débité de ') . number_format($amount, 2, ',', ' ') . ' ' . $cur
             . ' (' . $movement->kindLabel('fr') . '). Le client a été prévenu par notification et par e-mail.');
+    }
+
+    /** Annonce un montant au client sans le créditer : il reste « en attente » jusqu'à sa validation. */
+    public function holdPending(Request $request, User $account)
+    {
+        $this->authorizeAccount($account);
+
+        $data = $request->validate([
+            'amount' => 'required|numeric|min:0.01|max:9999999',
+            'label'  => 'nullable|string|max:120',
+            'note'   => 'nullable|string|max:255',
+        ]);
+
+        $amount = round((float) $data['amount'], 2);
+        $cur    = $account->currency ?? Currency::default();
+
+        PendingCredit::create([
+            'user_id'  => $account->id,
+            'admin_id' => Auth::id(),
+            'amount'   => $amount,
+            'currency' => $cur,
+            'label'    => $data['label'] ?? null,
+            'note'     => $data['note'] ?? null,
+        ]);
+
+        $locale = $account->locale ?? 'fr';
+        ClientNotification::forUser(
+            $account->id,
+            'system',
+            __('app.notif_pending_added', [], $locale),
+            __('app.notif_pending_added_body', ['amount' => number_format($amount, 2, ',', ' '), 'currency' => $cur], $locale),
+            ['amount' => $amount, 'currency' => $cur, 'kind' => 'pending']
+        );
+
+        return back()->with('success', number_format($amount, 2, ',', ' ') . ' ' . $cur . ' ajoutés au solde en attente. Le client en est informé.');
+    }
+
+    /** Valide un montant en attente : il devient du solde disponible (crédit du compte). */
+    public function validatePending(User $account, PendingCredit $credit)
+    {
+        $this->authorizeAccount($account);
+        abort_unless($credit->user_id === $account->id, 404);
+
+        if (! $credit->isPending()) {
+            return back()->withErrors(['amount' => 'Ce montant a déjà été traité.']);
+        }
+
+        $movement = DB::transaction(function () use ($account, $credit) {
+            $locked = PendingCredit::whereKey($credit->id)->lockForUpdate()->first();
+            if (! $locked || ! $locked->isPending()) {
+                return null;
+            }
+            $before = (float) $account->fresh()->balance;
+            $amount = (float) $locked->amount;
+            $account->increment('balance', $amount);
+
+            $movement = AccountMovement::create([
+                'user_id'        => $account->id,
+                'admin_id'       => Auth::id(),
+                'type'           => 'credit',
+                'kind'           => 'deposit',
+                'counterparty'   => $locked->label,
+                'reference'      => 'ATT-' . $locked->id,
+                'amount'         => $amount,
+                'currency'       => $locked->currency,
+                'balance_before' => $before,
+                'balance_after'  => $before + $amount,
+                'note'           => $locked->note ?: 'Montant en attente validé',
+            ]);
+
+            $locked->update(['status' => PendingCredit::VALIDATED, 'validated_by' => Auth::id(), 'movement_id' => $movement->id, 'resolved_at' => now()]);
+
+            return $movement;
+        });
+
+        if (! $movement) {
+            return back()->withErrors(['amount' => 'Ce montant a déjà été traité.']);
+        }
+
+        $this->notifyClient($account, $movement);
+
+        return back()->with('success', number_format($movement->amount, 2, ',', ' ') . ' ' . $movement->currency . ' validés : ils sont désormais dans le solde du compte.');
+    }
+
+    /** Annule un montant en attente (il n'est jamais crédité). */
+    public function cancelPending(User $account, PendingCredit $credit)
+    {
+        $this->authorizeAccount($account);
+        abort_unless($credit->user_id === $account->id, 404);
+
+        if (! $credit->isPending()) {
+            return back()->withErrors(['amount' => 'Ce montant a déjà été traité.']);
+        }
+
+        $credit->update(['status' => PendingCredit::CANCELLED, 'validated_by' => Auth::id(), 'resolved_at' => now()]);
+
+        return back()->with('success', 'Montant en attente annulé.');
+    }
+
+    /** Plafond maximal de la carte : défini par l'administration ; le plafond choisi par le client est ramené dans cette limite. */
+    public function updateCardCap(Request $request, User $account)
+    {
+        $this->authorizeAccount($account);
+
+        $card = $account->card()->first();
+        if (! $card) {
+            return back()->withErrors(['spending_cap' => 'Ce client n\'a pas de carte.']);
+        }
+
+        $data = $request->validate([
+            'spending_cap' => ['required', 'integer', 'min:' . Card::LIMIT_MIN, 'max:' . Card::CAP_CEILING],
+        ]);
+
+        $cap = (int) $data['spending_cap'];
+        $card->update([
+            'spending_cap'   => $cap,
+            'spending_limit' => min((int) ($card->spending_limit ?: Card::LIMIT_MIN), $cap),
+        ]);
+
+        $locale = $account->locale ?? 'fr';
+        ClientNotification::forUser(
+            $account->id,
+            'system',
+            __('app.notif_card_cap', [], $locale),
+            __('app.notif_card_cap_body', ['amount' => number_format($cap, 0, ',', ' '), 'currency' => $account->currency ?? Currency::default()], $locale),
+            ['cap' => $cap, 'kind' => 'card_cap']
+        );
+
+        return back()->with('success', 'Plafond de la carte fixé à ' . number_format($cap, 0, ',', ' ') . ' ' . ($account->currency ?? Currency::default()) . '.');
     }
 
     /** Notification dans l'application + e-mail, dans la langue du client. */

@@ -67,8 +67,10 @@ class AppController extends Controller
             ->take(5)
             ->values();
 
+        $pendingBalance = $user->pendingBalance();
+
         return view('client.app.home', compact(
-            'user', 'recentActivity', 'unreadCount'
+            'user', 'recentActivity', 'unreadCount', 'pendingBalance'
         ));
     }
 

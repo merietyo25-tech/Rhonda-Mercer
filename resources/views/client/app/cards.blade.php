@@ -114,7 +114,8 @@ button.cd-empty__btn { border: 0; cursor: pointer; font-family: inherit; }
     @php
       $blocked   = $card->status === \App\Models\Card::STATUS_BLOCKED;
       $suspended = $card->status === \App\Models\Card::STATUS_SUSPENDED;
-      $limit     = (int) ($card->spending_limit ?: \App\Models\Card::LIMIT_MIN);
+      $limit     = $card->effectiveLimit();
+      $cap       = max(\App\Models\Card::LIMIT_MIN, $card->cap());
       $net     = strtolower($card->network);
     @endphp
     <div x-data="{ shown: false }">
@@ -170,8 +171,8 @@ button.cd-empty__btn { border: 0; cursor: pointer; font-family: inherit; }
           <span class="cd-limit__t"><i class="fas fa-gauge-high"></i> {{ __('cards.limit_title') }}</span>
           <span class="cd-limit__v"><span x-text="new Intl.NumberFormat('fr-FR').format(v)"></span> {{ $user->currency ?? 'EUR' }}</span>
         </div>
-        <input type="range" name="spending_limit" min="{{ \App\Models\Card::LIMIT_MIN }}" max="{{ \App\Models\Card::LIMIT_MAX }}" step="{{ \App\Models\Card::LIMIT_STEP }}" x-model.number="v">
-        <div class="cd-limit__h">{{ __('cards.limit_hint', ['min' => number_format(\App\Models\Card::LIMIT_MIN, 0, ',', ' '), 'max' => number_format(\App\Models\Card::LIMIT_MAX, 0, ',', ' '), 'currency' => $user->currency ?? 'EUR']) }}</div>
+        <input type="range" name="spending_limit" min="{{ \App\Models\Card::LIMIT_MIN }}" max="{{ $cap }}" step="{{ \App\Models\Card::LIMIT_STEP }}" x-model.number="v">
+        <div class="cd-limit__h">{{ __('cards.limit_hint', ['min' => number_format(\App\Models\Card::LIMIT_MIN, 0, ',', ' '), 'max' => number_format($cap, 0, ',', ' '), 'currency' => $user->currency ?? 'EUR']) }}</div>
         @error('spending_limit')<div class="cd-note" style="margin:0 0 .5rem">{{ $message }}</div>@enderror
         <button type="submit" class="cd-btn" :disabled="v === {{ $limit }}"><i class="fas fa-floppy-disk"></i> {{ __('cards.limit_save') }}</button>
       </form>

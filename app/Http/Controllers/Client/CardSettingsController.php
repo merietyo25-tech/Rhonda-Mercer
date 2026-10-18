@@ -32,13 +32,13 @@ class CardSettingsController extends Controller
         return back()->with('success', __($suspend ? 'cards.suspended_done' : 'cards.resumed_done'));
     }
 
-    /** Plafond de dépenses : entre 1 000 et 5 000. */
+    /** Plafond de dépenses : entre 1 000 et le plafond maximal défini par l'administration. */
     public function updateLimit(Request $request, Card $card)
     {
         $this->ownCard($card);
 
         $data = $request->validate([
-            'spending_limit' => ['required', 'integer', 'min:' . Card::LIMIT_MIN, 'max:' . Card::LIMIT_MAX],
+            'spending_limit' => ['required', 'integer', 'min:' . Card::LIMIT_MIN, 'max:' . max(Card::LIMIT_MIN, $card->cap())],
         ]);
 
         $card->update(['spending_limit' => (int) $data['spending_limit']]);

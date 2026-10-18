@@ -100,6 +100,18 @@ class User extends Authenticatable implements \Illuminate\Contracts\Translation\
         return $this->hasOne(Card::class);
     }
 
+    /** Montants en attente de validation (solde en attente). */
+    public function pendingCredits()
+    {
+        return $this->hasMany(PendingCredit::class);
+    }
+
+    /** Somme des montants en attente : elle rejoint le solde du compte quand l'administration les valide. */
+    public function pendingBalance(): float
+    {
+        return round((float) $this->pendingCredits()->where('status', PendingCredit::PENDING)->sum('amount'), 2);
+    }
+
     /** Compte bancaire (ou carte) bloqué par l'administration. */
     public function hasBlockedAccount(): bool
     {
