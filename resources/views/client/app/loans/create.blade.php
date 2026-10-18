@@ -34,7 +34,7 @@
 @section('content')
 @php $cur = $user->currency ?: 'EUR'; $step = max(100, (int) (($settings['max'] - $settings['min']) / 100)); @endphp
 <form class="lc-page" method="POST" action="{{ route('client.app.loans.store') }}"
-      x-data="loanForm({{ $settings['min'] }}, {{ $settings['max'] }}, {{ $settings['rate'] }}, {{ \App\Models\LoanApplication::DURATION_MIN }}, {{ \App\Models\LoanApplication::DURATION_MAX }}, {{ (float) old('amount', min(max(5000, $settings['min']), $settings['max'])) }}, {{ (int) old('duration_months', 24) }})"
+      x-data="loanForm({{ $settings['min'] }}, {{ $settings['max'] }}, {{ $settings['rate'] }}, {{ $settings['dmin'] }}, {{ $settings['dmax'] }}, {{ (float) old('amount', min(max(5000, $settings['min']), $settings['max'])) }}, {{ (int) old('duration_months', min(max(24, $settings['dmin']), $settings['dmax'])) }})"
       @submit="busy = true">
   @csrf
 
@@ -46,7 +46,7 @@
 
     <div class="lc-lbl"><span>{{ __('loans.duration') }}</span><span class="lc-val"><span x-text="months"></span> {{ __('loans.months') }}</span></div>
     <input class="lc-range" type="range" name="duration_months" :min="dmin" :max="dmax" step="1" x-model.number="months" aria-label="{{ __('loans.duration') }}">
-    <div class="lc-bounds"><span>{{ \App\Models\LoanApplication::DURATION_MIN }} {{ __('loans.months') }}</span><span>{{ \App\Models\LoanApplication::DURATION_MAX }} {{ __('loans.months') }}</span></div>
+    <div class="lc-bounds"><span>{{ $settings['dmin'] }} {{ __('loans.months') }}</span><span>{{ $settings['dmax'] }} {{ __('loans.months') }}</span></div>
     @error('duration_months')<div class="lc-err">{{ $message }}</div>@enderror
 
     <div class="lc-sim" aria-live="polite">
@@ -75,7 +75,7 @@
   </div>
 
   <button type="submit" class="lc-send" :disabled="busy"><i class="fas fa-paper-plane"></i> {{ __('loans.send') }}</button>
-  <p class="lc-note" style="text-align:center">{{ __('loans.limits', ['min' => number_format($settings['min'], 0, ',', ' '), 'max' => number_format($settings['max'], 0, ',', ' '), 'currency' => $cur, 'dmin' => \App\Models\LoanApplication::DURATION_MIN, 'dmax' => \App\Models\LoanApplication::DURATION_MAX]) }}</p>
+  <p class="lc-note" style="text-align:center">{{ __('loans.limits', ['min' => number_format($settings['min'], 0, ',', ' '), 'max' => number_format($settings['max'], 0, ',', ' '), 'currency' => $cur, 'dmin' => $settings['dmin'], 'dmax' => $settings['dmax']]) }}</p>
 </form>
 
 <script>

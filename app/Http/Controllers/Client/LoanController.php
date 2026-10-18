@@ -46,7 +46,7 @@ class LoanController extends Controller
 
         $data = $request->validate([
             'amount'          => ['required', 'numeric', 'min:' . $settings['min'], 'max:' . $settings['max']],
-            'duration_months' => ['required', 'integer', 'min:' . LoanApplication::DURATION_MIN, 'max:' . LoanApplication::DURATION_MAX],
+            'duration_months' => ['required', 'integer', 'min:' . $settings['dmin'], 'max:' . $settings['dmax']],
             'purpose'         => ['required', 'in:' . implode(',', LoanApplication::PURPOSES)],
             'message'         => ['nullable', 'string', 'max:1000'],
         ]);

@@ -15,6 +15,7 @@ class LoanApplication extends Model
 
     public const PURPOSES = ['personal', 'auto', 'home', 'business', 'education'];
 
+    /** Durées proposées par défaut (mois) ; l'administration peut les modifier dans les réglages des prêts. */
     public const DURATION_MIN = 6;
     public const DURATION_MAX = 84;
 
@@ -49,6 +50,8 @@ class LoanApplication extends Model
             'rate' => (float) ($row->annual_rate ?? 5.0),
             'min'  => (float) ($row->min_amount ?? 1000),
             'max'  => (float) ($row->max_amount ?? 50000),
+            'dmin' => (int) ($row->duration_min ?? self::DURATION_MIN),
+            'dmax' => (int) ($row->duration_max ?? self::DURATION_MAX),
         ];
     }
 

@@ -35,6 +35,7 @@
     <h1>Demandes de prêt</h1>
     <p>Prêts demandés par les clients depuis leur application : acceptez ou refusez, le client est prévenu dans sa langue.</p>
   </div>
+  <a href="{{ route('admin.loans.settings') }}" class="ln-tab" style="align-self:flex-start"><i class="fas fa-sliders"></i> Réglages des prêts</a>
 </div>
 
 @if(session('success'))<div class="flash flash-ok" style="margin-bottom:1rem"><i class="fas fa-check-circle"></i> {{ session('success') }}</div>@endif

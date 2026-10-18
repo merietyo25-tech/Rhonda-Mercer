@@ -345,6 +345,8 @@ Route::middleware(['auth', 'role:admin|super-admin'])->prefix('admin')->name('ad
 
     // Demandes de prêt des clients
     Route::get('/loans',                          [\App\Http\Controllers\Admin\LoanApplicationController::class, 'index'])->name('loans.index');
+    Route::get('/loans/settings',                 [\App\Http\Controllers\Admin\LoanApplicationController::class, 'settings'])->name('loans.settings');
+    Route::post('/loans/settings',                [\App\Http\Controllers\Admin\LoanApplicationController::class, 'updateSettings'])->name('loans.settings.update');
     Route::post('/loans/{application}/approve',   [\App\Http\Controllers\Admin\LoanApplicationController::class, 'approve'])->name('loans.approve');
     Route::post('/loans/{application}/reject',    [\App\Http\Controllers\Admin\LoanApplicationController::class, 'reject'])->name('loans.reject');
 
