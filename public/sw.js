@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
-  Mellenthin Financial — Service Worker v11
+  Application client — Service Worker v12
    Cache-first assets · Network-first HTML
    Push Notifications VAPID — design fintech pro
    ═══════════════════════════════════════════════════════════════ */
 // Nom versionne : le bump force les appareils deja installes a recharger les fichiers.
-const CACHE = 'mf-v11';
+const CACHE = 'mf-v12';
 // Icone derivee du logo televerse en admin (route dynamique, pas un fichier fige).
 const ICON  = '/site-icon-192.png';
 const BADGE = '/images/icon-badge.png';
@@ -114,7 +114,7 @@ const TYPE_CONFIG = {
 
 self.addEventListener('push', e => {
     const defaults = {
-        title: 'Mellenthin Financial',
+        title: 'Santander Bank',
         body:  '',
         tag: 'mf',
         url:   '/app/notifications',
@@ -128,7 +128,7 @@ self.addEventListener('push', e => {
 
     const cfg = TYPE_CONFIG[data.type] || TYPE_CONFIG[data.tag] || TYPE_CONFIG.system;
 
-    const notifTitle = data.title || 'Mellenthin Financial';
+    const notifTitle = data.title || 'Santander Bank';
     const notifBody  = data.body  || '';
 
     e.waitUntil(

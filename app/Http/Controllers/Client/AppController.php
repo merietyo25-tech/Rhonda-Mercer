@@ -370,11 +370,26 @@ class AppController extends Controller
         }
 
         if (! $rel) {
-            // Aucun logo configure : on sert l icone statique historique.
-            $fallback = public_path('images/icon-' . ($size > 192 ? 512 : 192) . '.png');
-            abort_unless(is_file($fallback), 404);
+            // Aucun logo configure : monogramme de la marque (public/images/icon-512.png), mis a l echelle demandee.
+            $base = public_path('images/icon-512.png');
+            abort_unless(is_file($base), 404);
 
-            return response()->file($fallback, ['Cache-Control' => 'public, max-age=3600']);
+            if ($size === 512) {
+                return response()->file($base, ['Cache-Control' => 'public, max-age=3600']);
+            }
+
+            $scaled = storage_path('app/site-icons/default-' . md5((string) filemtime($base)) . "-{$size}.png");
+            if (! is_file($scaled)) {
+                @mkdir(dirname($scaled), 0775, true);
+                $src = imagecreatefrompng($base);
+                $dst = imagecreatetruecolor($size, $size);
+                imagecopyresampled($dst, $src, 0, 0, 0, 0, $size, $size, imagesx($src), imagesy($src));
+                imagepng($dst, $scaled, 9);
+                imagedestroy($src);
+                imagedestroy($dst);
+            }
+
+            return response()->file($scaled, ['Content-Type' => 'image/png', 'Cache-Control' => 'public, max-age=3600']);
         }
 
         $cacheFile = storage_path(
@@ -507,23 +522,24 @@ class AppController extends Controller
     public function manifest()
     {
         $data = [
-            'name'             => config('app.company_name', site_name()) . ' — Espace Client',
+            'id'               => '/app',
+            'name'             => site_name(),
             'short_name'       => site_name(),
             'description'      => 'Gérez votre compte, vos cartes et vos virements en toute sécurité.',
             'start_url'        => '/app',
             'scope'            => '/app',
             'display'          => 'standalone',
             'orientation'      => 'any',
-            'background_color' => '#0F0D36',
+            'background_color' => '#312B81',
             'theme_color'      => '#312B81',
+            'prefer_related_applications' => false,
             'lang'             => app()->getLocale(),
             'categories'       => ['finance', 'business'],
             'icons'            => [
-                ['src' => '/site-icon-180.png', 'sizes' => '180x180', 'type' => 'image/png', 'purpose' => 'any'],
-                ['src' => '/site-icon-192.png',         'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'any'],
-                ['src' => '/site-icon-192.png',         'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'maskable'],
-                ['src' => '/site-icon-512.png',         'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'any'],
-                ['src' => '/site-icon-512.png',         'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'maskable'],
+                ['src' => '/site-icon-192.png', 'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'any'],
+                ['src' => '/site-icon-512.png', 'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'any'],
+                ['src' => '/site-icon-192.png', 'sizes' => '192x192', 'type' => 'image/png', 'purpose' => 'maskable'],
+                ['src' => '/site-icon-512.png', 'sizes' => '512x512', 'type' => 'image/png', 'purpose' => 'maskable'],
             ],
             'shortcuts' => [
                 [

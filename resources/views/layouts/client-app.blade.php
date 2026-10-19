@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="{{ site_name() }}">
-  <meta name="theme-color" content="#008457">
+  <meta name="theme-color" content="#312B81">
   <meta name="description" content="{{ site_name() }} — Espace client mobile">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
