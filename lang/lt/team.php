@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Generalinė direktorė',
-        'bio'   => 'Claire vadovauja banko strategijai ir plėtrai. Karjerą ji kūrė mažmeninėje bankininkystėje ir mokėjimo paslaugose, su vienu įsitikinimu: bankas turi būti paprastas, skaidrus ir pasiekiamas bet kuriuo metu.\nJai vadovaujant, bankas 100 % internetu atidaromą sąskaitą, saugų tapatybės patikrinimą ir pavedimų sekimą realiuoju laiku padarė savo pasiūlymo ramsčiais.',
+        'bio'   => "Claire vadovauja banko strategijai ir plėtrai. Karjerą ji kūrė mažmeninėje bankininkystėje ir mokėjimo paslaugose, su vienu įsitikinimu: bankas turi būti paprastas, skaidrus ir pasiekiamas bet kuriuo metu.\nJai vadovaujant, bankas 100 % internetu atidaromą sąskaitą, saugų tapatybės patikrinimą ir pavedimų sekimą realiuoju laiku padarė savo pasiūlymo ramsčiais.",
     ],
     'markus-brandt' => [
         'title' => 'Operacijų direktorius',

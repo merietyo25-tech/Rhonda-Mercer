@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency gaida apstiprinājumu. Pēc apstiprināšanas tā tiks pievienota jūsu atlikumam.',
     'notif_card_cap' => 'Kartes limits atjaunināts',
     'notif_card_cap_body' => 'Jūsu kartes maksimālais limits ir :amount :currency.',
-    'pending_balance' => 'Saņemtais atlikums',
+    'pending_balance' => 'Nepieciešamais atlikums',
     'pending_balance_hint' => 'Šī summa tiks pievienota atlikumam pēc apstiprināšanas.',
 ];

@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Vezérigazgató',
-        'bio'   => 'Claire irányítja a bank stratégiáját és fejlődését. Pályáját a lakossági bankolásban és a fizetési szolgáltatásokban építette, egy meggyőződéssel: a banknak egyszerűnek, átláthatónak és bármikor elérhetőnek kell lennie.\nVezetésével a bank a 100 %-ban online számlanyitást, a biztonságos személyazonosítást és az utalások valós idejű követését tette kínálata pillérévé.',
+        'bio'   => "Claire irányítja a bank stratégiáját és fejlődését. Pályáját a lakossági bankolásban és a fizetési szolgáltatásokban építette, egy meggyőződéssel: a banknak egyszerűnek, átláthatónak és bármikor elérhetőnek kell lennie.\nVezetésével a bank a 100 %-ban online számlanyitást, a biztonságos személyazonosítást és az utalások valós idejű követését tette kínálata pillérévé.",
     ],
     'markus-brandt' => [
         'title' => 'Működési igazgató',

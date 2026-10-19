@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Direttur Ġenerali',
-        'bio'   => 'Claire tmexxi l-istrateġija u l-iżvilupp tal-bank. Bniet il-karriera tagħha fil-banking għall-konsumatur u fis-servizzi tal-pagament, b\'konvinzjoni waħda: bank irid ikun sempliċi, trasparenti u disponibbli f\'kull ħin.\nTaħt it-tmexxija tagħha, il-bank għamel il-ftuħ tal-kont 100 % online, il-verifika sigura tal-identità u s-segwiment tat-trasferimenti fil-ħin reali l-pilastri tal-offerta tiegħu.',
+        'bio'   => "Claire tmexxi l-istrateġija u l-iżvilupp tal-bank. Bniet il-karriera tagħha fil-banking għall-konsumatur u fis-servizzi tal-pagament, b'konvinzjoni waħda: bank irid ikun sempliċi, trasparenti u disponibbli f'kull ħin.\nTaħt it-tmexxija tagħha, il-bank għamel il-ftuħ tal-kont 100 % online, il-verifika sigura tal-identità u s-segwiment tat-trasferimenti fil-ħin reali l-pilastri tal-offerta tiegħu.",
     ],
     'markus-brandt' => [
         'title' => 'Direttur tal-Operazzjonijiet',

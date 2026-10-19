@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Ģenerāldirektore',
-        'bio'   => 'Klēra vada bankas stratēģiju un attīstību. Karjeru viņa veidojusi privātpersonu banku pakalpojumos un maksājumu pakalpojumos ar vienu pārliecību: bankai jābūt vienkāršai, caurspīdīgai un pieejamai jebkurā laikā.\nViņas vadībā banka 100 % tiešsaistē atverama konta atvēršanu, drošu identitātes pārbaudi un pārskaitījumu izsekošanu reāllaikā padarījusi par sava piedāvājuma pamatu.',
+        'bio'   => "Klēra vada bankas stratēģiju un attīstību. Karjeru viņa veidojusi privātpersonu banku pakalpojumos un maksājumu pakalpojumos ar vienu pārliecību: bankai jābūt vienkāršai, caurspīdīgai un pieejamai jebkurā laikā.\nViņas vadībā banka 100 % tiešsaistē atverama konta atvēršanu, drošu identitātes pārbaudi un pārskaitījumu izsekošanu reāllaikā padarījusi par sava piedāvājuma pamatu.",
     ],
     'markus-brandt' => [
         'title' => 'Operāciju direktors',

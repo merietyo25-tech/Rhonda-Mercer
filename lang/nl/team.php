@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Algemeen directeur',
-        'bio'   => 'Claire stuurt de strategie en ontwikkeling van de bank aan. Ze bouwde haar loopbaan op in retailbankieren en betaaldiensten, met één overtuiging: een bank moet eenvoudig, transparant en op elk uur beschikbaar zijn.\nOnder haar leiding maakte de bank van 100 % online rekening openen, veilige identiteitsverificatie en het realtime volgen van overschrijvingen de pijlers van haar aanbod.',
+        'bio'   => "Claire stuurt de strategie en ontwikkeling van de bank aan. Ze bouwde haar loopbaan op in retailbankieren en betaaldiensten, met één overtuiging: een bank moet eenvoudig, transparant en op elk uur beschikbaar zijn.\nOnder haar leiding maakte de bank van 100 % online rekening openen, veilige identiteitsverificatie en het realtime volgen van overschrijvingen de pijlers van haar aanbod.",
     ],
     'markus-brandt' => [
         'title' => 'Directeur operaties',

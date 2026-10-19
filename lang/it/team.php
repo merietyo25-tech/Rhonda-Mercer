@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Direttrice generale',
-        'bio'   => 'Claire guida la strategia e lo sviluppo della banca. Ha costruito la sua carriera nel retail banking e nei servizi di pagamento, con una convinzione: una banca deve essere semplice, trasparente e disponibile a qualsiasi ora.\nSotto la sua guida, la banca ha fatto dell\'apertura del conto 100 % online, della verifica d\'identità sicura e del monitoraggio dei bonifici in tempo reale i pilastri della sua offerta.',
+        'bio'   => "Claire guida la strategia e lo sviluppo della banca. Ha costruito la sua carriera nel retail banking e nei servizi di pagamento, con una convinzione: una banca deve essere semplice, trasparente e disponibile a qualsiasi ora.\nSotto la sua guida, la banca ha fatto dell'apertura del conto 100 % online, della verifica d'identità sicura e del monitoraggio dei bonifici in tempo reale i pilastri della sua offerta.",
     ],
     'markus-brandt' => [
         'title' => 'Direttore operativo',

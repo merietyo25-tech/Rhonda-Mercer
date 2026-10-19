@@ -154,19 +154,19 @@
           <input type="hidden" name="otp_clients_enabled" value="0">
           <input type="checkbox" name="otp_clients_enabled" value="1" class="sw-input" {{ old('otp_clients_enabled', $contact->otp_clients_enabled) ? 'checked' : '' }}>
           <span class="sw-track" aria-hidden="true"><span class="sw-thumb"></span></span>
-          <span class="sw-text"><strong>Code OTP à la connexion — clients</strong><small>Activé : chaque client reçoit un code par e-mail à chaque connexion. Désactivé : connexion directe, aucun e-mail OTP.</small></span>
+          <span class="sw-text"><strong>Code OTP à la connexion — clients</strong><small>Désactivé par défaut : connexion directe, aucun e-mail OTP. Activé : chaque client reçoit un code par e-mail à chaque connexion.</small></span>
         </label>
         <label class="sw-row">
           <input type="hidden" name="otp_staff_enabled" value="0">
           <input type="checkbox" name="otp_staff_enabled" value="1" class="sw-input" {{ old('otp_staff_enabled', $contact->otp_staff_enabled) ? 'checked' : '' }}>
           <span class="sw-track" aria-hidden="true"><span class="sw-thumb"></span></span>
-          <span class="sw-text"><strong>Code OTP à la connexion — personnel</strong><small>Activé : administrateurs et super-administrateurs reçoivent un code par e-mail. Désactivé : connexion directe (moins sécurisé).</small></span>
+          <span class="sw-text"><strong>Code OTP à la connexion — personnel</strong><small>Désactivé par défaut : connexion directe (moins sécurisé). Activé : administrateurs et super-administrateurs reçoivent un code par e-mail.</small></span>
         </label>
         <label class="sw-row">
           <input type="hidden" name="activation_mail_enabled" value="0">
           <input type="checkbox" name="activation_mail_enabled" value="1" class="sw-input" {{ old('activation_mail_enabled', $contact->activation_mail_enabled) ? 'checked' : '' }}>
           <span class="sw-track" aria-hidden="true"><span class="sw-thumb"></span></span>
-          <span class="sw-text"><strong>E-mail d’activation du compte</strong><small>Activé : tout nouvel inscrit reçoit un e-mail d’activation. Désactivé : aucun e-mail n’est envoyé et le compte est activé automatiquement.</small></span>
+          <span class="sw-text"><strong>E-mail d’activation du compte</strong><small>Désactivé par défaut : aucun e-mail ni lien, le compte est activé automatiquement. Activé : tout nouvel inscrit reçoit un e-mail d’activation.</small></span>
         </label>
       </div>
     </div>

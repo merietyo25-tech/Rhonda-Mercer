@@ -373,6 +373,6 @@ return [
     'notif_pending_added_body' => ':amount :currency aguardam validação. Serão somados ao seu saldo depois de validados.',
     'notif_card_cap' => 'Limite do cartão atualizado',
     'notif_card_cap_body' => 'O limite máximo do seu cartão é de :amount :currency.',
-    'pending_balance' => 'Saldo recebido',
+    'pending_balance' => 'Saldo requerido',
     'pending_balance_hint' => 'Este montante será somado ao seu saldo após a validação.',
 ];

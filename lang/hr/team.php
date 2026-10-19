@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Glavna direktorica',
-        'bio'   => 'Claire vodi strategiju i razvoj banke. Karijeru je izgradila u retail bankarstvu i platnim uslugama, s jednim uvjerenjem: banka mora biti jednostavna, transparentna i dostupna u svako doba.\nPod njezinim vodstvom banka je otvaranje računa 100 % online, sigurnu provjeru identiteta i praćenje prijenosa u stvarnom vremenu učinila stupovima svoje ponude.',
+        'bio'   => "Claire vodi strategiju i razvoj banke. Karijeru je izgradila u retail bankarstvu i platnim uslugama, s jednim uvjerenjem: banka mora biti jednostavna, transparentna i dostupna u svako doba.\nPod njezinim vodstvom banka je otvaranje računa 100 % online, sigurnu provjeru identiteta i praćenje prijenosa u stvarnom vremenu učinila stupovima svoje ponude.",
     ],
     'markus-brandt' => [
         'title' => 'Direktor operacija',

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /** Interrupteurs : OTP de connexion (clients / personnel) et e-mail d'activation du compte. Tout est activé par défaut. */
+    /** Interrupteurs : OTP de connexion (clients / personnel) et e-mail d'activation du compte. Tout est désactivé par défaut : seul un administrateur ou le super-administrateur peut les activer. */
     public function up(): void
     {
         Schema::table('site_contacts', function (Blueprint $table) {

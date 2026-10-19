@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Chief Executive Officer',
-        'bio'   => 'Claire leads the bank\'s strategy and growth. She built her career in retail banking and payment services, with one conviction: a bank should be simple, transparent and available at any hour.\nUnder her leadership, the bank made 100% online account opening, secure identity verification and real-time transfer tracking the pillars of its offer.',
+        'bio'   => "Claire leads the bank's strategy and growth. She built her career in retail banking and payment services, with one conviction: a bank should be simple, transparent and available at any hour.\nUnder her leadership, the bank made 100% online account opening, secure identity verification and real-time transfer tracking the pillars of its offer.",
     ],
     'markus-brandt' => [
         'title' => 'Chief Operating Officer',

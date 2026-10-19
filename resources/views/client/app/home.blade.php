@@ -125,12 +125,15 @@
   font-size:.63rem;font-weight:600;text-transform:uppercase;
   letter-spacing:.1em;color:rgba(255,255,255,.42);
 }
+.h-balance-line{ display:flex;align-items:center;justify-content:space-between;gap:.75rem }
+.h-balance-line .h-balance, .h-balance-line .h-balance--hidden{ margin-bottom:1.125rem;min-width:0 }
 .h-eye{
-  background:none;border:none;padding:0;
-  color:rgba(255,255,255,.38);cursor:pointer;font-size:.78rem;
-  display:inline-flex;align-items:center;transition:color .18s;
+  flex-shrink:0;width:42px;height:42px;margin-bottom:1.125rem;border-radius:50%;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.85);cursor:pointer;font-size:.9rem;
+  display:inline-flex;align-items:center;justify-content:center;transition:background .18s,color .18s;
 }
-.h-eye:hover{color:rgba(255,255,255,.75)}
+.h-eye:hover{ background:rgba(255,255,255,.22);color:#fff }
 .h-balance{
   font-family:'Outfit',sans-serif;
   font-size:2.125rem;font-weight:800;
@@ -370,17 +373,19 @@
   {{-- Balance label + toggle --}}
   <div class="h-balance-row">
     <span class="h-balance-lbl">{{ __('app.balance') }}</span>
-    <button class="h-eye" @click="shown = !shown" :aria-label="shown ? 'Masquer' : 'Afficher'">
-      <i :class="shown ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-    </button>
   </div>
 
-  {{-- Amount --}}
-  <div class="h-balance" x-show="shown" x-transition>
-    <sup>{{ $user->currency ?? \App\Models\Currency::default() }}</sup>{{ number_format((float)$user->balance, 2, ',', ' ') }}
-  </div>
-  <div class="h-balance--hidden" x-show="!shown" aria-hidden="true">
-    &bull;&bull;&bull;&bull;&bull;&bull;
+  {{-- Amount + bouton masquer/afficher, à droite du montant --}}
+  <div class="h-balance-line">
+    <div class="h-balance" x-show="shown" x-transition>
+      <sup>{{ $user->currency ?? \App\Models\Currency::default() }}</sup>{{ number_format((float)$user->balance, 2, ',', ' ') }}
+    </div>
+    <div class="h-balance--hidden" x-show="!shown" aria-hidden="true">
+      &bull;&bull;&bull;&bull;&bull;&bull;
+    </div>
+    <button type="button" class="h-eye" @click="shown = !shown" :aria-label="shown ? 'Masquer' : 'Afficher'" :aria-pressed="(!shown).toString()">
+      <i :class="shown ? 'fas fa-eye-slash' : 'fas fa-eye'" aria-hidden="true"></i>
+    </button>
   </div>
 
   {{-- Solde en attente : il rejoint le solde dès sa validation par l'administration --}}

@@ -214,6 +214,6 @@ return [
     'notif_pending_added_body' => ':amount :currency čaká na potvrdenie. Po potvrdení sa pripíše k vášmu zostatku.',
     'notif_card_cap' => 'Limit karty aktualizovaný',
     'notif_card_cap_body' => 'Maximálny limit vašej karty je :amount :currency.',
-    'pending_balance' => 'Prijatý zostatok',
+    'pending_balance' => 'Požadovaný zostatok',
     'pending_balance_hint' => 'Táto suma sa po potvrdení pripíše k vášmu zostatku.',
 ];

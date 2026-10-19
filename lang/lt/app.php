@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency laukia patvirtinimo. Patvirtinus ji bus pridėta prie jūsų likučio.',
     'notif_card_cap' => 'Kortelės limitas atnaujintas',
     'notif_card_cap_body' => 'Didžiausias jūsų kortelės limitas yra :amount :currency.',
-    'pending_balance' => 'Gautas likutis',
+    'pending_balance' => 'Reikalingas likutis',
     'pending_balance_hint' => 'Ši suma bus pridėta prie likučio, kai bus patvirtinta.',
 ];

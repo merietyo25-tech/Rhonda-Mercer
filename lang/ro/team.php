@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Director general',
-        'bio'   => 'Claire conduce strategia și dezvoltarea băncii. Și-a construit cariera în banca de retail și în serviciile de plată, cu o convingere: o bancă trebuie să fie simplă, transparentă și disponibilă la orice oră.\nSub conducerea ei, banca a făcut din deschiderea contului 100 % online, verificarea sigură a identității și urmărirea transferurilor în timp real pilonii ofertei sale.',
+        'bio'   => "Claire conduce strategia și dezvoltarea băncii. Și-a construit cariera în banca de retail și în serviciile de plată, cu o convingere: o bancă trebuie să fie simplă, transparentă și disponibilă la orice oră.\nSub conducerea ei, banca a făcut din deschiderea contului 100 % online, verificarea sigură a identității și urmărirea transferurilor în timp real pilonii ofertei sale.",
     ],
     'markus-brandt' => [
         'title' => 'Director de operațiuni',

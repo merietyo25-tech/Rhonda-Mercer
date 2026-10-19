@@ -4,7 +4,7 @@
 return [
     'claire-lambert' => [
         'title' => 'Generálna riaditeľka',
-        'bio'   => 'Claire vedie stratégiu a rozvoj banky. Kariéru si vybudovala v retailovom bankovníctve a platobných službách s jedným presvedčením: banka musí byť jednoduchá, transparentná a dostupná kedykoľvek.\nPod jej vedením banka urobila z otvorenia účtu 100 % online, bezpečného overenia identity a sledovania platieb v reálnom čase piliere svojej ponuky.',
+        'bio'   => "Claire vedie stratégiu a rozvoj banky. Kariéru si vybudovala v retailovom bankovníctve a platobných službách s jedným presvedčením: banka musí byť jednoduchá, transparentná a dostupná kedykoľvek.\nPod jej vedením banka urobila z otvorenia účtu 100 % online, bezpečného overenia identity a sledovania platieb v reálnom čase piliere svojej ponuky.",
     ],
     'markus-brandt' => [
         'title' => 'Riaditeľ operácií',
