@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency jóváhagyásra vár. Jóváhagyás után hozzáadódik az egyenlegéhez.',
     'notif_card_cap' => 'Kártyakeret frissítve',
     'notif_card_cap_body' => 'Kártyája maximális kerete :amount :currency.',
-    'pending_balance' => 'Függőben',
+    'pending_balance' => 'Beérkezett egyenleg',
     'pending_balance_hint' => 'Ez az összeg jóváhagyás után hozzáadódik az egyenlegéhez.',
 ];

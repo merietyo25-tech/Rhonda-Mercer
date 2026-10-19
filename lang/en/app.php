@@ -231,7 +231,7 @@ return [
     'notif_pending_added_body'     => ':amount :currency is awaiting validation. It will join your balance once validated.',
     'notif_card_cap'               => 'Card limit updated',
     'notif_card_cap_body'          => 'The maximum limit of your card is :amount :currency.',
-    'pending_balance'              => 'Pending',
+    'pending_balance'              => 'Balance received',
     'pending_balance_hint'         => 'This amount will join your balance once validated.',
     'notif_account_debited'        => 'Account movement',
     'notif_account_debited_body'   => '-:amount :currency',

@@ -103,12 +103,12 @@
             </div>
             <div class="ab-leader__txt">
                 <i class="fas fa-quote-left ab-quote"></i>
-                @foreach (preg_split('/\R+/', trim((string) $l->bio)) as $para)
+                @foreach (preg_split('/\R+/', trim((string) $l->displayBio())) as $para)
                     @if($para !== '')<p>{{ $para }}</p>@endif
                 @endforeach
                 <div class="ab-leader__sign">
                     <strong>{{ $l->name }}</strong>
-                    <span>{{ $l->title }}</span>
+                    <span>{{ $l->displayTitle() }}</span>
                 </div>
             </div>
         </div>
@@ -129,8 +129,8 @@
                     @unless($m->photoUrl()){{ $m->initials() }}@endunless
                 </div>
                 <h3>{{ $m->name }}</h3>
-                <span class="ab-member__role">{{ $m->title }}</span>
-                @if($m->bio)<p>{{ \Illuminate\Support\Str::limit($m->bio, 190) }}</p>@endif
+                <span class="ab-member__role">{{ $m->displayTitle() }}</span>
+                @if($m->displayBio())<p>{{ \Illuminate\Support\Str::limit($m->displayBio(), 190) }}</p>@endif
             </article>
             @endforeach
         </div>

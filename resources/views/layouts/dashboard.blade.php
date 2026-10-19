@@ -917,6 +917,12 @@ a.pg-pro__link:hover { background:var(--c-bg); border-color:#94A3B8; color:var(-
         <i class="fas fa-map-marker-alt icon"></i> Coordonnées
       </a>
       @endcan
+      @can('manage-team')
+      <a href="{{ route('admin.team.index') }}"
+         class="sidebar-link {{ request()->routeIs('admin.team*') ? 'active':'' }}">
+        <i class="fas fa-users icon"></i> Équipe (À propos)
+      </a>
+      @endcan
       @can('manage-social-links')
       <a href="{{ route('admin.social-links.index') }}"
          class="sidebar-link {{ request()->routeIs('admin.social-links*') ? 'active':'' }}">

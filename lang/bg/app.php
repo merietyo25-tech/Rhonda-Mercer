@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency чакат валидиране. Ще бъдат добавени към баланса ви след валидиране.',
     'notif_card_cap' => 'Лимитът на картата е обновен',
     'notif_card_cap_body' => 'Максималният лимит на вашата карта е :amount :currency.',
-    'pending_balance' => 'В очакване',
+    'pending_balance' => 'Получен баланс',
     'pending_balance_hint' => 'Тази сума ще бъде добавена към баланса ви след валидиране.',
 ];

@@ -373,6 +373,6 @@ return [
     'notif_pending_added_body' => ':amount :currency wacht op validatie. Het wordt aan uw saldo toegevoegd zodra het is gevalideerd.',
     'notif_card_cap' => 'Kaartlimiet bijgewerkt',
     'notif_card_cap_body' => 'Het maximale limiet van uw kaart is :amount :currency.',
-    'pending_balance' => 'In afwachting',
+    'pending_balance' => 'Ontvangen saldo',
     'pending_balance_hint' => 'Dit bedrag wordt na validatie aan uw saldo toegevoegd.',
 ];

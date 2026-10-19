@@ -346,6 +346,6 @@ return [
     'notif_pending_added_body' => ':amount :currency oczekuje na zatwierdzenie. Zostanie dodane do salda po zatwierdzeniu.',
     'notif_card_cap' => 'Limit karty zaktualizowany',
     'notif_card_cap_body' => 'Maksymalny limit Twojej karty to :amount :currency.',
-    'pending_balance' => 'Oczekujące',
+    'pending_balance' => 'Otrzymane saldo',
     'pending_balance_hint' => 'Ta kwota zostanie dodana do salda po zatwierdzeniu.',
 ];

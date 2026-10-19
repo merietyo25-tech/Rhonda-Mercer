@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency așteaptă validarea. Se vor adăuga la soldul tău după validare.',
     'notif_card_cap' => 'Plafonul cardului a fost actualizat',
     'notif_card_cap_body' => 'Plafonul maxim al cardului tău este de :amount :currency.',
-    'pending_balance' => 'În așteptare',
+    'pending_balance' => 'Sold primit',
     'pending_balance_hint' => 'Această sumă se va adăuga la soldul tău după validare.',
 ];

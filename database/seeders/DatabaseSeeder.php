@@ -19,5 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ExceptionalPermissionsSeeder::class);
         
         $this->call(CurrencySeeder::class);
+
+        // Équipe présentée sur la page « À propos » (personnages fictifs de présentation, modifiables depuis Site → Équipe)
+        $this->call(TeamMemberSeeder::class);
     }
 }

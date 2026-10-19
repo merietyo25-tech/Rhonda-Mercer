@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency warten auf Freigabe. Der Betrag wird Ihrem Kontostand gutgeschrieben, sobald er freigegeben ist.',
     'notif_card_cap' => 'Kartenlimit aktualisiert',
     'notif_card_cap_body' => 'Das maximale Limit Ihrer Karte beträgt :amount :currency.',
-    'pending_balance' => 'Ausstehend',
+    'pending_balance' => 'Eingegangener Saldo',
     'pending_balance_hint' => 'Dieser Betrag wird Ihrem Saldo nach der Freigabe gutgeschrieben.',
 ];

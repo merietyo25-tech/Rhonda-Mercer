@@ -214,6 +214,6 @@ return [
     'notif_pending_added_body' => ':amount :currency čaka na potrditev. Po potrditvi bo dodan vašemu stanju.',
     'notif_card_cap' => 'Limit kartice posodobljen',
     'notif_card_cap_body' => 'Najvišji limit vaše kartice je :amount :currency.',
-    'pending_balance' => 'V čakanju',
+    'pending_balance' => 'Prejeto stanje',
     'pending_balance_hint' => 'Ta znesek bo po potrditvi dodan vašemu stanju.',
 ];

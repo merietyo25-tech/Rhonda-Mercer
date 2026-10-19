@@ -198,14 +198,6 @@
     <span>{{ __('cards.nav') }}</span>
   </a>
 
-  {{-- IBAN --}}
-  <a href="{{ route('client.app.payment-methods') }}"
-     class="ca-nav-item {{ request()->routeIs('client.app.payment-methods', 'client.app.transfer.receive') ? 'active' : '' }}"
-     aria-label="IBAN">
-    <i class="fas fa-building-columns"></i>
-    <span>IBAN</span>
-  </a>
-
   {{-- Prêts (barre latérale uniquement) --}}
   <a href="{{ route('client.app.loans') }}"
      class="ca-nav-item ca-nav-item--side {{ request()->routeIs('client.app.loans*') ? 'active' : '' }}"

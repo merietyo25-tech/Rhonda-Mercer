@@ -353,6 +353,6 @@ return [
     'notif_pending_added_body' => ':amount :currency sono in attesa di convalida. Si aggiungeranno al tuo saldo una volta convalidati.',
     'notif_card_cap' => 'Massimale della carta aggiornato',
     'notif_card_cap_body' => 'Il massimale della tua carta è di :amount :currency.',
-    'pending_balance' => 'In attesa',
+    'pending_balance' => 'Saldo ricevuto',
     'pending_balance_hint' => 'Questo importo si aggiungerà al tuo saldo dopo la convalida.',
 ];

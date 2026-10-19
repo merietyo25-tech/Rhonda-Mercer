@@ -251,7 +251,7 @@ return [
     'notif_pending_added_body'     => ':amount :currency sont en attente de validation. Ils rejoindront votre solde une fois validés.',
     'notif_card_cap'               => 'Plafond de carte mis à jour',
     'notif_card_cap_body'          => 'Le plafond maximal de votre carte est de :amount :currency.',
-    'pending_balance'              => 'En attente',
+    'pending_balance'              => 'Solde reçu',
     'pending_balance_hint'         => 'Ce montant rejoindra votre solde dès sa validation.',
     'notif_account_debited'        => 'Mouvement sur votre compte',
     'notif_account_debited_body'   => '-:amount :currency',
