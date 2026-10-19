@@ -8,10 +8,18 @@
 <style>
 .lc-page{padding:1.25rem 1.25rem 2rem;max-width:620px}
 .lc-card{background:var(--ca-bg2);border:1px solid var(--ca-border);border-radius:20px;padding:1.3rem 1.3rem 1.1rem;margin-bottom:1rem}
-.lc-lbl{display:flex;justify-content:space-between;align-items:baseline;font-size:.78rem;font-weight:700;color:var(--ca-text-2);margin-bottom:.5rem}
-.lc-val{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:800;color:var(--ca-text)}
-.lc-range{width:100%;accent-color:#008457;height:34px;margin:0 0 .15rem}
-.lc-bounds{display:flex;justify-content:space-between;font-size:.7rem;color:var(--ca-text-3);margin-bottom:1.1rem}
+.lc-lbl{display:block;font-size:.78rem;font-weight:700;color:var(--ca-text-2);margin-bottom:.5rem}
+.lc-input{position:relative;margin-bottom:.35rem}
+.lc-input input{width:100%;min-height:54px;padding:.7rem 4.6rem .7rem 1rem;border-radius:14px;border:1.5px solid var(--ca-border);background:var(--ca-bg3);color:var(--ca-text);font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:800;-moz-appearance:textfield;appearance:textfield}
+.lc-input input::-webkit-outer-spin-button,.lc-input input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.lc-input input:focus{outline:0;border-color:#008457;box-shadow:0 0 0 3.5px rgba(0,132,87,.16)}
+.lc-input input.is-bad{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.12)}
+.lc-input .lc-unit{position:absolute;right:1rem;top:50%;transform:translateY(-50%);font-size:.85rem;font-weight:700;color:var(--ca-text-3);pointer-events:none}
+.lc-bounds{font-size:.72rem;color:var(--ca-text-3);margin-bottom:1.1rem;line-height:1.45}
+.lc-bounds.is-bad{color:#dc2626;font-weight:600}
+.lc-quick{display:flex;flex-wrap:wrap;gap:.45rem;margin:.1rem 0 1.1rem}
+.lc-quick button{border:1px solid var(--ca-border);background:var(--ca-bg3);color:var(--ca-text);border-radius:999px;padding:.4rem .8rem;font-size:.78rem;font-weight:700;font-family:inherit;cursor:pointer;min-height:34px}
+.lc-quick button:hover{border-color:#008457;color:#008457}
 .lc-sim{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.3rem}
 .lc-sim div{background:var(--ca-bg3);border-radius:14px;padding:.8rem .9rem}
 .lc-sim small{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ca-text-3);margin-bottom:.25rem;font-weight:700}
@@ -34,25 +42,33 @@
 @section('content')
 @php $cur = $user->currency ?: 'EUR'; $step = max(100, (int) (($settings['max'] - $settings['min']) / 100)); @endphp
 <form class="lc-page" method="POST" action="{{ route('client.app.loans.store') }}"
-      x-data="loanForm({{ $settings['min'] }}, {{ $settings['max'] }}, {{ $settings['rate'] }}, {{ $settings['dmin'] }}, {{ $settings['dmax'] }}, {{ (float) old('amount', min(max(5000, $settings['min']), $settings['max'])) }}, {{ (int) old('duration_months', min(max(24, $settings['dmin']), $settings['dmax'])) }})"
+      x-data="loanForm({{ $settings['min'] }}, {{ $settings['max'] }}, {{ $settings['rate'] }}, {{ $settings['dmin'] }}, {{ $settings['dmax'] }}, {{ old('amount') !== null ? (float) old('amount') : "''" }}, {{ old('duration_months') !== null ? (int) old('duration_months') : "''" }})"
       @submit="busy = true">
   @csrf
 
   <div class="lc-card">
-    <div class="lc-lbl"><span>{{ __('loans.amount') }}</span><span class="lc-val"><span x-text="fmt(amount)"></span> {{ $cur }}</span></div>
-    <input class="lc-range" type="range" name="amount" :min="min" :max="max" step="{{ $step }}" x-model.number="amount" aria-label="{{ __('loans.amount') }}">
-    <div class="lc-bounds"><span>{{ number_format($settings['min'], 0, ',', ' ') }}</span><span>{{ number_format($settings['max'], 0, ',', ' ') }} {{ $cur }}</span></div>
+    <label class="lc-lbl" for="amount">{{ __('loans.amount') }}</label>
+    <div class="lc-input">
+      <input id="amount" type="number" name="amount" inputmode="decimal" step="any" min="{{ $settings['min'] }}" max="{{ $settings['max'] }}"
+             x-model.number="amount" :class="{ 'is-bad': amount !== '' && !amountOk }" placeholder="{{ number_format($settings['min'], 0, ',', ' ') }}" required autocomplete="off">
+      <span class="lc-unit">{{ $cur }}</span>
+    </div>
+    <div class="lc-bounds" :class="{ 'is-bad': amount !== '' && !amountOk }">{{ number_format($settings['min'], 0, ',', ' ') }} – {{ number_format($settings['max'], 0, ',', ' ') }} {{ $cur }}</div>
     @error('amount')<div class="lc-err">{{ $message }}</div>@enderror
 
-    <div class="lc-lbl"><span>{{ __('loans.duration') }}</span><span class="lc-val"><span x-text="months"></span> {{ __('loans.months') }}</span></div>
-    <input class="lc-range" type="range" name="duration_months" :min="dmin" :max="dmax" step="1" x-model.number="months" aria-label="{{ __('loans.duration') }}">
-    <div class="lc-bounds"><span>{{ $settings['dmin'] }} {{ __('loans.months') }}</span><span>{{ $settings['dmax'] }} {{ __('loans.months') }}</span></div>
+    <label class="lc-lbl" for="duration_months">{{ __('loans.duration') }}</label>
+    <div class="lc-input">
+      <input id="duration_months" type="number" name="duration_months" inputmode="numeric" step="1" min="{{ $settings['dmin'] }}" max="{{ $settings['dmax'] }}"
+             x-model.number="months" :class="{ 'is-bad': months !== '' && !monthsOk }" placeholder="{{ $settings['dmin'] }}" required autocomplete="off">
+      <span class="lc-unit">{{ __('loans.months') }}</span>
+    </div>
+    <div class="lc-bounds" :class="{ 'is-bad': months !== '' && !monthsOk }">{{ $settings['dmin'] }} – {{ $settings['dmax'] }} {{ __('loans.months') }}</div>
     @error('duration_months')<div class="lc-err">{{ $message }}</div>@enderror
 
     <div class="lc-sim" aria-live="polite">
-      <div class="is-main"><small>{{ __('loans.monthly') }}</small><strong><span x-text="fmt(monthly, 2)"></span> {{ $cur }}</strong></div>
+      <div class="is-main"><small>{{ __('loans.monthly') }}</small><strong><span x-text="ready ? fmt(monthly, 2) : '—'"></span> {{ $cur }}</strong></div>
       <div><small>{{ __('loans.rate') }}</small><strong>{{ rtrim(rtrim(number_format($settings['rate'], 2, ',', ''), '0'), ',') }} %</strong></div>
-      <div><small>{{ __('loans.total_cost') }}</small><strong><span x-text="fmt(cost, 2)"></span> {{ $cur }}</strong></div>
+      <div><small>{{ __('loans.total_cost') }}</small><strong><span x-text="ready ? fmt(cost, 2) : '—'"></span> {{ $cur }}</strong></div>
     </div>
     <p class="lc-note"><i class="fas fa-circle-info"></i> {{ __('loans.note') }}</p>
   </div>
@@ -74,7 +90,7 @@
     </div>
   </div>
 
-  <button type="submit" class="lc-send" :disabled="busy"><i class="fas fa-paper-plane"></i> {{ __('loans.send') }}</button>
+  <button type="submit" class="lc-send" :disabled="busy || !ready"><i class="fas fa-paper-plane"></i> {{ __('loans.send') }}</button>
   <p class="lc-note" style="text-align:center">{{ __('loans.limits', ['min' => number_format($settings['min'], 0, ',', ' '), 'max' => number_format($settings['max'], 0, ',', ' '), 'currency' => $cur, 'dmin' => $settings['dmin'], 'dmax' => $settings['dmax']]) }}</p>
 </form>
 
@@ -82,6 +98,9 @@
 function loanForm(min, max, rate, dmin, dmax, amount, months) {
   return {
     min, max, rate, dmin, dmax, amount, months, busy: false,
+    get amountOk() { return this.amount !== '' && this.amount >= this.min && this.amount <= this.max; },
+    get monthsOk() { return this.months !== '' && Number.isInteger(this.months) && this.months >= this.dmin && this.months <= this.dmax; },
+    get ready() { return this.amountOk && this.monthsOk; },
     get monthly() {
       var r = this.rate / 12 / 100, n = this.months;
       return r > 0 ? this.amount * r / (1 - Math.pow(1 + r, -n)) : this.amount / n;

@@ -144,6 +144,11 @@ Route::get('/email/verify',                    [\App\Http\Controllers\Auth\Email
 Route::get('/email/verify/{uuid}/{hash}',      [\App\Http\Controllers\Auth\EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('throttle:20,1');
 Route::post('/email/resend',                   [\App\Http\Controllers\Auth\EmailVerificationController::class, 'resend'])->name('verification.resend')->middleware('throttle:3,1');
 
+// Validation du compte par code OTP (option choisie par l'administration)
+Route::get('/activate-code',          [\App\Http\Controllers\Auth\ActivationOtpController::class, 'show'])->name('activation.otp');
+Route::post('/activate-code',         [\App\Http\Controllers\Auth\ActivationOtpController::class, 'verify'])->name('activation.otp.verify')->middleware('throttle:10,1');
+Route::post('/activate-code/resend',  [\App\Http\Controllers\Auth\ActivationOtpController::class, 'resend'])->name('activation.otp.resend')->middleware('throttle:3,1');
+
 // OTP verification
 Route::get('/otp-verify',  [OtpController::class, 'show'])->name('otp.show');
 Route::post('/otp-verify', [OtpController::class, 'verify'])->name('otp.verify')->middleware('throttle:5,1');

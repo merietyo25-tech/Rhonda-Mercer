@@ -98,8 +98,15 @@ class EmailVerificationController extends Controller
 
     public static function sendActivationMail(User $user): bool
     {
-        // Interrupteur « e-mail d'activation » éteint : aucun mail, le compte est validé d'office.
-        if (! \App\Models\SiteContact::current()->activation_mail_enabled) {
+        $method = \App\Models\SiteContact::current()->activationMethod();
+
+        // Méthode « code OTP » : un code à 6 chiffres est envoyé, à saisir dans l'application (pas de lien).
+        if ($method === 'otp') {
+            return ActivationOtpController::sendCode($user);
+        }
+
+        // Aucune méthode (par défaut) : aucun mail, le compte est validé d'office.
+        if ($method === 'none') {
             if (! $user->email_verified_at) {
                 $user->forceFill(['email_verified_at' => now()])->save();
             }

@@ -61,6 +61,14 @@ class SignupController extends Controller
             return redirect()->route('client.app.home')->with('success', __('onboarding.signup_done_direct'));
         }
 
+        // Validation par code OTP : on invite le client à saisir le code reçu par e-mail
+        if (\App\Models\SiteContact::current()->activationMethod() === 'otp') {
+            $request->session()->put('activation_user_id', $user->id);
+            $to = redirect()->route('activation.otp')->with('signup_ok', __('onboarding.signup_done_verify'));
+
+            return $sent ? $to : $to->withErrors(['code' => __('onboarding.resend_failed')]);
+        }
+
         $redirect = redirect()->route('verification.notice')->with('verify_email', $user->email)->with('signup_ok', __('onboarding.signup_done_verify'));
 
         return $sent ? $redirect : $redirect->with('error', __('onboarding.resend_failed'));

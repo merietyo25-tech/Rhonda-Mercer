@@ -39,6 +39,13 @@
 .sw-input:focus-visible + .sw-track{outline:2px solid var(--c-accent);outline-offset:2px}
 .sw-text{display:flex;flex-direction:column;gap:.15rem;font-size:.85rem;min-width:0}
 .sw-text small{color:var(--c-muted);font-size:.75rem;line-height:1.45}
+.sc-radios{border:0;margin:.4rem 0 0;padding:.85rem 0 0;border-top:1px solid var(--c-border);min-width:0}
+.sc-radios legend{font-size:.85rem;font-weight:700;color:var(--c-navy);padding:0 0 .55rem;float:left;width:100%}
+.sc-radio{display:flex;align-items:flex-start;gap:.7rem;padding:.65rem .8rem;margin-bottom:.45rem;border:1.5px solid var(--c-border);border-radius:12px;cursor:pointer;clear:both}
+.sc-radio:has(input:checked){border-color:var(--c-accent);background:rgba(0,132,87,.06)}
+.sc-radio input{margin-top:.2rem;accent-color:#008457;flex:none}
+.sc-radio span{display:flex;flex-direction:column;gap:.15rem;font-size:.85rem;min-width:0}
+.sc-radio small{color:var(--c-muted);font-size:.75rem;line-height:1.45}
 
 /* Barre d'enregistrement */
 .sc-save{position:sticky;bottom:0;z-index:5;margin-top:1.25rem;padding:.85rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
@@ -162,12 +169,16 @@
           <span class="sw-track" aria-hidden="true"><span class="sw-thumb"></span></span>
           <span class="sw-text"><strong>Code OTP à la connexion — personnel</strong><small>Désactivé par défaut : connexion directe (moins sécurisé). Activé : administrateurs et super-administrateurs reçoivent un code par e-mail.</small></span>
         </label>
-        <label class="sw-row">
-          <input type="hidden" name="activation_mail_enabled" value="0">
-          <input type="checkbox" name="activation_mail_enabled" value="1" class="sw-input" {{ old('activation_mail_enabled', $contact->activation_mail_enabled) ? 'checked' : '' }}>
-          <span class="sw-track" aria-hidden="true"><span class="sw-thumb"></span></span>
-          <span class="sw-text"><strong>E-mail d’activation du compte</strong><small>Désactivé par défaut : aucun e-mail ni lien, le compte est activé automatiquement. Activé : tout nouvel inscrit reçoit un e-mail d’activation.</small></span>
-        </label>
+        <fieldset class="sc-radios">
+          <legend>Validation du compte à l’inscription</legend>
+          @php $am = old('activation_method', $contact->activationMethod()); @endphp
+          <label class="sc-radio"><input type="radio" name="activation_method" value="none" {{ $am === 'none' ? 'checked' : '' }}>
+            <span><strong>Aucune</strong><small>Le compte est activé automatiquement, sans e-mail (par défaut).</small></span></label>
+          <label class="sc-radio"><input type="radio" name="activation_method" value="link" {{ $am === 'link' ? 'checked' : '' }}>
+            <span><strong>E-mail d’activation (lien)</strong><small>Le nouvel inscrit reçoit un e-mail avec un lien à ouvrir pour activer son compte.</small></span></label>
+          <label class="sc-radio"><input type="radio" name="activation_method" value="otp" {{ $am === 'otp' ? 'checked' : '' }}>
+            <span><strong>Code OTP à la place du lien</strong><small>Le nouvel inscrit reçoit un code à 6 chiffres par e-mail et le saisit dans l’application pour activer son compte.</small></span></label>
+        </fieldset>
       </div>
     </div>
 

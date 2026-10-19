@@ -26,6 +26,7 @@ class SiteContact extends Model
         'otp_clients_enabled',
         'otp_staff_enabled',
         'activation_mail_enabled',
+        'activation_otp_enabled',
         'kyc_steps',
         'whatsapp_number',
         'whatsapp_enabled',
@@ -36,7 +37,14 @@ class SiteContact extends Model
         'otp_clients_enabled'     => 'boolean',
         'otp_staff_enabled'       => 'boolean',
         'activation_mail_enabled' => 'boolean',
+        'activation_otp_enabled'  => 'boolean',
     ];
+
+    /** Validation du compte à l'inscription : « otp » (code saisi), « link » (lien par e-mail) ou « none » (activation automatique). */
+    public function activationMethod(): string
+    {
+        return $this->activation_otp_enabled ? 'otp' : ($this->activation_mail_enabled ? 'link' : 'none');
+    }
 
     /**
      * Enregistrement singleton des coordonnées du site.

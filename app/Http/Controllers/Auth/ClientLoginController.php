@@ -62,8 +62,17 @@ class ClientLoginController extends Controller
         // Compte non activé : l'adresse e-mail doit d'abord être confirmée. On envoie l'utilisateur
         // sur la page « vérifiez votre boîte mail » (renvoi possible) ; une fois activé, il passe à l'OTP.
         // E-mail d'activation désactivé dans les paramètres : aucun mail n'est envoyé, le compte est donc validé d'office.
-        if (! $user->email_verified_at && ! SiteContact::current()->activation_mail_enabled) {
+        $method = SiteContact::current()->activationMethod();
+        if (! $user->email_verified_at && $method === 'none') {
             $user->forceFill(['email_verified_at' => now()])->save();
+        }
+
+        // Validation par code OTP : on envoie un nouveau code et on ouvre la page de saisie
+        if (! $user->email_verified_at && $method === 'otp') {
+            $request->session()->put('activation_user_id', $user->id);
+            \App\Http\Controllers\Auth\ActivationOtpController::sendCode($user);
+
+            return redirect()->route('activation.otp')->with('error', __('onboarding.email_not_verified'));
         }
 
         if (! $user->email_verified_at) {

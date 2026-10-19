@@ -45,7 +45,7 @@ class SiteContactController extends Controller
             'whatsapp_enabled' => ['boolean'],
             'otp_clients_enabled'     => ['boolean'],
             'otp_staff_enabled'       => ['boolean'],
-            'activation_mail_enabled' => ['boolean'],
+            'activation_method'       => ['required', 'in:none,link,otp'],
             'logo_light'      => ['nullable', 'image', 'max:2048'],
             'logo_dark'       => ['nullable', 'image', 'max:2048'],
             'email_signature' => ['nullable', 'image', 'max:2048'],
@@ -54,7 +54,11 @@ class SiteContactController extends Controller
         ]);
 
         $contact = SiteContact::current();
-        $contact->update(collect($validated)->except(['logo_light', 'logo_dark', 'email_signature'])->all());
+        $contact->update(collect($validated)->except(['logo_light', 'logo_dark', 'email_signature', 'activation_method'])->all() + [
+            // Une seule méthode de validation du compte à la fois : code OTP, lien par e-mail, ou aucune (activation automatique)
+            'activation_otp_enabled'  => $validated['activation_method'] === 'otp',
+            'activation_mail_enabled' => $validated['activation_method'] === 'link',
+        ]);
 
         $this->handleLogoUploads($request, $contact);
 
