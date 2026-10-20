@@ -29,10 +29,16 @@ class SignupController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $locale = $request->input('locale', app()->getLocale());
+        // L'application s'affiche dans la langue du NAVIGATEUR de la personne (Accept-Language). Si cette langue n'est pas
+        // proposée, on retient la langue de la page d'inscription, puis l'anglais.
+        $locale = $this->browserLocale($request) ?? $request->input('locale', app()->getLocale());
         if (! in_array($locale, self::SUPPORTED_LOCALES, true)) {
             $locale = 'en';
         }
+
+        // Les pages qui suivent (code ou lien d'activation, connexion) s'affichent déjà dans cette langue
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
 
         // Compte inactif : email_verified_at reste null jusqu'au clic sur le lien d'activation.
         // La devise est toujours l'euro, aucun choix n'est proposé à l'inscription.
@@ -72,6 +78,27 @@ class SignupController extends Controller
         $redirect = redirect()->route('verification.notice')->with('verify_email', $user->email)->with('signup_ok', __('onboarding.signup_done_verify'));
 
         return $sent ? $redirect : $redirect->with('error', __('onboarding.resend_failed'));
+    }
+
+    /** Première langue du navigateur (en tenant compte des priorités « q ») parmi les langues proposées par le site. */
+    private function browserLocale(Request $request): ?string
+    {
+        $supported = array_intersect(self::SUPPORTED_LOCALES, \App\Models\Language::enabledCodes());
+
+        $weighted = [];
+        foreach (explode(',', (string) $request->header('Accept-Language', '')) as $i => $part) {
+            [$tag, $q] = array_pad(explode(';q=', trim($part)), 2, '1');
+            $code = strtolower(substr(trim($tag), 0, 2));
+            if ($code !== '' && in_array($code, $supported, true) && ! isset($weighted[$code])) {
+                $weighted[$code] = [(float) $q, -$i];
+            }
+        }
+        if (! $weighted) {
+            return null;
+        }
+        uasort($weighted, fn ($a, $b) => $b <=> $a);
+
+        return array_key_first($weighted);
     }
 
     /**

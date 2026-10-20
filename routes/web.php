@@ -206,6 +206,7 @@ Route::middleware(['auth', 'role:client', 'client.locale'])->prefix('app')->name
 
     // Notifications (page)
     Route::get('/notifications',             [ClientAppController::class, 'notifications'])->name('notifications');
+    Route::post('/notifications/read-all',   [ClientAppController::class, 'notificationReadAll'])->name('notifications.read-all');
 
     // Mouvements de compte
     Route::get('/movements', [ClientAppController::class, 'movements'])->name('movements');
@@ -253,7 +254,6 @@ Route::middleware(['auth', 'role:client', 'client.locale'])->prefix('app')->name
         Route::get('/support/poll',              [ClientSupportController::class, 'poll'])->name('support.poll');
         Route::post('/support',                  [ClientSupportController::class, 'store'])->name('support.store');
         Route::get('/notifications/unread-count',[ClientAppController::class, 'notificationCount'])->name('notifications.count');
-        Route::post('/notifications/read-all',   [ClientAppController::class, 'notificationReadAll'])->name('notifications.read-all');
         Route::post('/notifications/{id}/read',  [ClientAppController::class, 'notificationRead'])->name('notifications.read');
     });
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\OtpMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -93,7 +94,11 @@ class ActivationOtpController extends Controller
         Cache::forget('activation_otp_tries_' . $user->id);
         $request->session()->forget('activation_user_id');
 
-        return redirect()->route('login')->with('verified_status', __('onboarding.verified_success'));
+        // Compte activé : connexion directe à l'espace client (pas de nouvelle saisie du mot de passe ni de code)
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->route('client.app.home')->with('success', __('onboarding.verified_success'));
     }
 
     public function resend(Request $request)

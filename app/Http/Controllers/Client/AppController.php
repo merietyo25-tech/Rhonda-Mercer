@@ -174,7 +174,7 @@ class AppController extends Controller
             ->whereNull('read_at')
             ->update(['read_at' => now()]);
 
-        return back();
+        return redirect()->route('client.app.notifications');
     }
 
     public function notificationCount()

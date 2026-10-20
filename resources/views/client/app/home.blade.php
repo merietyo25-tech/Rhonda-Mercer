@@ -6,7 +6,9 @@
 <header class="ca-topbar ca-topbar--home h-topbar">
   {{-- Left: avatar + greeting --}}
   <div class="h-header__left">
-    <div class="h-avatar">{{ strtoupper(substr($user->name, 0, 1)) }}</div>
+    <a href="{{ route('client.app.profile') }}" class="h-avatar" aria-label="{{ __('app.nav_profile') }}">
+      @include('partials.client-avatar', ['uid' => 'h'])
+    </a>
     <div>
       <div class="h-greeting">{{ __('app.welcome_back') }}</div>
       <div class="h-name">{{ Str::words($user->name, 2, '') }}</div>
@@ -43,8 +45,11 @@
   border:2.5px solid rgba(63,203,146,.45);
   box-shadow:0 0 0 4px rgba(63,203,146,.1);
   display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:1.1rem;color:#fff;
+  overflow:hidden;padding:0;transition:transform .15s,box-shadow .2s;
 }
+.h-avatar:hover{ transform:scale(1.05);box-shadow:0 0 0 4px rgba(63,203,146,.22) }
+.h-avatar:active{ transform:scale(.96) }
+.h-avatar .ca-avatar-svg{ width:100%;height:100%;display:block }
 .h-greeting{ font-size:.7rem;color:var(--ca-text-3);margin-bottom:.05rem }
 .h-name{ font-size:.98rem;font-weight:700;color:var(--ca-text) }
 .h-topbtn{

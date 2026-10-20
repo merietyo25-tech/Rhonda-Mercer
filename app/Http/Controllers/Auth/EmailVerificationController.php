@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\VerifyAccountMail;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
@@ -57,6 +58,14 @@ class EmailVerificationController extends Controller
         }
 
         $user->forceFill(['email_verified_at' => now()])->save();
+
+        // Compte activé : connexion directe à l'espace client (le lien suffit, aucun mot de passe ni code à ressaisir)
+        if ($user->type === 'client' && ! $user->is_blocked) {
+            Auth::login($user);
+            $request->session()->regenerate();
+
+            return redirect()->route('client.app.home')->with('success', __('onboarding.verified_success'));
+        }
 
         return redirect()->route('login')->with('verified_status', __('onboarding.verified_success'));
     }
