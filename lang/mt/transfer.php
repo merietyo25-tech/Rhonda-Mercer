@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Qed nistennew il-kodiċi tiegħek',
     'progress_done' => 'Lest',
     'code_title' => 'Kodiċi ta’ żblokk meħtieġ',
-    'code_text' => 'It-trasferiment tiegħek twaqqaf fi :pct %. Daħħal il-kodiċi ta’ 6 ċifri li l-konsulent tiegħek se jagħtik biex ikompli.',
+    'code_text' => 'It-trasferiment tiegħek twaqqaf fi :pct %. Daħħal il-kodiċi ta’ 4 ċifri li l-konsulent tiegħek se jagħtik biex ikompli.',
     'code_button' => 'Żblokka',
     'code_help' => 'Dan il-kodiċi jista’ jinkiseb biss mingħand il-konsulent tiegħek. Ikkuntattjah permezz tal-appoġġ.',
     'code_ok' => 'Kodiċi aċċettat: l-ipproċessar tat-trasferiment tiegħek se jkompli.',

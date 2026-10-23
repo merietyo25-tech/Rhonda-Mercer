@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'A la espera de su código',
     'progress_done' => 'Finalizada',
     'code_title' => 'Código de desbloqueo requerido',
-    'code_text' => 'Su transferencia está detenida en el :pct %. Introduzca el código de 6 dígitos que le facilitará su asesor para que pueda continuar.',
+    'code_text' => 'Su transferencia está detenida en el :pct %. Introduzca el código de 4 dígitos que le facilitará su asesor para que pueda continuar.',
     'code_button' => 'Desbloquear',
     'code_help' => 'Este código solo puede obtenerse de su asesor. Contáctelo a través del soporte.',
     'code_ok' => 'Código aceptado: su transferencia reanudará el procesamiento.',

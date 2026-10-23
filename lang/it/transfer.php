@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'In attesa del tuo codice',
     'progress_done' => 'Completato',
     'code_title' => 'Codice di sblocco richiesto',
-    'code_text' => 'Il tuo bonifico è fermo al :pct %. Inserisci il codice a 6 cifre che ti comunicherà il tuo consulente per farlo proseguire.',
+    'code_text' => 'Il tuo bonifico è fermo al :pct %. Inserisci il codice a 4 cifre che ti comunicherà il tuo consulente per farlo proseguire.',
     'code_button' => 'Sblocca',
     'code_help' => 'Questo codice può essere ottenuto solo dal tuo consulente. Contattalo tramite l’assistenza.',
     'code_ok' => 'Codice accettato: l’elaborazione del bonifico riprenderà.',

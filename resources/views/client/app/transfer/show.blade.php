@@ -164,11 +164,12 @@
       @if($locked)
       <div class="td-err" style="margin-top:0">{{ __('transfer.code_locked', ['minutes' => max(1, now()->diffInMinutes($transfer->code_locked_until))]) }}</div>
       @else
-      <form method="POST" action="{{ route('client.app.transfer.unlock', $transfer->reference) }}" class="td-code" x-data="{ busy: false, v: '' }" @submit="busy = true">
+      @php $codeLen = strlen((string) $transfer->unlock_code) ?: \App\Models\Transfer::CODE_LENGTH; @endphp
+      <form method="POST" action="{{ route('client.app.transfer.unlock', $transfer->reference) }}" class="td-code" x-data="{ busy: false, v: '', len: {{ $codeLen }} }" @submit="busy = true">
         @csrf
-        <input type="text" name="code" class="td-code__input" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code"
-               placeholder="••••••" x-model="v" @input="v = v.replace(/\D/g, '').slice(0, 6)" required>
-        <button type="submit" class="td-code__btn" :disabled="busy || v.length !== 6">
+        <input type="text" name="code" class="td-code__input" inputmode="numeric" pattern="[0-9]{{ '{' . $codeLen . '}' }}" maxlength="{{ $codeLen }}" autocomplete="one-time-code"
+               placeholder="{{ str_repeat('•', $codeLen) }}" x-model="v" @input="v = v.replace(/\D/g, '').slice(0, len)" required>
+        <button type="submit" class="td-code__btn" :disabled="busy || v.length !== len">
           <i class="fas" :class="busy ? 'fa-spinner fa-spin' : 'fa-unlock'"></i> {{ __('transfer.code_button') }}
         </button>
       </form>

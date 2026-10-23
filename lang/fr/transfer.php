@@ -58,7 +58,7 @@ return [
     'progress_blocked'    => 'En attente de votre code',
     'progress_done'       => 'Terminé',
     'code_title'          => 'Code de déblocage requis',
-    'code_text'           => 'Votre virement est arrêté à :pct %. Saisissez le code à 6 chiffres que votre conseiller vous communiquera pour qu’il puisse se poursuivre.',
+    'code_text'           => 'Votre virement est arrêté à :pct %. Saisissez le code à 4 chiffres que votre conseiller vous communiquera pour qu’il puisse se poursuivre.',
     'code_button'         => 'Débloquer',
     'code_help'           => 'Ce code ne peut être obtenu qu’auprès de votre conseiller. Contactez-le via le support.',
     'code_ok'             => 'Code validé : le traitement de votre virement va reprendre.',

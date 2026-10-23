@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Oczekiwanie na Twój kod',
     'progress_done' => 'Zakończono',
     'code_title' => 'Wymagany kod odblokowujący',
-    'code_text' => 'Twój przelew został wstrzymany na poziomie :pct %. Wpisz 6-cyfrowy kod, który przekaże Ci doradca, aby mógł być kontynuowany.',
+    'code_text' => 'Twój przelew został wstrzymany na poziomie :pct %. Wpisz 4-cyfrowy kod, który przekaże Ci doradca, aby mógł być kontynuowany.',
     'code_button' => 'Odblokuj',
     'code_help' => 'Ten kod można uzyskać tylko od doradcy. Skontaktuj się z nim przez pomoc techniczną.',
     'code_ok' => 'Kod zaakceptowany: przetwarzanie przelewu zostanie wznowione.',

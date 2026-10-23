@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Wacht op uw code',
     'progress_done' => 'Afgerond',
     'code_title' => 'Ontgrendelcode vereist',
-    'code_text' => 'Uw overschrijving is gestopt bij :pct %. Voer de 6-cijferige code in die uw adviseur u geeft zodat de overschrijving kan doorgaan.',
+    'code_text' => 'Uw overschrijving is gestopt bij :pct %. Voer de 4-cijferige code in die uw adviseur u geeft zodat de overschrijving kan doorgaan.',
     'code_button' => 'Ontgrendelen',
     'code_help' => 'Deze code kunt u alleen van uw adviseur krijgen. Neem contact met hem of haar op via de support.',
     'code_ok' => 'Code geaccepteerd: uw overschrijving wordt weer verwerkt.',

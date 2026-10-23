@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Čakamo na vašo kodo',
     'progress_done' => 'Končano',
     'code_title' => 'Potrebna je koda za odklep',
-    'code_text' => 'Vaše nakazilo je ustavljeno pri :pct %. Vnesite 6-mestno kodo, ki vam jo bo sporočil svetovalec, da se lahko nadaljuje.',
+    'code_text' => 'Vaše nakazilo je ustavljeno pri :pct %. Vnesite 4-mestno kodo, ki vam jo bo sporočil svetovalec, da se lahko nadaljuje.',
     'code_button' => 'Odkleni',
     'code_help' => 'To kodo lahko dobite samo pri svojem svetovalcu. Obrnite se nanj prek podpore.',
     'code_ok' => 'Koda sprejeta: obdelava nakazila se bo nadaljevala.',

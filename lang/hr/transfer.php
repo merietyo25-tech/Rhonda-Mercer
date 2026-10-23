@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Čeka se vaš kôd',
     'progress_done' => 'Završeno',
     'code_title' => 'Potreban je kôd za otključavanje',
-    'code_text' => 'Vaš je prijenos zaustavljen na :pct %. Unesite 6-znamenkasti kôd koji će vam priopćiti savjetnik kako bi se nastavio.',
+    'code_text' => 'Vaš je prijenos zaustavljen na :pct %. Unesite 4-znamenkasti kôd koji će vam priopćiti savjetnik kako bi se nastavio.',
     'code_button' => 'Otključaj',
     'code_help' => 'Ovaj kôd možete dobiti samo od svog savjetnika. Obratite mu se putem podrške.',
     'code_ok' => 'Kôd prihvaćen: obrada vašeg prijenosa nastavit će se.',

@@ -101,7 +101,7 @@ class TransferValidationController extends Controller
     }
 
     /**
-     * Générateur de code : crée le code à 6 chiffres du prochain palier. Le client le saisit pour que la
+     * Générateur de code : crée le code à 4 chiffres du prochain palier. Le client le saisit pour que la
      * barre avance — 1er code → 70 %, 2e → 99 %, 3e (dernier) → 100 %. La progression ne dépend ni du
      * paiement de la facture de frais ni du fait que la barre soit déjà à 100 % : seule la saisie des codes la fait avancer.
      */

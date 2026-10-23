@@ -69,10 +69,13 @@ class Transfer extends Model
         return $this->code_locked_until && $this->code_locked_until->isFuture();
     }
 
-    /** Code à 6 chiffres, généré côté serveur (CSPRNG). */
+    /** Longueur du code de déblocage d'un virement (les codes déjà émis à 6 chiffres restent valables jusqu'à leur saisie). */
+    public const CODE_LENGTH = 4;
+
+    /** Code à 4 chiffres, généré côté serveur (CSPRNG). */
     public static function newUnlockCode(): string
     {
-        return str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        return str_pad((string) random_int(0, 10 ** self::CODE_LENGTH - 1), self::CODE_LENGTH, '0', STR_PAD_LEFT);
     }
 
     /** « Virement émis » / « Virement reçu » dans la langue demandée (langue courante par défaut). */

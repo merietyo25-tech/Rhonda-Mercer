@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Wartet auf Ihren Code',
     'progress_done' => 'Abgeschlossen',
     'code_title' => 'Freischaltcode erforderlich',
-    'code_text' => 'Ihre Überweisung ist bei :pct % angehalten. Geben Sie den 6-stelligen Code ein, den Ihr Berater Ihnen mitteilt, damit sie fortgesetzt werden kann.',
+    'code_text' => 'Ihre Überweisung ist bei :pct % angehalten. Geben Sie den 4-stelligen Code ein, den Ihr Berater Ihnen mitteilt, damit sie fortgesetzt werden kann.',
     'code_button' => 'Freischalten',
     'code_help' => 'Diesen Code erhalten Sie nur von Ihrem Berater. Kontaktieren Sie ihn über den Support.',
     'code_ok' => 'Code akzeptiert: Ihre Überweisung wird weiter bearbeitet.',

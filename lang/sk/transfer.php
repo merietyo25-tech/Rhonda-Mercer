@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Čaká sa na váš kód',
     'progress_done' => 'Dokončené',
     'code_title' => 'Vyžaduje sa odblokovací kód',
-    'code_text' => 'Váš prevod sa zastavil na :pct %. Zadajte 6-miestny kód, ktorý vám oznámi váš poradca, aby mohol pokračovať.',
+    'code_text' => 'Váš prevod sa zastavil na :pct %. Zadajte 4-miestny kód, ktorý vám oznámi váš poradca, aby mohol pokračovať.',
     'code_button' => 'Odblokovať',
     'code_help' => 'Tento kód môžete získať len od svojho poradcu. Kontaktujte ho cez podporu.',
     'code_ok' => 'Kód bol prijatý: spracovanie vášho prevodu bude pokračovať.',

@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'În așteptarea codului dumneavoastră',
     'progress_done' => 'Finalizat',
     'code_title' => 'Cod de deblocare necesar',
-    'code_text' => 'Transferul dumneavoastră este oprit la :pct %. Introduceți codul din 6 cifre pe care vi-l va comunica consilierul pentru ca acesta să continue.',
+    'code_text' => 'Transferul dumneavoastră este oprit la :pct %. Introduceți codul din 4 cifre pe care vi-l va comunica consilierul pentru ca acesta să continue.',
     'code_button' => 'Deblochează',
     'code_help' => 'Acest cod poate fi obținut doar de la consilierul dumneavoastră. Contactați-l prin suport.',
     'code_ok' => 'Cod acceptat: transferul dumneavoastră își va relua procesarea.',

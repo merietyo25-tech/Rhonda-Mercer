@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'A kódjára várunk',
     'progress_done' => 'Befejezve',
     'code_title' => 'Feloldó kód szükséges',
-    'code_text' => 'Átutalása :pct %-nál leállt. Adja meg a tanácsadója által közölt 6 számjegyű kódot a folytatáshoz.',
+    'code_text' => 'Átutalása :pct %-nál leállt. Adja meg a tanácsadója által közölt 4 számjegyű kódot a folytatáshoz.',
     'code_button' => 'Feloldás',
     'code_help' => 'Ezt a kódot csak tanácsadójától kaphatja meg. Vegye fel vele a kapcsolatot az ügyfélszolgálaton keresztül.',
     'code_ok' => 'A kód elfogadva: az átutalás feldolgozása folytatódik.',

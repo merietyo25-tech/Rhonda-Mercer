@@ -58,7 +58,7 @@ return [
     'progress_blocked'    => 'Waiting for your code',
     'progress_done'       => 'Completed',
     'code_title'          => 'Unlock code required',
-    'code_text'           => 'Your transfer is paused at :pct%. Enter the 6-digit code your advisor will give you so it can continue.',
+    'code_text'           => 'Your transfer is paused at :pct%. Enter the 4-digit code your advisor will give you so it can continue.',
     'code_button'         => 'Unlock',
     'code_help'           => 'This code can only be obtained from your advisor. Contact them through support.',
     'code_ok'             => 'Code accepted: your transfer will resume processing.',

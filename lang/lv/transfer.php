@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Gaida jūsu kodu',
     'progress_done' => 'Pabeigts',
     'code_title' => 'Nepieciešams atbloķēšanas kods',
-    'code_text' => 'Jūsu pārskaitījums apturēts pie :pct %. Ievadiet 6 ciparu kodu, ko jums paziņos konsultants, lai tas varētu turpināties.',
+    'code_text' => 'Jūsu pārskaitījums apturēts pie :pct %. Ievadiet 4 ciparu kodu, ko jums paziņos konsultants, lai tas varētu turpināties.',
     'code_button' => 'Atbloķēt',
     'code_help' => 'Šo kodu var saņemt tikai no konsultanta. Sazinieties ar viņu, izmantojot atbalstu.',
     'code_ok' => 'Kods pieņemts: pārskaitījuma apstrāde tiks turpināta.',

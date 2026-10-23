@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'À espera do seu código',
     'progress_done' => 'Concluída',
     'code_title' => 'Código de desbloqueio necessário',
-    'code_text' => 'A sua transferência está parada em :pct %. Introduza o código de 6 dígitos que o seu gestor lhe comunicará para que possa continuar.',
+    'code_text' => 'A sua transferência está parada em :pct %. Introduza o código de 4 dígitos que o seu gestor lhe comunicará para que possa continuar.',
     'code_button' => 'Desbloquear',
     'code_help' => 'Este código só pode ser obtido junto do seu gestor. Contacte-o através do suporte.',
     'code_ok' => 'Código aceite: a sua transferência vai retomar o processamento.',

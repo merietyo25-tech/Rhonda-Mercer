@@ -54,7 +54,7 @@ return [
     'progress_blocked' => 'Laukiama jūsų kodo',
     'progress_done' => 'Baigta',
     'code_title' => 'Reikalingas atrakinimo kodas',
-    'code_text' => 'Jūsų pavedimas sustabdytas ties :pct %. Įveskite 6 skaitmenų kodą, kurį pateiks konsultantas, kad pavedimas galėtų būti tęsiamas.',
+    'code_text' => 'Jūsų pavedimas sustabdytas ties :pct %. Įveskite 4 skaitmenų kodą, kurį pateiks konsultantas, kad pavedimas galėtų būti tęsiamas.',
     'code_button' => 'Atrakinti',
     'code_help' => 'Šį kodą gali suteikti tik jūsų konsultantas. Susisiekite su juo per pagalbos tarnybą.',
     'code_ok' => 'Kodas priimtas: pavedimo apdorojimas bus tęsiamas.',

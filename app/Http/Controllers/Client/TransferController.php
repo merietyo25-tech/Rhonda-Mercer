@@ -171,7 +171,7 @@ class TransferController extends Controller
             return $back->withErrors(['code' => __('transfer.code_locked', ['minutes' => max(1, now()->diffInMinutes($transfer->code_locked_until))])]);
         }
 
-        $request->validate(['code' => 'required|digits:6']);
+        $request->validate(['code' => 'required|digits_between:' . \App\Models\Transfer::CODE_LENGTH . ',6']);
 
         if (! hash_equals((string) $transfer->unlock_code, (string) $request->input('code'))) {
             $attempts = $transfer->code_attempts + 1;
