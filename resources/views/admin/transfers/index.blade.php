@@ -217,7 +217,7 @@
       </button>
     </form>
     @else
-    <span class="btn-ghost btn-sm-pro" style="opacity:.7;cursor:default"><i class="fas fa-check"></i> 3 codes saisis · 100 %</span>
+    <span class="btn-ghost btn-sm-pro" style="opacity:.7;cursor:default"><i class="fas fa-check"></i> {{ count(\App\Models\Transfer::CODE_STAGES) }} codes saisis · 100 %</span>
     @endif
     @if($trf->status === \App\Models\Transfer::STATUS_PENDING)
     <button type="button" class="btn-ghost btn-sm-pro" @click="m = 'invoice'"><i class="fas fa-file-invoice"></i> Facturer les frais</button>

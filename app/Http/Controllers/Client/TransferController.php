@@ -189,7 +189,7 @@ class TransferController extends Controller
                 : __('transfer.code_wrong', ['left' => $left])]);
         }
 
-        // Le code fait passer la barre au palier suivant (70 % → 99 % → 100 %), quel que soit l'état de la facture
+        // Le code fait passer la barre au palier suivant (70 % → 85 % → 99 % → 100 %), quel que soit l'état de la facture
         $stage  = (int) $transfer->code_stage;
         $target = $transfer->nextStageTarget() ?? 100;
         $transfer->update([
