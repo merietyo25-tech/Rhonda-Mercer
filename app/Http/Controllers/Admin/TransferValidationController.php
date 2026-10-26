@@ -102,7 +102,7 @@ class TransferValidationController extends Controller
 
     /**
      * Générateur de code : crée le code à 6 chiffres du prochain palier. Le client le saisit pour que la
-     * barre avance — le code est généré en 4 fois : 1er code → 70 %, 2e → 85 %, 3e → 99 %, 4e (dernier) → 100 %. La progression ne dépend ni du
+     * barre avance — le code est généré en 6 fois : 40 %, 55 %, 70 %, 85 %, 99 %, puis 100 % (6e et dernier code). La progression ne dépend ni du
      * paiement de la facture de frais ni du fait que la barre soit déjà à 100 % : seule la saisie des codes la fait avancer.
      */
     public function progress(Request $request, Transfer $transfer)
