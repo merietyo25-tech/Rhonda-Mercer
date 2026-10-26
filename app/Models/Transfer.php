@@ -32,11 +32,19 @@ class Transfer extends Model
         'code_locked_until' => 'datetime',
     ];
 
-    /** Niveau de la barre dès l'émission du virement par le client (50 %), avant le 1er code. */
-    public const INITIAL_PROGRESS = 50;
+    /** Niveau de la barre dès l'émission du virement par le client : toujours 25 %, avant le 1er code. */
+    public const INITIAL_PROGRESS = 25;
 
-    /** Paliers atteints à chaque code saisi par le client : 1er code → 70 %, 2e → 99 %, 3e (dernier) → 100 %. */
-    public const CODE_STAGES = [70, 99, 100];
+    /**
+     * Paliers atteints à chaque code saisi par le client : le code est généré en 6 fois, un par palier —
+     * 1er code → 40 %, 2e → 55 %, 3e → 70 %, 4e → 85 %, 5e → 99 %, 6e (dernier) → 100 %.
+     */
+    public const CODE_STAGES = [40, 55, 70, 85, 99, 100];
+
+    /** Tout nouveau virement démarre à 25 %, quel que soit le chemin de création. */
+    protected $attributes = [
+        'progress' => self::INITIAL_PROGRESS,
+    ];
 
     /** Nombre d'essais de code avant blocage temporaire. */
     public const CODE_MAX_ATTEMPTS = 5;
@@ -58,7 +66,7 @@ class Transfer extends Model
         return in_array($this->status, [self::STATUS_PENDING, self::STATUS_FEE_REQUIRED], true) && $this->code_required;
     }
 
-    /** Palier (en %) que débloquera le prochain code, ou null si les 3 codes ont déjà été saisis. */
+    /** Palier (en %) que débloquera le prochain code, ou null si les 6 codes ont déjà été saisis. */
     public function nextStageTarget(): ?int
     {
         return self::CODE_STAGES[(int) $this->code_stage] ?? null;
